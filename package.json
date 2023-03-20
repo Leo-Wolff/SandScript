@@ -1,0 +1,24 @@
+{
+	"name": "sandscript",
+	"version": "1.0.0",
+	"description": "SandScript is an app where you can put a message in a bottle and send it across the world. SandScript is all about bringing back slow and meaningful communication between others. That is why once a bottle is send the arrival time of the bottle is dependent on real-life distance between you and your match.",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Leo-Wolff/SandScript.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Leo-Wolff/SandScript/issues"
+	},
+	"homepage": "https://github.com/Leo-Wolff/SandScript#readme",
+	"devDependencies": {
+		"nodemon": "^2.0.21"
+	}
+}
