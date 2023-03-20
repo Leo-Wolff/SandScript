@@ -20,5 +20,8 @@
 	"homepage": "https://github.com/Leo-Wolff/SandScript#readme",
 	"devDependencies": {
 		"nodemon": "^2.0.21"
+	},
+	"dependencies": {
+		"express": "^4.18.2"
 	}
 }
