@@ -1,0 +1,57 @@
+/* Quill */
+.ql-container {
+	font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ql-snow {
+	position: absolute;
+	top: 4em;
+	left: calc(50% - (90% / 2));
+
+	border-radius: 5px;
+	padding: 0;
+
+	width: 90%;
+}
+
+.ql-toolbar {
+	border: 0;
+	padding: 0;
+
+	text-align: center;
+	background: none;
+}
+
+body .ql-toolbar.ql-snow {
+	border: 0;
+}
+
+.ql-toolbar .ql-formats .ql-bold,
+.ql-toolbar .ql-formats .ql-italic,
+.ql-toolbar .ql-formats .ql-underline,
+.ql-toolbar .ql-formats .ql-strike,
+.ql-toolbar .ql-formats .ql-clean {
+	margin: 0 0.75em 0 0.75em;
+	border-radius: 360px;
+
+	background-color: var(--sky-blue);
+}
+
+.ql-container {
+	top: 7.5em;
+	left: 0.75em;
+
+	border: 0;
+	padding: 0;
+
+	font-size: 1em;
+}
+
+/* ids */
+
+#editor {
+	border: 0;
+	border-top: 5px solid var(--black);
+
+	height: 45em;
+}
