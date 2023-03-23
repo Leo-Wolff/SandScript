@@ -27,7 +27,7 @@ app.get('/discover', (req, res) => {
   res.render('pages/discover')
 })
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   res.render('pages/index')
 })
 
@@ -36,10 +36,11 @@ app.get('/', (req, res) => {
 app.post('/discover', async (req, res) => {
   try {
     // checks if all elements compare to a person in the database
-    const data = await users.find({}).toArray()
+    const data = await users.find({ gender: req.body.gender }).toArray()
+    console.log(data)
   
     if (data) {
-      res.render('pages/discover', { data })
+      res.render('pages/gefiltered', { data })
     } else {
       res.send('no results')
     }
