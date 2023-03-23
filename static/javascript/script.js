@@ -1,3 +1,19 @@
+//QUILL EDITOR
+var toolbarOptions = [
+	["bold", "italic", "underline", "strike"], // toggled buttons
+	["clean"], // remove formatting button
+]
+
+var quill = new Quill("#editor", {
+	modules: {
+		toolbar: toolbarOptions,
+	},
+
+	placeholder: "Write your letter",
+
+	theme: "snow",
+})
+
 let remainingTime = 2 * 60 * 60 // Two hours in seconds
 let timerInterval
 
