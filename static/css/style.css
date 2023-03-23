@@ -128,6 +128,7 @@ footer.light svg.active .cls-1, footer.light svg.active .cls-2 {
   left: 50%;
   transform: translate(-25%, -50%);
   width: 100%;
+  color: #fff;
 }
 
 #timer > span {

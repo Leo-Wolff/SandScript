@@ -35,3 +35,11 @@ window.addEventListener('load', () => {
 	startCountdown()
 	timerInterval = setInterval(startCountdown, 1000)
 })
+
+function openForm() {
+    document.getElementById('filter').style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById('filter').style.display = "none";
+  }
