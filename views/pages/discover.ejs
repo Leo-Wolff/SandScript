@@ -1,97 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <%- include('../partials/head'); %>
-</head>
-<body class=" standard-bg container">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="standard-bg container">
+		<header>
+			<button class="dark first">
+				<svg
+					class="bag"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 64.97 199.69"
+				>
+					<g id="Laag_2-2" data-name="Laag 2">
+						<g id="bottle">
+							<path
+								class="cls-1"
+								d="m44.41,54.37c-.53-6.57-.12-23.31-.12-23.31l-22.08-.06s-.17,18.17-.06,23.33c.11,5.16-20.83,17.11-20.85,24.72-.02,6.94-.26,95.07-.3,110.68,0,1.84.99,3.51,2.61,4.4,3.5,1.92,11.39,4.51,28.49,4.56,17.44.05,25.48-2.6,29.02-4.52,1.58-.86,2.55-2.53,2.55-4.34.04-15.56.27-101.17.3-110.61.03-10.4-19.03-18.29-19.56-24.85Z"
+							/>
+							<path
+								class="cls-1"
+								d="m41.08,28.44h-16.63l-2.64-24.11c-.19-1.78,1.2-3.33,2.98-3.33h15.94c1.79,0,3.18,1.55,2.98,3.33l-2.64,24.11Z"
+							/>
+							<path
+								class="cls-1"
+								d="m44.17,36.12l-22.84-.06c-3.3,0-6-2.72-5.99-6.02h0c0-3.3,2.72-6,6.02-5.99l22.84.06c3.3,0,6,2.72,5.99,6.02h0c0,3.3-2.72,6-6.02,5.99Z"
+							/>
+							<path
+								class="cls-2"
+								d="m46.77,74.19s-.03-.01-.05-.02c.02-.08.05-.17.05-.25,0-2.06-6.27-3.73-14.01-3.73s-14.01,1.67-14.01,3.73c0,.08.03.17.05.25-.02,0,4.16,47.35,4.16,47.35.52,5.9.52,11.83,0,17.72l-4.21,47.34s.04.01.06.02c-.03.1-.06.21-.06.31,0,2.06,6.27,3.73,14.01,3.73s14.01-1.67,14.01-3.73c0-.11-.03-.21-.06-.31.02,0,.04-.01.06-.02l-4.21-47.34c-.52-5.9-.52-11.83,0-17.72l4.21-47.34Z"
+							/>
+							<path
+								class="cls-2"
+								d="m18.81,74.18s4.65,10.12,18.04,6.07-7.65-6.07-7.65-6.07"
+							/>
+						</g>
+					</g>
+				</svg>
+			</button>
+			<button class="dark first" onclick="openForm()">
+				<svg
+					class="bag"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 64.97 199.69"
+				>
+					<g id="Laag_2-2" data-name="Laag 2">
+						<g id="bottle">
+							<path
+								class="cls-1"
+								d="m44.41,54.37c-.53-6.57-.12-23.31-.12-23.31l-22.08-.06s-.17,18.17-.06,23.33c.11,5.16-20.83,17.11-20.85,24.72-.02,6.94-.26,95.07-.3,110.68,0,1.84.99,3.51,2.61,4.4,3.5,1.92,11.39,4.51,28.49,4.56,17.44.05,25.48-2.6,29.02-4.52,1.58-.86,2.55-2.53,2.55-4.34.04-15.56.27-101.17.3-110.61.03-10.4-19.03-18.29-19.56-24.85Z"
+							/>
+							<path
+								class="cls-1"
+								d="m41.08,28.44h-16.63l-2.64-24.11c-.19-1.78,1.2-3.33,2.98-3.33h15.94c1.79,0,3.18,1.55,2.98,3.33l-2.64,24.11Z"
+							/>
+							<path
+								class="cls-1"
+								d="m44.17,36.12l-22.84-.06c-3.3,0-6-2.72-5.99-6.02h0c0-3.3,2.72-6,6.02-5.99l22.84.06c3.3,0,6,2.72,5.99,6.02h0c0,3.3-2.72,6-6.02,5.99Z"
+							/>
+							<path
+								class="cls-2"
+								d="m46.77,74.19s-.03-.01-.05-.02c.02-.08.05-.17.05-.25,0-2.06-6.27-3.73-14.01-3.73s-14.01,1.67-14.01,3.73c0,.08.03.17.05.25-.02,0,4.16,47.35,4.16,47.35.52,5.9.52,11.83,0,17.72l-4.21,47.34s.04.01.06.02c-.03.1-.06.21-.06.31,0,2.06,6.27,3.73,14.01,3.73s14.01-1.67,14.01-3.73c0-.11-.03-.21-.06-.31.02,0,.04-.01.06-.02l-4.21-47.34c-.52-5.9-.52-11.83,0-17.72l4.21-47.34Z"
+							/>
+							<path
+								class="cls-2"
+								d="m18.81,74.18s4.65,10.12,18.04,6.07-7.65-6.07-7.65-6.07"
+							/>
+						</g>
+					</g>
+				</svg>
+			</button>
+		</header>
 
-<header>
-  <button class="dark first">
-    <svg
-      class="bag"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64.97 199.69"
-    >
-      <g id="Laag_2-2" data-name="Laag 2">
-        <g id="bottle">
-          <path
-            class="cls-1"
-            d="m44.41,54.37c-.53-6.57-.12-23.31-.12-23.31l-22.08-.06s-.17,18.17-.06,23.33c.11,5.16-20.83,17.11-20.85,24.72-.02,6.94-.26,95.07-.3,110.68,0,1.84.99,3.51,2.61,4.4,3.5,1.92,11.39,4.51,28.49,4.56,17.44.05,25.48-2.6,29.02-4.52,1.58-.86,2.55-2.53,2.55-4.34.04-15.56.27-101.17.3-110.61.03-10.4-19.03-18.29-19.56-24.85Z"
-          />
-          <path
-            class="cls-1"
-            d="m41.08,28.44h-16.63l-2.64-24.11c-.19-1.78,1.2-3.33,2.98-3.33h15.94c1.79,0,3.18,1.55,2.98,3.33l-2.64,24.11Z"
-          />
-          <path
-            class="cls-1"
-            d="m44.17,36.12l-22.84-.06c-3.3,0-6-2.72-5.99-6.02h0c0-3.3,2.72-6,6.02-5.99l22.84.06c3.3,0,6,2.72,5.99,6.02h0c0,3.3-2.72,6-6.02,5.99Z"
-          />
-          <path
-            class="cls-2"
-            d="m46.77,74.19s-.03-.01-.05-.02c.02-.08.05-.17.05-.25,0-2.06-6.27-3.73-14.01-3.73s-14.01,1.67-14.01,3.73c0,.08.03.17.05.25-.02,0,4.16,47.35,4.16,47.35.52,5.9.52,11.83,0,17.72l-4.21,47.34s.04.01.06.02c-.03.1-.06.21-.06.31,0,2.06,6.27,3.73,14.01,3.73s14.01-1.67,14.01-3.73c0-.11-.03-.21-.06-.31.02,0,.04-.01.06-.02l-4.21-47.34c-.52-5.9-.52-11.83,0-17.72l4.21-47.34Z"
-          />
-          <path
-            class="cls-2"
-            d="m18.81,74.18s4.65,10.12,18.04,6.07-7.65-6.07-7.65-6.07"
-          />
-        </g>
-      </g>
-    </svg>
-  </button>
-  <button class="dark first" onclick="openForm()">
-    <svg
-      class="bag"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64.97 199.69"
-    >
-      <g id="Laag_2-2" data-name="Laag 2">
-        <g id="bottle">
-          <path
-            class="cls-1"
-            d="m44.41,54.37c-.53-6.57-.12-23.31-.12-23.31l-22.08-.06s-.17,18.17-.06,23.33c.11,5.16-20.83,17.11-20.85,24.72-.02,6.94-.26,95.07-.3,110.68,0,1.84.99,3.51,2.61,4.4,3.5,1.92,11.39,4.51,28.49,4.56,17.44.05,25.48-2.6,29.02-4.52,1.58-.86,2.55-2.53,2.55-4.34.04-15.56.27-101.17.3-110.61.03-10.4-19.03-18.29-19.56-24.85Z"
-          />
-          <path
-            class="cls-1"
-            d="m41.08,28.44h-16.63l-2.64-24.11c-.19-1.78,1.2-3.33,2.98-3.33h15.94c1.79,0,3.18,1.55,2.98,3.33l-2.64,24.11Z"
-          />
-          <path
-            class="cls-1"
-            d="m44.17,36.12l-22.84-.06c-3.3,0-6-2.72-5.99-6.02h0c0-3.3,2.72-6,6.02-5.99l22.84.06c3.3,0,6,2.72,5.99,6.02h0c0,3.3-2.72,6-6.02,5.99Z"
-          />
-          <path
-            class="cls-2"
-            d="m46.77,74.19s-.03-.01-.05-.02c.02-.08.05-.17.05-.25,0-2.06-6.27-3.73-14.01-3.73s-14.01,1.67-14.01,3.73c0,.08.03.17.05.25-.02,0,4.16,47.35,4.16,47.35.52,5.9.52,11.83,0,17.72l-4.21,47.34s.04.01.06.02c-.03.1-.06.21-.06.31,0,2.06,6.27,3.73,14.01,3.73s14.01-1.67,14.01-3.73c0-.11-.03-.21-.06-.31.02,0,.04-.01.06-.02l-4.21-47.34c-.52-5.9-.52-11.83,0-17.72l4.21-47.34Z"
-          />
-          <path
-            class="cls-2"
-            d="m18.81,74.18s4.65,10.12,18.04,6.07-7.65-6.07-7.65-6.07"
-          />
-        </g>
-      </g>
-    </svg>
-  </button>
-</header>
+		<main>
+			<section id="filter">
+				<form action="/discover">
+					<section class="form-group">
+						<label for="email">Gender</label>
+						<article>
+							<label for="email">Male</label>
+							<input type="checkbox" id="male" name="gender" value="Male" />
+							<label for="email">Female</label>
+							<input type="checkbox" id="female" name="gender" value="Female" />
+							<label for="email">Non Binairy</label>
+							<input type="checkbox" id="non-binairy" name="gender" value="Non Binairy" />
+						</article>
+					</section>
 
-<main>
-    <section id="filter">
-        <form action="">
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-        
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-        
-            <button type="submit" class="btn">Login</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-    </section>
+					<section class="form-group">
+						<label for="email">Age</label>
+						<input type="number" id="age-l" name="age" />
+						<input type="number" id="age-h" name="age" />
+					</section>
 
-</main>
+					<section class="form-group">
+						<label for="language">Language</label>
+						<select name="language" id="lang">
+							<option value="choose">- Choose a language</option>
+							<option value="Norway">Norway</option>
+							<option value="Greenland">Greenland</option>
+							<option value="Greece">Greece</option>
+							<option value="UK">United Kingdom</option>
+							<option value="Italy">Italy</option>
+							<option value="Croatia">Croatia</option>
+							<option value="Denmark">Denmark</option>
+							<option value="Iceland">Iceland</option>
+							<option value="Netherlands">Netherlands</option>
+							<option value="Germany">Germany</option>
+							<option value="Belgium">Belgium</option>
+							<option value="France">France</option>
+							<option value="Spain">Spain</option>
+						</select>
+					</section>
 
-<footer class="light">
-  <%- include('../partials/footer'); %>
-</footer>
+					<section class="form-group">
+						<label for="country">Country</label>
+						<select name="country" id="country">
+							<option value="choose">- Choose a country</option>
+							<option value="Norway">Norway</option>
+							<option value="Greenland">Greenland</option>
+							<option value="Greece">Greece</option>
+							<option value="UK">United Kingdom</option>
+							<option value="Italy">Italy</option>
+							<option value="Croatia">Croatia</option>
+							<option value="Denmark">Denmark</option>
+							<option value="Iceland">Iceland</option>
+							<option value="Netherlands">Netherlands</option>
+							<option value="Germany">Germany</option>
+							<option value="Belgium">Belgium</option>
+							<option value="France">France</option>
+							<option value="Spain">Spain</option>
+						</select>
+					</section>
 
-<script src="js/index.js"></script>
-</body>
+					<section class="form-group">
+						<label for="interests">Interests</label>
+						<select name="interests" id="interests">
+							<option value="choose">- Choose a interest</option>
+							<option value="Sports">Sports</option>
+							<option value="Music">Music</option>
+							<option value="Movies">Movies</option>
+							<option value="Nature">Nature</option>
+							<option value="Animals">Animals</option>
+							<option value="Games">Games</option>
+							<option value="Drawing">Drawing</option>
+						</select>
+					</section>
+
+					<button type="submit" class="btn">Apply</button>
+					<button type="button" class="btn cancel" onclick="closeForm()"
+						>X</button
+					>
+				</form>
+			</section>
+
+            <section>
+                <% data.forEach((item)=> { %>
+                <div class="event-found">
+                  <div class="foto">
+                    <img src=" <%= item.foto %>" alt="title of img" />
+                  </div>
+                  <div class="data">
+                    <h2><%= item.eventnaam %></h2>
+                    <p><%= item.soort %></p>
+                    <p><%= item.locatie %></p>
+                    <p><%= item.datum %></p>
+                    <p><%= item.reistijd %></p>
+                    <p><%= item.tijd %></p>
+                    <p><%= item.grootte %></p>
+                    <section>
+                      <form>
+                        <button type="submit" name="aanmelden">Aanmelden</button>
+                      </form>
+                    </section>
+                  </div>
+                </div>
+          
+                <% }) %>
+            </section>
+		</main>
+
+		<footer class="light"> <%- include('../partials/footer'); %> </footer>
+
+		<script src="/javascript/script.js"></script>
+	</body>
 </html>
