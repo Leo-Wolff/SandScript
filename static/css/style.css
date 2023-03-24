@@ -1,0 +1,294 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+:root {
+  --bgClr: linear-gradient(180deg, rgba(0, 197, 175, 1) 0%, rgba(0, 177, 190, 1) 42%, rgba(0, 122, 171, 1) 100%);
+  --darkBlue: #032847;
+  --blue: #00b1be;
+  --lightBlue: #00c5af;
+  --fontFamily: "Ubuntu", sans-serif;
+  --fontLight: 300;
+  --fontRegular: 400;
+  --fontMedium: 500;
+  --fontBold: 700;
+  --fontMenu: 14px;
+}
+
+/*====================
+ Algemene stijling
+ ====================*/
+body.container {
+  width: 95%;
+  position: relative;
+  margin: auto;
+  display: block;
+}
+
+body.home-bg {
+    background: var(--bgClr);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+body.standard-bg {
+  background: var(--darkBlue);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+.standard-bg header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.standard-bg main nav {
+  background: #fff;
+  width: 80%;
+  margin: auto;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.standard-bg main nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.standard-bg main nav li {
+  text-decoration: none;
+  list-style-type: none;
+  padding: 10px 47px;
+  width: 50%;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontLight);
+}
+
+.standard-bg main nav li:last-of-type {
+  background: var(--blue);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #fff;
+}
+
+button svg {
+  height: 40px;
+}
+
+button.dark,
+button.light {
+  width: 60px;
+  height: 60px;
+  background-color: var(--darkBlue);
+  border: none;
+  border-radius: 50%;
+}
+button.first{
+    margin-top: 20px;
+}
+button.light {
+  background-color: var(--lightBlue);
+}
+.standard-bg button.dark, .standard-bg button.light {
+  background-color: var(--blue);
+}
+
+/*====================
+SVG Buttons Styling 
+====================*/
+
+svg .cls-1 {
+  stroke-miterlimit: 10;
+}
+
+svg .cls-1,
+svg .cls-2 {
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+svg .cls-2 {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+svg.active .cls-1, svg.active .cls-2 {
+  fill: #fff;
+  stroke: transparent;
+}
+
+svg.treasure {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 130px;
+}
+
+svg.treasure .cls-1,
+svg.treasure .cls-2 {
+  fill: var(--darkBlue);
+}
+
+svg.menu-item {
+  height: 40px;
+  margin-bottom: 7px;
+}
+footer nav ul li:nth-of-type(3) a svg.menu-item {
+  transform: rotate(10deg);
+}
+
+footer.light svg .cls-1,
+svg .cls-2 {
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+footer.light svg.active .cls-1, footer.light svg.active .cls-2 {
+  fill: #fff;
+  stroke: transparent;
+}
+
+/*====================
+ clock stijling
+ ====================*/
+ #timer {
+  position: fixed;
+  top: 65%;
+  left: 50%;
+  transform: translate(-25%, -50%);
+  width: 100%;
+  color: #fff;
+}
+
+#timer > span {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontMedium);
+  font-size: 60px;
+  color: #fff;
+}
+
+/*====================
+Discover page stijling
+ ====================*/
+
+#filter {
+  display: none;
+  position: fixed;
+  top: 100px;
+  background: #fff;
+  padding: 30px;
+  z-index: 9;
+  width: 95%;
+  border-radius: 10px;
+}
+
+#filter form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontLight);
+}
+
+#filter form section, #filter form label {
+  width: 100%;
+  display: block;
+}
+
+#filter form article label {
+  display: inline;
+}
+
+button.cancel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/*====================
+ Footer stijling
+ ====================*/
+
+footer {
+  position: fixed;
+  bottom: -20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+footer nav {
+  background: var(--darkBlue);
+  border-radius: 10px;
+  padding: 15px 20px;
+}
+footer nav ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+}
+footer nav ul li {
+  padding: 0px 20px;
+  text-decoration: none;
+}
+footer nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontLight);
+  font-size: var(--fontMenu);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+footer nav ul li:first-of-type{
+  padding-left: 0;
+}
+footer nav ul li:last-of-type{
+  padding-right: 0;
+}
+footer.light nav {
+  background: var(--blue);
+  border-radius: 10px;
+  padding: 15px 20px;
+}
+footer.light nav ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+}
+footer.light nav ul li {
+  padding: 0px 20px;
+  text-decoration: none;
+}
+footer.light nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontLight);
+  font-size: var(--fontMenu);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+footer.light nav ul li:first-of-type{
+  padding-left: 0;
+}
+footer.light nav ul li:last-of-type{
+  padding-right: 0;
+}
