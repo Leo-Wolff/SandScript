@@ -23,8 +23,15 @@ app.use(express.static(path.join(__dirname, '/static')))
 app.get('/matches', (req, res) => {
   res.render('pages/matches')
 })
-app.get('/discover', (req, res) => {
-  res.render('pages/discover')
+
+app.get('/discover', async (req, res) => {
+  try{
+    const eersteMatch = await users.findOne( { status: 'new'} )  // Search for a person with status new
+
+    res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
+  } catch (err) {
+    console.log(err.stack)
+  }
 })
 
 app.get('/', async (req, res) => {
@@ -36,15 +43,31 @@ app.get('/', async (req, res) => {
 app.post('/discover', async (req, res) => {
   try {
     // checks if all elements compare to a person in the database
-    const data = await users.find({ gender: req.body.gender }).toArray()
-    console.log(data)
+    const eersteMatch = await users.findOne({ gender: req.body.gender }, { status: 'new' } )  // Search for a person with status new
   
-    if (data) {
-      res.render('pages/gefiltered', { data })
+    if (eersteMatch) {
+      res.render('pages/gefiltered', { eersteMatch })
+
     } else {
       res.send('no results')
     }
   } catch (err) {
+    console.log(err.stack)
+  }
+})
+
+app.post('/liked', async (req, res) => {
+  try {
+    const eersteMatch = await users.findOne( { status: 'new' } ) // Search for a person with status new
+
+    await users.updateOne(
+      { _id: eersteMatch._id },
+      { $set: { status: 'liked' } }
+    )
+
+    res.redirect('/discover')
+
+  } catch(err){
     console.log(err.stack)
   }
 })

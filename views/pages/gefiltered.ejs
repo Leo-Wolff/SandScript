@@ -157,18 +157,22 @@
 			</section>
 
 			<section>
-                <% data.forEach((item)=> { %>
+               
                     <div class="event-found">
-                      <h2><%= item.name %></h2>
-                      <p><%= item.age %></p>
-                      <p><%= item.gender %></p>
-                      <p><%= item.interests %></p>
-                      <p><%= item.language %></p>
-                      <p><%= item.country %></p>
+                      <h2><%= eersteMatch.name %></h2>
+                      <p><%= eersteMatch.age %></p>
+                      <p><%= eersteMatch.gender %></p>
+                      <p><%= eersteMatch.interests %></p>
+                      <p><%= eersteMatch.language %></p>
+                      <p><%= eersteMatch.country %></p>
                     </div>
-                    <% }) %>
+
 				
 			</section>
+
+            <form action="/liked" method="post">
+                <button type="submit" name="matchId" value="<%= eersteMatch._id %>">Liked</button>
+            </form>
 		</main>
 
 		<footer class="light"> <%- include('../partials/footer'); %> </footer>
