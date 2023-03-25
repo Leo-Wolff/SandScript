@@ -5,7 +5,48 @@ const port = 8000
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
+app.get('/inloggen', (req, res) => {
+  res.render('inloggen')
+})
+app.get('/account', async(req,res) => {
+  const {username, email} = req.session.user
+  res.render('account', {
+      username: username,
+    email: email
+  })
+  })
+  app.post('/uitloggen', (req, res) => {
+    req.session.destroy()
+    res.redirect('/')
+  })
+  app.post("/inloggen", async (req, res) => {
+    const currentUser = await User.findOne({
+      username: req.body.username,
+    })
+    req.session.user = {
+      username: currentUser.username,
+      password: currentUser.password,
+      email: currentUser.email,
+    }
+    res.redirect("/account")
+  })
+  app.post("/update", async (req, res) => {
+    await User.findOneAndUpdate(
+      {
+        username: req.session.user.username,
+      },
+      {
+        username: req.body.username,
+        email: req.body.email,
+      }
+    );
+    req.session.user.username = req.body.username;
+    req.session.user.email = req.body.email;
+    res.redirect("/account");
+  });
+  app.get('*', (req, res) => {
+    res.render('404')
+  })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
