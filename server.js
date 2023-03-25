@@ -2,11 +2,27 @@ const express = require('express')
 const app = express()
 const port = 8000
 const path = require('path')
+const User = require("./models/User")
+const connection = require("./database/connection")
+const session = require('express-session')
+require('dotenv').config()
 
+connection()
 // set the view engine to ejs
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '/static')))
+
+//Session
+app.set("trust proxy", 1)
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {},
+  })
+)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
