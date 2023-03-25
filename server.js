@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 8000
+const path = require('path')
 
 // set the view engine to ejs
 app.set('view engine', 'ejs')
