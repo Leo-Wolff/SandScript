@@ -1,19 +1,12 @@
 const express = require("express")
 const app = express()
 const port = 8000
-const path = require('path')
 
-// set the view engine to ejs
-app.set('view engine', 'ejs')
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '/static')))
+const connection = require("./database/connection")
+require('dotenv').config()
 
-app.get('/matches', (req, res) => {
-  res.render('pages/matches')
-})
-app.get('/discover', (req, res) => {
-  res.render('pages/discover')
-})
+// Database connection
+connection()
 
 app.get('/', (req, res) => {
   res.render('pages/index')
