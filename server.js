@@ -1,6 +1,7 @@
-const express = require('express')
+const express = require("express")
 const app = express()
 const port = 8000
+
 const connection = require("./database/connection")
 require('dotenv').config()
 
@@ -8,9 +9,9 @@ require('dotenv').config()
 connection()
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('pages/index')
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+	console.log(`Example app listening on port ${port}`)
 })
