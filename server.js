@@ -25,7 +25,7 @@ app.use(
 )
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('index')
 })
 app.get('/inloggen', (req, res) => {
   res.render('inloggen')
@@ -45,6 +45,7 @@ app.get('/account', async(req,res) => {
     const currentUser = await User.findOne({
       username: req.body.username,
     })
+    console.log(req.body.username)
     req.session.user = {
       username: currentUser.username,
       password: currentUser.password,
