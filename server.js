@@ -44,6 +44,11 @@ app.post('/discover', async (req, res) => {
   try {
     // checks if all elements compare to a person in the database
     const eersteMatch = await users.findOne({ gender: req.body.gender, status: 'new' } )  // Search for a person with status new
+
+       // Verzamel de filterselecties
+const selectedFilters = {
+  gender: req.body.gender
+}
   
     if (eersteMatch) {
       res.render('pages/gefiltered', { eersteMatch })
@@ -66,10 +71,21 @@ app.post('/liked', async (req, res) => {
 
     await users.updateOne(
       { _id: eersteMatch._id },
-      { $set: { status: eersteMatch._id } }
+      { $set: { status: 'liked' } }
     )
+   // Verzamel de filterselecties
+const selectedFilters = {
+  gender: req.body.gender
+}
 
-    res.redirect('/discover')
+// Bouw de querystring op basis van de filterselecties
+const querystring = Object.keys(selectedFilters)
+  .map(key => `${key}=${selectedFilters[key]}`)
+  .join('&')
+
+    res.redirect(`/discover?${querystring}`)
+
+    console.log(selectedFilters)
 
   } catch(err){
     console.log(err.stack)
