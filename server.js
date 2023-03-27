@@ -3,11 +3,16 @@ const express = require('express')
 const app = express()
 const port = 8000
 const path = require('path')
+const cookieParser = require('cookie-parser')
 
 // Connecting mongoDB
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const uri = process.env.MONGODB_URI
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
+const client = new MongoClient(uri, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	serverApi: ServerApiVersion.v1,
+})
 const dbName = 'sandscript'
 client.connect()
 
@@ -19,79 +24,78 @@ const users = db.collection('users')
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '/static')))
+app.use(cookieParser())
 
+// Matches page
 app.get('/matches', (req, res) => {
-  res.render('pages/matches')
+	res.render('pages/matches')
 })
 
-app.get('/discover', async (req, res) => {
-  try{
-    const eersteMatch = await users.findOne( { status: 'new'} )  // Search for a person with status new
-
-    res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
-  } catch (err) {
-    console.log(err.stack)
-  }
-})
-
+// index page
 app.get('/', async (req, res) => {
-  res.render('pages/index')
+	res.render('pages/index')
 })
 
+// discover page
+app.get('/discover', async (req, res) => {
+	try {
+		const filters = req.cookies.selectedFilters
+			? JSON.parse(req.cookies.selectedFilters)
+			: {} // get filters from cookie 
+
+		const eersteMatch = await users.findOne({ ...filters, status: 'new' }) // use filters to search for a match
+
+		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
+	} catch (err) {
+		console.log(err.stack)
+	}
+})
 
 // filtering in discover page
 app.post('/discover', async (req, res) => {
-  try {
-    // checks if all elements compare to a person in the database
-    const eersteMatch = await users.findOne({ gender: req.body.gender, status: 'new' } )  // Search for a person with status new
+	try {
+		const filters = { gender: req.body.gender } // save selected filter in object // set cookie with selected filters
 
-       // Verzamel de filterselecties
-const selectedFilters = {
-  gender: req.body.gender
-}
-  
-    if (eersteMatch) {
-      res.render('pages/gefiltered', { eersteMatch })
+		res.cookie('selectedFilters', JSON.stringify(filters)) // checks if all elements compare to a person in the database
 
-    } else {
-      res.send('no results')
-    }
-  } catch (err) {
-    console.log(err.stack)
-  }
+		const eersteMatch = await users.findOne({
+			gender: req.body.gender,
+			status: 'new',
+		}) // Search for a person with status new
+		if (eersteMatch) {
+			res.render('pages/gefiltered', { eersteMatch })
+		} else {
+			res.send('no results')
+		}
+	} catch (err) {
+		console.log(err.stack)
+	}
 })
 
 app.post('/liked', async (req, res) => {
-  try {
-    // const eersteMatch = await users.findOne( { status: 'new' } ) // Search for a person with status new
-    const eersteMatch = await users.findOne( { _id: new ObjectId(req.body.matchId) } ) // Search for a person with status new
+	try {
+		// const eersteMatch = await users.findOne( { status: 'new' } ) // Search for a person with status new
 
-    console.log(eersteMatch)
-    console.log(req.body.matchId)
+		const eersteMatch = await users.findOne({
+			_id: new ObjectId(req.body.matchId),
+		}) // Search for a person with status new
 
-    await users.updateOne(
-      { _id: eersteMatch._id },
-      { $set: { status: 'liked' } }
-    )
-   // Verzamel de filterselecties
-const selectedFilters = {
-  gender: req.body.gender
-}
+		console.log(eersteMatch)
 
-// Bouw de querystring op basis van de filterselecties
-const querystring = Object.keys(selectedFilters)
-  .map(key => `${key}=${selectedFilters[key]}`)
-  .join('&')
+		console.log(req.body.matchId)
 
-    res.redirect(`/discover?${querystring}`)
+		await users.updateOne(
+			{ _id: eersteMatch._id },
 
-    console.log(selectedFilters)
+			{ $set: { status: 'liked' } }
+		)
 
-  } catch(err){
-    console.log(err.stack)
-  }
+		res.redirect('/discover')
+	} catch (err) {
+		console.log(err.stack)
+	}
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+	console.log(`Example app listening on port ${port}`)
 })
