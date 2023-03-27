@@ -5,7 +5,7 @@ const port = 8000
 const path = require('path')
 
 // Connecting mongoDB
-const { MongoClient, ServerApiVersion } = require('mongodb')
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const uri = process.env.MONGODB_URI
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
 const dbName = 'sandscript'
@@ -43,7 +43,7 @@ app.get('/', async (req, res) => {
 app.post('/discover', async (req, res) => {
   try {
     // checks if all elements compare to a person in the database
-    const eersteMatch = await users.findOne({ gender: req.body.gender }, { status: 'new' } )  // Search for a person with status new
+    const eersteMatch = await users.findOne({ gender: req.body.gender, status: 'new' } )  // Search for a person with status new
   
     if (eersteMatch) {
       res.render('pages/gefiltered', { eersteMatch })
@@ -58,7 +58,11 @@ app.post('/discover', async (req, res) => {
 
 app.post('/liked', async (req, res) => {
   try {
-    const eersteMatch = await users.findOne( { status: 'new' } ) // Search for a person with status new
+    // const eersteMatch = await users.findOne( { status: 'new' } ) // Search for a person with status new
+    const eersteMatch = await users.findOne( { _id: new ObjectId(req.body.matchId) } ) // Search for a person with status new
+
+    console.log(eersteMatch)
+    console.log(req.body.matchId)
 
     await users.updateOne(
       { _id: eersteMatch._id },
