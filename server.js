@@ -66,7 +66,7 @@ app.post('/liked', async (req, res) => {
 
     await users.updateOne(
       { _id: eersteMatch._id },
-      { $set: { status: 'liked' } }
+      { $set: { status: eersteMatch._id } }
     )
 
     res.redirect('/discover')
