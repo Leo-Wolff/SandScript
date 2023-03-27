@@ -43,7 +43,7 @@ app.get('/discover', async (req, res) => {
 			? JSON.parse(req.cookies.selectedFilters)
 			: {} // get filters from cookie 
 
-		const eersteMatch = await users.findOne({ ...filters, status: 'new' }) // use filters to search for a match
+		const eersteMatch = await users.findOne({ ...filters, status: 'new' }) // filter between the selcted filters and status new
 
 		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
 	} catch (err) {
@@ -54,14 +54,15 @@ app.get('/discover', async (req, res) => {
 // filtering in discover page
 app.post('/discover', async (req, res) => {
 	try {
-		const filters = { gender: req.body.gender } // save selected filter in object // set cookie with selected filters
+		const filters = { gender: req.body.gender } // save input from user in filters
 
-		res.cookie('selectedFilters', JSON.stringify(filters)) // checks if all elements compare to a person in the database
+		res.cookie('selectedFilters', JSON.stringify(filters)) // save filters in cookie
 
 		const eersteMatch = await users.findOne({
 			gender: req.body.gender,
 			status: 'new',
-		}) // Search for a person with status new
+		}) // Search for a person, where the user has selected input via the seqrch form
+
 		if (eersteMatch) {
 			res.render('pages/gefiltered', { eersteMatch })
 		} else {
@@ -74,21 +75,17 @@ app.post('/discover', async (req, res) => {
 
 app.post('/liked', async (req, res) => {
 	try {
-		// const eersteMatch = await users.findOne( { status: 'new' } ) // Search for a person with status new
-
 		const eersteMatch = await users.findOne({
-			_id: new ObjectId(req.body.matchId),
+			_id: new ObjectId(req.body.matchId)
 		}) // Search for a person with status new
 
 		console.log(eersteMatch)
-
 		console.log(req.body.matchId)
 
 		await users.updateOne(
 			{ _id: eersteMatch._id },
-
 			{ $set: { status: 'liked' } }
-		)
+		) // Update the status of the person to liked
 
 		res.redirect('/discover')
 	} catch (err) {
