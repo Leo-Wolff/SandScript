@@ -43,7 +43,7 @@ app.get('/discover', async (req, res) => {
 			? JSON.parse(req.cookies.selectedFilters)
 			: {} // get filters from cookie 
 
-		const eersteMatch = await users.findOne({ ...filters, status: 'new' }) // filter between the selcted filters and status new
+		const eersteMatch = await users.findOne({ ...filters, likes: { $nin: ["MysteryMan4"]}, status: 'new' }) // filter between the selcted filters and status new
 
 		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
 	} catch (err) {
@@ -60,7 +60,8 @@ app.post('/discover', async (req, res) => {
 
 		const eersteMatch = await users.findOne({
 			gender: req.body.gender,
-			status: 'new',
+			likes: { $nin: ["MysteryMan4"]},
+      status: 'new'
 		}) // Search for a person, where the user has selected input via the seqrch form
 
 		if (eersteMatch) {
@@ -85,7 +86,12 @@ app.post('/liked', async (req, res) => {
 		await users.updateOne(
 			{ _id: eersteMatch._id },
 			{ $set: { status: 'liked' } }
-		) // Update the status of the person to liked
+		)
+    
+    await users.updateOne(
+			{ _id: eersteMatch._id },
+			{ $push: { likes: 'req.cookies.username' } }
+		)// Update the status of the person to liked and add the logged-in user's username to their likes list
 
 		res.redirect('/discover')
 	} catch (err) {

@@ -156,6 +156,15 @@
 				</form>
 			</section>
 
+
+            <section>
+                <h1><%= eersteMatch.name %></h1>
+
+                <form action="/liked" method="post">
+                    <button type="submit" name="matchId" value="<%= eersteMatch._id %>">Liked</button>
+                </form>
+            </section>
+
 		</main>
 
 		<footer class="light"> <%- include('../partials/footer'); %> </footer>
