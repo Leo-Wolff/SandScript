@@ -164,9 +164,10 @@ footer.light svg.active .cls-1, footer.light svg.active .cls-2 {
   position: fixed;
   top: 65%;
   left: 50%;
-  transform: translate(-25%, -50%);
+  transform: translate(-50%, -50%);
   width: 100%;
   color: #fff;
+  text-align: center;
 }
 
 #timer > span {
@@ -189,6 +190,7 @@ Discover page stijling
   z-index: 9;
   width: 95%;
   border-radius: 10px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 35%);
 }
 
 #filter form {
@@ -212,6 +214,44 @@ button.cancel {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+/*====================
+ Matches stijling
+ ====================*/
+
+section.matchable {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 150px;
+}
+
+article.event-found {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fontFamily);
+}
+
+.event-found p:nth-of-type(3),
+.event-found p:nth-of-type(4),
+.event-found p:nth-of-type(5) {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.event-found p b {
+  display: block;
+}
+
+section.match-btn {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
 }
 
 /*====================
