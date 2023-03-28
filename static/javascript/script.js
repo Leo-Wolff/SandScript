@@ -1,7 +1,6 @@
 //QUILL EDITOR
 var toolbarOptions = [
 	["bold", "italic", "underline", "strike"], // toggled buttons
-	["clean"], // remove formatting button
 ]
 
 var quill = new Quill("#editor", {
@@ -9,7 +8,7 @@ var quill = new Quill("#editor", {
 		toolbar: toolbarOptions,
 	},
 
-	placeholder: "Write your letter",
+	placeholder: "Write your letter...",
 
 	theme: "snow",
 })
@@ -17,11 +16,11 @@ var quill = new Quill("#editor", {
 let remainingTime = 2 * 60 * 60 // Two hours in seconds
 let timerInterval
 
-const hoursElem = document.getElementById('hours'),
-	minutesElem = document.getElementById('minutes'),
-	secondsElem = document.getElementById('seconds'),
-	timer = document.getElementById('timer'),
-	content = document.getElementById('content')
+const hoursElem = document.getElementById("hours"),
+	minutesElem = document.getElementById("minutes"),
+	secondsElem = document.getElementById("seconds"),
+	timer = document.getElementById("timer"),
+	content = document.getElementById("content")
 
 const formatTime = (time, string) => {
 	return time == 1 ? `${time}` : `${time}`
@@ -47,15 +46,15 @@ const endCountdown = () => {
 	clearInterval(timerInterval)
 }
 
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
 	startCountdown()
 	timerInterval = setInterval(startCountdown, 1000)
 })
 
 function openForm() {
-    document.getElementById('filter').style.display = "block";
-  }
-  
-  function closeForm() {
-    document.getElementById('filter').style.display = "none";
-  }
+	document.getElementById("filter").style.display = "block"
+}
+
+function closeForm() {
+	document.getElementById("filter").style.display = "none"
+}

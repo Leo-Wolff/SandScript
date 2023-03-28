@@ -1,0 +1,54 @@
+<html lang="en">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="standard-bg container">
+		<header>
+			<!-- Click on img to go to pop-up "Do you want to stop for now?" -->
+			<img src="/img/back-button.svg">
+
+			<!-- Reciptient of letter -->
+			<h1>To: Bas Kramer</h1>
+		</header>
+
+		<!-- Quill text editor -->
+		<div id="editor"></div>
+
+		<!-- Confirm letter button that will lead to pop-up "" -->
+		<button class="confirm-letter">Fill bottle</button>
+
+		<!-- POP-UPS -->
+		<section class="">
+			<img src="static/img/" alt="Cancel" />
+			<h2>Do you want to stop for now?</h2>
+			<p>
+				<a href="../">Exit</a>
+				<a href="matches">Save as draft</a>
+			</p>
+		</section>
+
+		<section id="sign-letter" class="hidden">
+			<img id="close-sign" src="static/img/" alt="Cancel" />
+			<h2>Do you want to sign your letter?</h2>
+			<p>
+				<a href="bottle">Don't sign</a>
+				<button class="styled-like-a" id="open-form">Sign</button>
+			</p>
+		</section>
+
+		<!-- Insert what name your letter will be signed under -->
+		<!-- <section id="sign-name" class="hidden">
+			<img id="close-form" src="static/img/" alt="Cancel" />
+
+			<form action="bottle" method="post">
+				<input id="content" type="hidden" name="content" />
+
+				<input id="signature" type="text" name="signed" />
+
+				<input id="submit-letter" type="submit" value="Sign your letter" />
+			</form>
+		</section> -->
+
+		<script src="/javascript/script.js"></script> -->
+	</body>
+</html>

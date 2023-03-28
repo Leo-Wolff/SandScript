@@ -12,6 +12,10 @@
 	--darkBlue: #032847;
 	--blue: #00b1be;
 	--lightBlue: #00c5af;
+	--white: #fff;
+	--red: #db4b3c;
+	--beige: #f2e8cf;
+	--black: #001f3f;
 	--fontFamily: "Ubuntu", sans-serif;
 	--fontLight: 300;
 	--fontRegular: 400;
@@ -65,6 +69,22 @@ button.light {
 .standard-bg button.dark,
 .standard-bg button.light {
 	background-color: var(--blue);
+}
+
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--white);
+	font-family: var(--fontFamily);
+}
+
+.hidden {
+	display: none;
 }
 
 /*====================
@@ -263,31 +283,78 @@ footer.light nav ul li:last-of-type {
 }
 
 /*====================
-Letter.html
+Letter.ejs
  ====================*/
 
-/* Quill */
-.ql-container {
-	font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+body header img {
+	position: absolute;
+	top: 2em;
+	left: 0.5em;
+
+	border-radius: 360px;
+	padding: 1em 1.625em 1em 1.375em;
+
+	height: 4em;
+
+	background-color: var(--red);
 }
 
+body header h1 {
+	position: absolute;
+	top: 1.9em;
+	left: calc(1.5em + 2.5em); /* plus the width body header img is taking up */
+
+	font-weight: var(--fontRegular);
+	font-size: 1.6em;
+}
+
+.confirm-letter {
+	position: absolute;
+	top: 90%;
+	left: calc(50% - ((100% - 1em) / 2));
+
+	border: 0;
+	padding: 0.75em;
+	border-radius: 5px;
+
+	width: calc(100% - 1em);
+
+	font-size: 1em;
+	font-family: var(--fontFamily);
+	color: var(--white);
+	background-color: var(--blue);
+}
+
+/*====================
+Quill
+ ====================*/
 .ql-snow {
 	position: absolute;
-	top: 4em;
-	left: calc(50% - (90% / 2));
+	top: 7em;
+	left: calc(50% - ((100% - 1em) / 2));
 
-	border-radius: 5px;
 	padding: 0;
 
-	width: 90%;
+	width: calc(100% - 1.5em);
+
+	background-color: var(--beige);
+}
+
+.ql-snow p {
+	font-family: var(--fontFamily);
+	color: var(--black);
 }
 
 .ql-toolbar {
 	border: 0;
 	padding: 0;
 
+	width: calc(100% - 1em);
+
 	text-align: center;
 	background: none;
+
+	background-color: var(--beige);
 }
 
 body .ql-toolbar.ql-snow {
@@ -297,20 +364,38 @@ body .ql-toolbar.ql-snow {
 .ql-toolbar .ql-formats .ql-bold,
 .ql-toolbar .ql-formats .ql-italic,
 .ql-toolbar .ql-formats .ql-underline,
-.ql-toolbar .ql-formats .ql-strike,
-.ql-toolbar .ql-formats .ql-clean {
-	margin: 0 0.75em 0 0.75em;
+.ql-toolbar .ql-formats .ql-strike {
+	margin: 0.5em 1em 0.5em 1em;
+	padding: 1.5em;
 	border-radius: 360px;
 
-	background-color: var(--sky-blue);
+	background-color: var(--blue);
+}
+
+.ql-toolbar .ql-formats .ql-bold svg,
+.ql-toolbar .ql-formats .ql-italic svg,
+.ql-toolbar .ql-formats .ql-underline svg,
+.ql-toolbar .ql-formats .ql-strike svg {
+	position: relative;
+	top: -0.85em;
+	left: -0.85em;
+
+	margin: 0;
+	padding: 0;
+
+	height: 1.75em;
+
+	filter: brightness(100);
 }
 
 .ql-container {
-	top: 7.5em;
-	left: 0.75em;
+	top: 13.9em;
+	left: 0.65em;
 
 	border: 0;
 	padding: 0;
+
+	width: calc(100% - 1.25em);
 
 	font-size: 1em;
 }
@@ -319,7 +404,21 @@ body .ql-toolbar.ql-snow {
 
 #editor {
 	border: 0;
-	border-top: 5px solid var(--black);
 
-	height: 45em;
+	height: 37em;
 }
+
+#editor::after {
+	content: "";
+	position: absolute;
+	height: 1px;
+	background: var(--black);
+	top: 0;
+	width: calc(100% - 3em);
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/*====================
+Pop-ups letter.ejs
+ ====================*/
