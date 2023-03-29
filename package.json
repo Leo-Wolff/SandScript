@@ -23,6 +23,7 @@
 		"nodemon": "^2.0.22"
 	},
 	"dependencies": {
+		"body-parser": "^1.20.2",
 		"camelcase": "^7.0.1",
 		"dotenv": "^16.0.3",
 		"ejs": "^3.1.9",

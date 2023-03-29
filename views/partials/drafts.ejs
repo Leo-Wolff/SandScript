@@ -1,11 +1,11 @@
+<% letters.forEach((info)=> { %>
 <div class="draft-item">
 	<!-- avatar -->
 	<div></div>
 
-	<p>RE: Reciptient</p>
-	<p>
-		Here will be the text of the letter which will stop at a certain amount of
-		characters.
-	</p>
-	<p>Last updated: 28 Mar</p>
+	<p>RE: <%= info.recipient %></p>
+	<p><%- info.content %></p>
+	<p>- <%= info.signed %></p>
+	<p>Last updated: <%= info.dateUpdated %></p>
 </div>
+<% }) %>
