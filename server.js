@@ -86,6 +86,7 @@ app.post('/liked', async (req, res) => {
 		}) // Search for a person with status new
 
 		const ik = await users.findOne({username: 'MysteryMan4'})
+		console.log(eersteMatch)
 
 
 		await users.updateOne(
