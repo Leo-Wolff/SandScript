@@ -1,10 +1,11 @@
 <% letters.forEach((info)=> { %>
 <div class="draft-item">
-	<!-- avatar -->
-	<div></div>
+	<img src="/img/close-button.svg" alt="Cancel" />
+
+	<img src="/img/profile-picture.svg" alt="Profile picture of recipient" />
 
 	<p>RE: <%= info.recipient %></p>
-	<p><%- info.text %></p>
+	<div class="draft-content"><p><%- info.text %></p></div>
 	<p>- <%= info.signed %></p>
 	<p>Last updated: <%= info.dateUpdated %></p>
 </div>
