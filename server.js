@@ -103,7 +103,7 @@ app.get('/discover', async (req, res) => {
 			? JSON.parse(req.cookies.selectedFilters)
 			: {} // get filters from cookie 
 
-			const ik = await users.findOne({username: 'MysteryMan4'})
+			const ik = await users.findOne({username: 'MysteryMan2'})
 			const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
 		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
@@ -119,7 +119,7 @@ app.post('/discover', async (req, res) => {
 
 		res.cookie('selectedFilters', JSON.stringify(filters)) // save filters in cookie
 
-		const ik = await users.findOne({username: 'MysteryMan4'})
+		const ik = await users.findOne({username: 'MysteryMan2'})
 		const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
 		if (eersteMatch) {
@@ -138,7 +138,7 @@ app.post('/liked', async (req, res) => {
 			_id: new ObjectId(req.body.matchId)
 		})
 
-		const ik = await users.findOne({username: 'MysteryMan4'})
+		const ik = await users.findOne({username: 'MysteryMan2'})
 		console.log(eersteMatch)
 
 
@@ -158,8 +158,10 @@ app.post('/liked', async (req, res) => {
 
 		if (ik.likes.includes(eersteMatch.username) && ik.likedBy.includes(eersteMatch.username)) {
 			console.log('match')
+			res.redirect('/discover')
 		} else {
 			console.log('geen match')
+			res.redirect('/discover')
 		}
 
 	} catch (err) {
