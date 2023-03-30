@@ -27,9 +27,49 @@ app.use(express.static(path.join(__dirname, '/static')))
 app.use(cookieParser())
 
 // Matches page
-app.get('/matches', (req, res) => {
-	res.render('pages/matches')
+app.get('/matches', async (req, res) => {
+	try {
+		const filters = req.cookies.selectedFilters
+			? JSON.parse(req.cookies.selectedFilters)
+			: {} // get filters from cookie 
+
+		const eersteMatch = await users.find({ }).toArray() // filter between the selcted filters and status new
+
+		res.render('pages/matches', { eersteMatch }) // Render the page with the first match
+	} catch (err) {
+		console.log(err.stack)
+	}
 })
+
+// filtering in discover page
+app.post('/sorter', async (req, res) => {
+	try {
+		const sortBy = req.body.sorteren;
+		let sortOption = {}
+	
+		if (sortBy === 'age') {
+		  sortOption = { age: 1 }
+		} else if (sortBy === 'name') {
+			sortOption = { name: 1 }
+		} else if (sortBy === '-name') {
+			sortOption = { name: -1 }
+		}
+	
+		const eersteMatch = await users
+		  .find({})
+		  .sort(sortOption)
+		  .toArray() // Retrieve all the documents in the collection, sorted by the user's selection
+
+		if (eersteMatch.length > 0) {
+			res.render('pages/matches', { eersteMatch })
+		} else {
+			res.send('no results')
+		}
+	} catch (err) {
+		console.log(err.stack)
+	}
+})
+  
 
 // index page
 app.get('/', async (req, res) => {
@@ -61,7 +101,7 @@ app.post('/discover', async (req, res) => {
 		const eersteMatch = await users.findOne({
 			gender: req.body.gender,
 			likes: { $nin: ["MysteryMan4"]},
-      status: 'new'
+      		status: 'new'
 		}) // Search for a person, where the user has selected input via the seqrch form
 
 		if (eersteMatch) {
