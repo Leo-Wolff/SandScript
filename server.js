@@ -26,8 +26,8 @@ const client = new MongoClient(uri, {
 const dbName = "sandscript"
 
 // collections aanroepen
-const db = client.db(dbName)
-const users = db.collection("users")
+global.db = client.db(dbName)
+global.users = db.collection("users")
 
 async function connectToDatabase() {
 	try {
@@ -42,18 +42,6 @@ async function connectToDatabase() {
 }
 
 connectToDatabase()
-
-function getDataFromDatabase(dbCollection) {
-	const db = client.db(dbName)
-	let collection = db.collection(dbCollection) // collectie naam
-	collection = GetDraftsFromDatabase(collection)
-
-	return collection
-}
-
-async function GetDraftsFromDatabase(collection) {
-	return collection.find().toArray()
-}
 
 async function CreateNewDraft(collection, content, input) {
 	const draft = {
@@ -88,7 +76,7 @@ app.post("/uitloggen", (req, res) => {
 	res.redirect("/inloggen")
 })
 app.get("/inloggen", (req, res) => {
-	res.render("inloggen")
+	res.render("pages/inloggen")
 })
 app.post("/inloggen", async (req, res) => {
 	const currentUser = await users.findOne({
@@ -101,14 +89,16 @@ app.post("/inloggen", async (req, res) => {
 	}
 	res.redirect("/account")
 })
+
 //Profile page
-app.get("/account", async (req, res) => {
-	const { username, email } = req.session.user
-	res.render("account", {
-		username: username,
-		email: email,
-	})
-})
+// app.get("/account", async (req, res) => {
+// 	const { username, email } = req.session.user
+// 	res.render("pages/account", {
+// 		username: username,
+// 		email: email,
+// 	})
+// })
+
 app.post("/update", async (req, res) => {
 	await users.findOneAndUpdate(
 		{
@@ -125,32 +115,12 @@ app.post("/update", async (req, res) => {
 	req.session.user.email = req.body.email
 	res.redirect("/account")
 })
-// Matches page
-app.get("/matches", async (req, res) => {
-	// const eersteMatch = await users.findOne({ ...filters, likes: { $nin: ["MysteryMan4"]}, status: 'new' }) // filter between the selcted filters and status new
 
-	let draft = await getDataFromDatabase("letters")
-	res.render("pages/matches", {
-		letters: draft,
-	})
-})
+const editorRoutes = require("./routes/editor.js")
+app.use("/editor", editorRoutes)
 
-// index page
-app.get("/", async (req, res) => {
-	try {
-		res.render("pages/index")
-	} catch (err) {
-		console.log(err.stack)
-	}
-})
-
-app.get("/letter", (req, res) => {
-	res.render("pages/letter")
-})
-
-app.get("/bottle", (req, res) => {
-	res.render("pages/bottle")
-})
+const homeRoutes = require("./routes/home.js")
+app.use("/home", homeRoutes)
 
 app.post("/bottle", (req, res) => {
 	const db = client.db(dbName)
@@ -160,24 +130,24 @@ app.post("/bottle", (req, res) => {
 })
 
 // discover page
-app.get("/discover", async (req, res) => {
-	try {
-		const filters = req.cookies.selectedFilters
-			? JSON.parse(req.cookies.selectedFilters)
-			: {} // get filters from cookie
+// app.get("/discover", async (req, res) => {
+// 	try {
+// 		const filters = req.cookies.selectedFilters
+// 			? JSON.parse(req.cookies.selectedFilters)
+// 			: {} // get filters from cookie
 
-		const ik = await users.findOne({ username: "MysteryMan2" })
-		const eersteMatch = await users.findOne({
-			...filters,
-			username: { $nin: ik.likes, $not: { $eq: ik.username } },
-			status: "new",
-		})
+// 		const ik = await users.findOne({ username: "MysteryMan2" })
+// 		const eersteMatch = await users.findOne({
+// 			...filters,
+// 			username: { $nin: ik.likes, $not: { $eq: ik.username } },
+// 			status: "new",
+// 		})
 
-		res.render("pages/gefiltered", { eersteMatch }) // Render the page with the first match
-	} catch (err) {
-		console.log(err.stack)
-	}
-})
+// 		res.render("pages/gefiltered", { eersteMatch }) // Render the page with the first match
+// 	} catch (err) {
+// 		console.log(err.stack)
+// 	}
+// })
 
 // filtering in discover page
 app.post("/discover", async (req, res) => {
@@ -230,10 +200,10 @@ app.post("/liked", async (req, res) => {
 			ik.likedBy.includes(eersteMatch.username)
 		) {
 			console.log("match")
-			res.redirect("/discover")
+			res.redirect("home/discover")
 		} else {
-			console.log("geen match")
-			res.redirect("/discover")
+			console.log("no match")
+			res.redirect("home/discover")
 		}
 	} catch (err) {
 		console.log(err.stack)
@@ -241,5 +211,5 @@ app.post("/liked", async (req, res) => {
 })
 
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`)
+	console.log(`Wow! Look at that ${port}`)
 })
