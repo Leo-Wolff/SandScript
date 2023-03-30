@@ -48,6 +48,17 @@
   </ul>
 </nav>
 
+<% data.forEach((item)=> { %>
+  <div class="event-found">
+    <h2><%= item.name %></h2>
+    <p><%= item.age %></p>
+    <p><%= item.gender %></p>
+    <p><%= item.interests %></p>
+    <p><%= item.language %></p>
+    <p><%= item.country %></p>
+  </div>
+  <% }) %>
+
 </main>
 
 <footer class="light">

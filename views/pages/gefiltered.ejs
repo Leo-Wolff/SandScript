@@ -156,15 +156,22 @@
 				</form>
 			</section>
 
+			<section>
+               
+                    <article class="event-found">
+                      <h2><%= eersteMatch.name %></h2>
+                      <p><%= eersteMatch.age %></p>
+                      <p><%= eersteMatch.gender %></p>
+                      <p><%= eersteMatch.interests %></p>
+                      <p><%= eersteMatch.language %></p>
+                      <p><%= eersteMatch.country %></p>
+                    </article>
 
-            <section>
-                <h1><%= eersteMatch.name %></h1>
+                    <form action="/liked" method="post">
+                        <button type="submit" name="matchId" value="<%= eersteMatch._id %>">Liked</button>
+                    </form>
 
-                <form action="/liked" method="post">
-                    <button type="submit" name="matchId" value="<%= eersteMatch._id %>">Liked</button>
-                </form>
-            </section>
-
+			</section>
 		</main>
 
 		<footer class="light"> <%- include('../partials/footer'); %> </footer>
