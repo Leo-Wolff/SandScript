@@ -42,7 +42,7 @@ app.get('/matches', async (req, res) => {
 })
 
 // filtering in discover page
-app.post('/sorter', async (req, res) => {
+app.post('/matches', async (req, res) => {
 	try {
 		const sortBy = req.body.sorteren;
 		let sortOption = {}
