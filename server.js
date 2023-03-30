@@ -110,8 +110,10 @@ app.post('/liked', async (req, res) => {
 
 		if (ik.likes.includes(eersteMatch.username) && ik.likedBy.includes(eersteMatch.username)) {
 			console.log('match')
+			res.redirect('/discover')
 		} else {
 			console.log('geen match')
+			res.redirect('/discover')
 		}
 
 	} catch (err) {
