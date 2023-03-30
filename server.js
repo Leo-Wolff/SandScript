@@ -27,13 +27,20 @@ app.use(express.static(path.join(__dirname, '/static')))
 app.use(cookieParser())
 
 // Matches page
-app.get('/matches', (req, res) => {
-	res.render('pages/matches')
+app.get('/matches', async (req, res) => {
+	// const eersteMatch = await users.findOne({ ...filters, likes: { $nin: ["MysteryMan4"]}, status: 'new' }) // filter between the selcted filters and status new
+	
+	res.render('pages/matches', { eersteMatch })
 })
 
 // index page
 app.get('/', async (req, res) => {
+	try{
 	res.render('pages/index')
+
+	} catch(err) {
+		console.log(err.stack)
+	}
 })
 
 // discover page
@@ -43,7 +50,8 @@ app.get('/discover', async (req, res) => {
 			? JSON.parse(req.cookies.selectedFilters)
 			: {} // get filters from cookie 
 
-		const eersteMatch = await users.findOne({ ...filters, likes: { $nin: ["MysteryMan4"]}, status: 'new' }) // filter between the selcted filters and status new
+			const ik = await users.findOne({username: 'MysteryMan4'})
+			const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
 		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
 	} catch (err) {
@@ -58,11 +66,8 @@ app.post('/discover', async (req, res) => {
 
 		res.cookie('selectedFilters', JSON.stringify(filters)) // save filters in cookie
 
-		const eersteMatch = await users.findOne({
-			gender: req.body.gender,
-			likes: { $nin: ["MysteryMan4"]},
-      status: 'new'
-		}) // Search for a person, where the user has selected input via the seqrch form
+		const ik = await users.findOne({username: 'MysteryMan4'})
+		const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
 		if (eersteMatch) {
 			res.render('pages/gefiltered', { eersteMatch })
@@ -80,20 +85,34 @@ app.post('/liked', async (req, res) => {
 			_id: new ObjectId(req.body.matchId)
 		}) // Search for a person with status new
 
-		console.log(eersteMatch)
-		console.log(req.body.matchId)
+		const ik = await users.findOne({username: 'MysteryMan4'})
+
+
+		await users.updateOne(
+			{ _id: ik._id },
+			{ $push: { likes: eersteMatch.username } }
+		)
 
 		await users.updateOne(
 			{ _id: eersteMatch._id },
-			{ $set: { status: 'liked' } }
+			{ $push: { likedBy: ik.username } }
 		)
-    
-    await users.updateOne(
-			{ _id: eersteMatch._id },
-			{ $push: { likes: 'req.cookies.username' } }
-		)// Update the status of the person to liked and add the logged-in user's username to their likes list
 
-		res.redirect('/discover')
+		ik.likes.push(eersteMatch.username)
+		eersteMatch.likedBy.push(ik.username)
+
+		// console.log(eersteMatch)
+		// console.log(ik)
+
+		// console.log(ik.likes.includes(eersteMatch.username)) 
+		// console.log(ik.likedBy.includes(eersteMatch.username))
+
+		if (ik.likes.includes(eersteMatch.username) && ik.likedBy.includes(eersteMatch.username)) {
+			console.log('match')
+		} else {
+			console.log('geen match')
+		}
+
 	} catch (err) {
 		console.log(err.stack)
 	}
