@@ -99,3 +99,11 @@ function openForm() {
 function closeForm() {
 	document.getElementById("filter").style.display = "none"
 }
+
+function openSortForm() {
+    document.getElementById('sorter').style.display = "block";
+}
+  
+function closeSortForm() {
+    document.getElementById('sorter').style.display = "none";
+}

@@ -9,4 +9,8 @@ router.post("/discover", discoverController.discover1) // Post selectedfilter on
 
 router.post("/liked", discoverController.liked) // Like the FirstMatch
 
+router.get("/matches", discoverController.matchlist) // Match list of all your matches
+
+router.post("/matches", discoverController.matchlist1)
+
 module.exports = router
