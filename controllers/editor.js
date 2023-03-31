@@ -8,6 +8,26 @@ async function CreateNewDraft(collection, content, input) {
 	await collection.insertOne(draft)
 }
 
+// console.log(db)
+function getDataFromDatabase(dbCollection) {
+	// const db = client.db(dbName)
+	let collection = db.collection(dbCollection) // collectie naam
+	collection = GetDraftsFromDatabase(collection)
+
+	return collection
+}
+
+async function GetDraftsFromDatabase(collection) {
+	return collection.find().toArray()
+}
+
+exports.drafts = async (req, res) => {
+	let draft = await getDataFromDatabase("letters")
+	res.render("pages/drafts.ejs", {
+		letters: draft,
+	})
+}
+
 exports.letter = (req, res) => {
 	res.render("pages/letter.ejs")
 }
