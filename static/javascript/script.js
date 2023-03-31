@@ -32,6 +32,7 @@ if (closeButtons != null) {
 	})
 }
 
+//letter
 if (document.getElementById("back-button") != null) {
 	document.getElementById("back-button").addEventListener("click", () => {
 		stopPopup.classList.remove("hidden")
@@ -51,6 +52,30 @@ if (document.querySelector(".styled-like-a") != null) {
 		signPopup.classList.add("hidden")
 		signForm.classList.remove("hidden")
 		console.log("Open sign letter form")
+	})
+}
+
+//bottle
+//variables
+const photoPopup = document.getElementById("insert-photo")
+const photoInput = document.getElementById("insert-input")
+
+if (photoInput != null) {
+	photoInput.addEventListener("change", (e) => {
+		let reader = new FileReader()
+
+		reader.onload = () => {
+			document.getElementById("output").src = reader.result
+		}
+
+		reader.readAsDataURL(e.target.files[0])
+
+		// output is hidden so that the border style only shows when an image is uploaded
+		document.getElementById("output").classList.remove("hidden")
+
+		// show a different button to fake a confirm button
+		document.getElementById("upload-photo").classList.add("hidden")
+		document.getElementById("confirm-photo").classList.remove("hidden")
 	})
 }
 

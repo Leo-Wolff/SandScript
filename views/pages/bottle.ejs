@@ -2,7 +2,55 @@
 	<head>
 		<%- include('../partials/head'); %>
 	</head>
-	<body>
+	<body class="standard-bg container">
+		<header>
+			<!-- Click on img to go to pop-up "Do you want to stop for now?" -->
+			<img id="back-button" src="/img/back-button.svg" />
+
+			<!-- Reciptient of letter -->
+			<h1>To: Bas Kramer</h1>
+		</header>
+
+		<img src="/img/profile-picture.svg" alt="Add photo" />
+		<img src="/img/profile-picture.svg" alt="Add items" />
+
+		<img
+			src="/img/profile-picture.svg"
+			alt="Your bottle that you can fill with a photo or trinket"
+		/>
+
+		<!-- POP-UPS -->
+		<section class="popup">
+			<section class="hidden">
+				<img src="/img/close-button.svg" alt="Cancel" />
+				<h2>Do you want to stop for now?</h2>
+				<div>
+					<a href="../home/">Exit</a>
+					<a href="../home/matches">Save as draft</a>
+				</div>
+			</section>
+
+			<section id="insert-photo" class="">
+				<img id="close-photo" src="/img/close-button.svg" alt="Cancel" />
+				<h2>Add a photo to put into your bottle</h2>
+				<div>
+					<input
+						id="insert-input"
+						class="hidden"
+						type="file"
+						accept="image/*"
+					/>
+					<img
+						id="output"
+						class="hidden"
+						alt="A preview of the image you have uploaded"
+					/>
+					<label id="upload-photo" for="insert-input">Upload photo</label>
+					<p id="confirm-photo" class="hidden">Select photo</p>
+				</div>
+			</section>
+		</section>
+
 		<script src="/javascript/script.js"></script>
 	</body>
 </html>

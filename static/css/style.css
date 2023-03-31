@@ -548,6 +548,7 @@ Pop-ups letter.ejs
 }
 
 .popup a,
+.popup label,
 .styled-like-a {
 	border: 0;
 	padding: 1em 0 1em 0;
@@ -696,4 +697,9 @@ Draft partial
 	max-width: 32.5ch;
 
 	text-overflow: ellipsis;
+}
+
+img:not(header img) {
+	margin-top: 15em;
+	width: 5em;
 }
