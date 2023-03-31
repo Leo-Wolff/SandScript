@@ -21,37 +21,77 @@ const closeButtons = document.querySelectorAll(".popup img"),
 	signForm = document.querySelectorAll(".popup section")[2]
 
 //All popups are included here since there is never a time that more than one popup has to be open
-closeButtons.forEach((element) => {
-	element.addEventListener("click", () => {
-		stopPopup.classList.add("hidden")
-		signPopup.classList.add("hidden")
-		signForm.classList.add("hidden")
-		console.log("Close pop-up")
+if (closeButtons != null) {
+	closeButtons.forEach((element) => {
+		element.addEventListener("click", () => {
+			stopPopup.classList.add("hidden")
+			signPopup.classList.add("hidden")
+			signForm.classList.add("hidden")
+			console.log("Close pop-up")
+		})
 	})
-})
+}
 
-document.getElementById("back-button").addEventListener("click", () => {
-	stopPopup.classList.remove("hidden")
-	console.log("Open stop writing letter pop-up")
-})
+if (document.getElementById("back-button") != null) {
+	document.getElementById("back-button").addEventListener("click", () => {
+		stopPopup.classList.remove("hidden")
+		console.log("Open stop writing letter pop-up")
+	})
+}
 
-document.querySelector(".confirm-letter").addEventListener("click", () => {
-	signPopup.classList.remove("hidden")
-	console.log("Open sign letter pop-up")
-})
+if (document.querySelector(".confirm-letter") != null) {
+	document.querySelector(".confirm-letter").addEventListener("click", () => {
+		signPopup.classList.remove("hidden")
+		console.log("Open sign letter pop-up")
+	})
+}
 
-document.querySelector(".styled-like-a").addEventListener("click", () => {
-	signPopup.classList.add("hidden")
-	signForm.classList.remove("hidden")
-	console.log("Open sign letter form")
-})
+if (document.querySelector(".styled-like-a") != null) {
+	document.querySelector(".styled-like-a").addEventListener("click", () => {
+		signPopup.classList.add("hidden")
+		signForm.classList.remove("hidden")
+		console.log("Open sign letter form")
+	})
+}
 
 //TEXT EDITOR FORM POSTING
-document.querySelector(".styled-like-a").addEventListener("click", () => {
-	var delta = quill.container.firstChild.innerHTML
-	document.getElementById("content").value = delta
-	console.log(document.getElementById("content").value)
-})
+if (document.querySelector(".styled-like-a") != null) {
+	document.querySelector(".styled-like-a").addEventListener("click", () => {
+		var delta = quill.container.firstChild.innerHTML
+		document.getElementById("content").value = delta
+		console.log(document.getElementById("content").value)
+	})
+}
+
+//DRAFT ITEM DELETE
+const deleteImg = async (documentId) => {
+	try {
+		console.log("Deleting document with _id:", documentId)
+		const response = await fetch("/delete-image", {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ documentId }),
+		})
+		const result = await response.json()
+		console.log(result)
+	} catch (err) {
+		console.error(err)
+	}
+}
+
+const imagesDelete = document.querySelectorAll(".draft-item img")
+
+if (imagesDelete != null) {
+	imagesDelete.forEach((img) => {
+		img.addEventListener("click", () => {
+			const documentId = img.dataset.documentId
+			deleteImg(documentId)
+			console.log("Delete document")
+		})
+	})
+}
 
 // CLOCK
 let remainingTime = 2 * 60 * 60 // Two hours in seconds

@@ -1,12 +1,16 @@
-<% letters.forEach((info)=> { %>
+<% letters.forEach((document)=> { %>
 <div class="draft-item">
-	<img src="/img/close-button.svg" alt="Cancel" />
+	<img
+		data-document-id="<%= document._id %>"
+		src="/img/close-button.svg"
+		alt="Cancel"
+	/>
 
 	<img src="/img/profile-picture.svg" alt="Profile picture of recipient" />
 
-	<p>RE: <%= info.recipient %></p>
-	<div class="draft-content"><p><%- info.text %></p></div>
-	<p>- <%= info.signed %></p>
-	<p>Last updated: <%= info.dateUpdated %></p>
+	<p>RE: <%= document.recipient %></p>
+	<div class="draft-content"><p><%- document.text %></p></div>
+	<p>- <%= document.signed %></p>
+	<p>Last updated: <%= document.dateUpdated %></p>
 </div>
 <% }) %>

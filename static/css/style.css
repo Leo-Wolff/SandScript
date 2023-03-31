@@ -687,8 +687,8 @@ Draft partial
 .draft-content {
 	overflow: hidden;
 
-	line-height: 1em;
-	max-height: calc(1em * 3);
+	line-height: 1.25em;
+	max-height: calc(1.25em * 2.475);
 }
 
 .draft-content p {
