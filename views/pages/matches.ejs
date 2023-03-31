@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <%- include('../partials/head'); %>
-</head>
-<body class=" standard-bg container">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="standard-bg container">
+		
 
 <header>
   <button class="dark first">
@@ -72,13 +73,14 @@
   </button>
 </header>
 
-<main>
-<nav>
-  <ul>
-    <li>Matches</li>
-    <li>Drafts</li>
-  </ul>
-</nav>
+	<main>
+			<nav>
+				<ul>
+					<li>Matches</li>
+          <li>Drafts</li>
+				</ul>
+			</nav>
+
 
 <section id="sorter">
   <form method="post" action="/matches" >
@@ -113,6 +115,7 @@
 <% }) %>
 
 </main>
+
 
 <footer class="light">
   <%- include('../partials/footer'); %>
