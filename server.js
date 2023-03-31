@@ -1,39 +1,57 @@
+require("dotenv").config()
 const express = require("express")
 const app = express()
 const port = 8000
 const path = require("path")
-const User = require("./models/User")
-
-// Log in feature
-const connection = require("./database/connection")
-const session = require("express-session")
-require("dotenv").config()
-
-// Matching feature
 const cookieParser = require("cookie-parser")
+const session = require("express-session")
+const bodyParser = require("body-parser")
 
-connection()
+// Connecting mongoDB
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb")
 
-// require('dotenv').config()
-// const express = require('express')
-// const app = express()
-// const port = 8000
-// const path = require('path')
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
-// // Connecting mongoDB
-// const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
-// const uri = process.env.MONGODB_URI
-// const client = new MongoClient(uri, {
-// 	useNewUrlParser: true,
-// 	useUnifiedTopology: true,
-// 	serverApi: ServerApiVersion.v1,
-// })
-// const dbName = 'sandscript'
-// client.connect()
+// parse application/json
+app.use(bodyParser.json())
 
-// // collections aanroepen
-// const db = client.db(dbName)
-// const User = db.collection('User')
+const uri = process.env.MONGODB_URI
+const client = new MongoClient(uri, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	serverApi: ServerApiVersion.v1,
+})
+
+const dbName = "sandscript"
+
+// collections aanroepen
+global.db = client.db(dbName)
+global.users = db.collection("users")
+
+async function connectToDatabase() {
+	try {
+		console.log("Connecting to MongoDB Atlas cluster...")
+		await client.connect()
+		console.log("Successfully connected to MongoDB Atlas!")
+		return client
+	} catch (error) {
+		console.error("Connection to MongoDB Atlas failed!", error)
+		process.exit()
+	}
+}
+
+connectToDatabase()
+
+async function CreateNewDraft(collection, content, input) {
+	const draft = {
+		text: content,
+		signed: input,
+		dateUpdated: new Date().toISOString().slice(0, 10), // oorspronkelijk date is handiger voor aanpassen later
+	}
+
+	await collection.insertOne(draft)
+}
 
 // set the view engine to ejs
 app.set("view engine", "ejs")
@@ -41,8 +59,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname, "/static")))
 app.use(cookieParser())
-
-// Log in feature
 
 //Session
 app.set("trust proxy", 1)
@@ -54,56 +70,112 @@ app.use(
 		cookie: {},
 	})
 )
-
-// Matches page
-app.get("/matches", async (req, res) => {
-	// const eersteMatch = await User.findOne({ ...filters, likes: { $nin: ["MysteryMan4"]}, status: 'new' }) // filter between the selcted filters and status new
-
-	res.render("pages/matches", { eersteMatch })
+//Login page
+app.post("/uitloggen", (req, res) => {
+	req.session.destroy()
+	res.redirect("/inloggen")
+})
+app.get("/inloggen", (req, res) => {
+	res.render("pages/inloggen")
+})
+app.post("/inloggen", async (req, res) => {
+	const currentUser = await users.findOne({
+		username: req.body.username,
+	})
+	req.session.user = {
+		username: currentUser.username,
+		password: currentUser.password,
+		email: currentUser.email,
+	}
+	res.redirect("/account")
 })
 
-// index page
-app.get("/", async (req, res) => {
-	try {
-		res.render("pages/index")
-	} catch (err) {
-		console.log(err.stack)
-	}
+//Profile page
+// app.get("/account", async (req, res) => {
+// 	const { username, email } = req.session.user
+// 	res.render("pages/account", {
+// 		username: username,
+// 		email: email,
+// 	})
+// })
+
+app.post("/update", async (req, res) => {
+	await users.findOneAndUpdate(
+		{
+			username: req.session.user.username,
+		},
+		{
+			$set: {
+				username: req.body.username,
+				email: req.body.email,
+			},
+		}
+	)
+	req.session.user.username = req.body.username
+	req.session.user.email = req.body.email
+	res.redirect("/account")
+})
+
+const editorRoutes = require("./routes/editor.js")
+app.use("/editor", editorRoutes)
+
+const homeRoutes = require("./routes/home.js")
+app.use("/home", homeRoutes)
+
+app.post("/bottle", (req, res) => {
+	const db = client.db(dbName)
+	const collectionLetters = db.collection("letters")
+	CreateNewDraft(collectionLetters, req.body.content, req.body.signed)
+	res.render("pages/bottle")
 })
 
 // discover page
-app.get("/discover", async (req, res) => {
-	try {
-		const filters = req.cookies.selectedFilters
-			? JSON.parse(req.cookies.selectedFilters)
-			: {} // get filters from cookie
+// app.get('/discover', async (req, res) => {
+// 	try {
+// 		const filters = req.cookies.selectedFilters
+// 			? JSON.parse(req.cookies.selectedFilters)
+// 			: {} // get filters from cookie 
 
-		const ik = await User.findOne({ username: "MysteryMan4" })
-		const eersteMatch = await User.findOne({
-			...filters,
-			username: { $nin: ik.likes, $not: { $eq: ik.username } },
-			status: "new",
-		})
+// 			const ik = await users.findOne({username: 'MysteryMan'})
+// 			const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
-		res.render("pages/gefiltered", { eersteMatch }) // Render the page with the first match
-	} catch (err) {
-		console.log(err.stack)
-	}
-})
+// 		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
+// 	} catch (err) {
+// 		console.log(err.stack)
+// 	}
+// })
+
+// discover page
+// app.get("/discover", async (req, res) => {
+// 	try {
+// 		const filters = req.cookies.selectedFilters
+// 			? JSON.parse(req.cookies.selectedFilters)
+// 			: {} // get filters from cookie
+
+// 		const ik = await users.findOne({ username: "MysteryMan2" })
+// 		const eersteMatch = await users.findOne({
+// 			...filters,
+// 			username: { $nin: ik.likes, $not: { $eq: ik.username } },
+// 			status: "new",
+// 		})
+
+// 		res.render("pages/gefiltered", { eersteMatch }) // Render the page with the first match
+// 	} catch (err) {
+// 		console.log(err.stack)
+// 	}
+// })
 
 // filtering in discover page
-app.post("/discover", async (req, res) => {
+app.post('home/discover', async (req, res) => {
 	try {
 		const filters = { gender: req.body.gender } // save input from user in filters
 
 		res.cookie("selectedFilters", JSON.stringify(filters)) // save filters in cookie
 
-		const ik = await User.findOne({ username: "MysteryMan4" })
-		const eersteMatch = await User.findOne({
-			...filters,
-			username: { $nin: ik.likes, $not: { $eq: ik.username } },
-			status: "new",
-		})
+		console.log(req.session);
+
+		const ik = await users.findOne({username: 'MysteryMan'})
+		const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
 		if (eersteMatch) {
 			res.render("pages/gefiltered", { eersteMatch })
@@ -117,18 +189,19 @@ app.post("/discover", async (req, res) => {
 
 app.post("/liked", async (req, res) => {
 	try {
-		const eersteMatch = await User.findOne({
-			_id: new ObjectId(req.body.matchId),
-		}) // Search for a person with status new
+		const eersteMatch = await users.findOne({
+			_id: new ObjectId(req.body.matchId)
+		})
 
-		const ik = await User.findOne({ username: "MysteryMan4" })
+		const ik = await users.findOne({username: 'MysteryMan'})
+		console.log(eersteMatch)
 
-		await User.updateOne(
+		await users.updateOne(
 			{ _id: ik._id },
-			{ $push: { likes: eersteMatch.username } }
+			{ $push: { likes: eersteMatch.username} }
 		)
 
-		await User.updateOne(
+		await users.updateOne(
 			{ _id: eersteMatch._id },
 			{ $push: { likedBy: ik.username } }
 		)
@@ -136,68 +209,18 @@ app.post("/liked", async (req, res) => {
 		ik.likes.push(eersteMatch.username)
 		eersteMatch.likedBy.push(ik.username)
 
-		// console.log(eersteMatch)
-		// console.log(ik)
-
-		// console.log(ik.likes.includes(eersteMatch.username))
-		// console.log(ik.likedBy.includes(eersteMatch.username))
-
-		if (
-			ik.likes.includes(eersteMatch.username) &&
-			ik.likedBy.includes(eersteMatch.username)
-		) {
-			console.log("match")
+		if (ik.likes.includes(eersteMatch.username) && ik.likedBy.includes(eersteMatch.username)) {
+			console.log('match')
+			res.redirect('home/discover')
 		} else {
-			console.log("geen match")
+			console.log('geen match')
+			res.redirect('home/discover')
 		}
 	} catch (err) {
 		console.log(err.stack)
 	}
 })
 
-app.get("/inloggen", (req, res) => {
-	res.render("inloggen")
-})
-app.get("/account", async (req, res) => {
-	const { username, email } = req.session.user
-	res.render("account", {
-		username: username,
-		email: email,
-	})
-})
-app.post("/uitloggen", (req, res) => {
-	req.session.destroy()
-	res.redirect("/")
-})
-app.post("/inloggen", async (req, res) => {
-	const currentUser = await User.findOne({
-		username: req.body.username,
-	})
-	console.log(req.body.username)
-	req.session.user = {
-		username: currentUser.username,
-		password: currentUser.password,
-		email: currentUser.email,
-	}
-	res.redirect("/account")
-})
-app.post("/update", async (req, res) => {
-	await User.findOneAndUpdate(
-		{
-			username: req.session.user.username,
-		},
-		{
-			username: req.body.username,
-			email: req.body.email,
-		}
-	)
-	req.session.user.username = req.body.username
-	req.session.user.email = req.body.email
-	res.redirect("/account")
-})
-app.get("*", (req, res) => {
-	res.render("404")
-})
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`)
+	console.log(`Wow! Look at that ${port}`)
 })
