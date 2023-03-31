@@ -130,6 +130,22 @@ app.post("/bottle", (req, res) => {
 })
 
 // discover page
+// app.get('/discover', async (req, res) => {
+// 	try {
+// 		const filters = req.cookies.selectedFilters
+// 			? JSON.parse(req.cookies.selectedFilters)
+// 			: {} // get filters from cookie 
+
+// 			const ik = await users.findOne({username: 'MysteryMan'})
+// 			const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
+
+// 		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
+// 	} catch (err) {
+// 		console.log(err.stack)
+// 	}
+// })
+
+// discover page
 // app.get("/discover", async (req, res) => {
 // 	try {
 // 		const filters = req.cookies.selectedFilters
@@ -150,18 +166,16 @@ app.post("/bottle", (req, res) => {
 // })
 
 // filtering in discover page
-app.post("/discover", async (req, res) => {
+app.post('home/discover', async (req, res) => {
 	try {
 		const filters = { gender: req.body.gender } // save input from user in filters
 
 		res.cookie("selectedFilters", JSON.stringify(filters)) // save filters in cookie
 
-		const ik = await users.findOne({ username: "MysteryMan2" })
-		const eersteMatch = await users.findOne({
-			...filters,
-			username: { $nin: ik.likes, $not: { $eq: ik.username } },
-			status: "new",
-		})
+		console.log(req.session);
+
+		const ik = await users.findOne({username: 'MysteryMan'})
+		const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
 		if (eersteMatch) {
 			res.render("pages/gefiltered", { eersteMatch })
@@ -176,15 +190,15 @@ app.post("/discover", async (req, res) => {
 app.post("/liked", async (req, res) => {
 	try {
 		const eersteMatch = await users.findOne({
-			_id: new ObjectId(req.body.matchId),
+			_id: new ObjectId(req.body.matchId)
 		})
 
-		const ik = await users.findOne({ username: "MysteryMan2" })
+		const ik = await users.findOne({username: 'MysteryMan'})
 		console.log(eersteMatch)
 
 		await users.updateOne(
 			{ _id: ik._id },
-			{ $push: { likes: eersteMatch.username } }
+			{ $push: { likes: eersteMatch.username} }
 		)
 
 		await users.updateOne(
@@ -195,15 +209,12 @@ app.post("/liked", async (req, res) => {
 		ik.likes.push(eersteMatch.username)
 		eersteMatch.likedBy.push(ik.username)
 
-		if (
-			ik.likes.includes(eersteMatch.username) &&
-			ik.likedBy.includes(eersteMatch.username)
-		) {
-			console.log("match")
-			res.redirect("home/discover")
+		if (ik.likes.includes(eersteMatch.username) && ik.likedBy.includes(eersteMatch.username)) {
+			console.log('match')
+			res.redirect('home/discover')
 		} else {
-			console.log("no match")
-			res.redirect("home/discover")
+			console.log('geen match')
+			res.redirect('home/discover')
 		}
 	} catch (err) {
 		console.log(err.stack)

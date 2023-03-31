@@ -6,16 +6,12 @@ exports.discover = async (req, res) => {
 	try {
 		const filters = req.cookies.selectedFilters
 			? JSON.parse(req.cookies.selectedFilters)
-			: {} // get filters from cookie
+			: {} // get filters from cookie 
 
-		const ik = await users.findOne({ username: "MysteryMan2" })
-		const eersteMatch = await users.findOne({
-			...filters,
-			username: { $nin: ik.likes, $not: { $eq: ik.username } },
-			status: "new",
-		})
+			const ik = await users.findOne({username: 'MysteryMan'})
+			const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
-		res.render("pages/gefiltered.ejs", { eersteMatch }) // Render the page with the first match
+		res.render('pages/gefiltered', { eersteMatch }) // Render the page with the first match
 	} catch (err) {
 		console.log(err.stack)
 	}
