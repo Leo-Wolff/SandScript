@@ -145,12 +145,32 @@ app.post("/bottle", (req, res) => {
 // 	}
 // })
 
+// discover page
+// app.get("/discover", async (req, res) => {
+// 	try {
+// 		const filters = req.cookies.selectedFilters
+// 			? JSON.parse(req.cookies.selectedFilters)
+// 			: {} // get filters from cookie
+
+// 		const ik = await users.findOne({ username: "MysteryMan2" })
+// 		const eersteMatch = await users.findOne({
+// 			...filters,
+// 			username: { $nin: ik.likes, $not: { $eq: ik.username } },
+// 			status: "new",
+// 		})
+
+// 		res.render("pages/gefiltered", { eersteMatch }) // Render the page with the first match
+// 	} catch (err) {
+// 		console.log(err.stack)
+// 	}
+// })
+
 // filtering in discover page
 app.post('home/discover', async (req, res) => {
 	try {
 		const filters = { gender: req.body.gender } // save input from user in filters
 
-		res.cookie('selectedFilters', JSON.stringify(filters)) // save filters in cookie
+		res.cookie("selectedFilters", JSON.stringify(filters)) // save filters in cookie
 
 		console.log(req.session);
 
@@ -158,16 +178,16 @@ app.post('home/discover', async (req, res) => {
 		const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
 
 		if (eersteMatch) {
-			res.render('pages/gefiltered', { eersteMatch })
+			res.render("pages/gefiltered", { eersteMatch })
 		} else {
-			res.send('no results')
+			res.send("no results")
 		}
 	} catch (err) {
 		console.log(err.stack)
 	}
 })
 
-app.post('/liked', async (req, res) => {
+app.post("/liked", async (req, res) => {
 	try {
 		const eersteMatch = await users.findOne({
 			_id: new ObjectId(req.body.matchId)
@@ -175,7 +195,6 @@ app.post('/liked', async (req, res) => {
 
 		const ik = await users.findOne({username: 'MysteryMan'})
 		console.log(eersteMatch)
-
 
 		await users.updateOne(
 			{ _id: ik._id },
@@ -197,7 +216,6 @@ app.post('/liked', async (req, res) => {
 			console.log('geen match')
 			res.redirect('home/discover')
 		}
-
 	} catch (err) {
 		console.log(err.stack)
 	}
