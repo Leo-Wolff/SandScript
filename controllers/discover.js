@@ -69,3 +69,47 @@ exports.liked = async (req, res) => {
 		console.log(err.stack)
 	}
 }
+
+// Matches page
+exports.matchlist = async (req, res) => {
+	try {
+		const filters = req.cookies.selectedFilters
+			? JSON.parse(req.cookies.selectedFilters)
+			: {} // get filters from cookie 
+
+		const eersteMatch = await users.find({ }).toArray() // filter between the selcted filters and status new
+
+		res.render('pages/matches', { eersteMatch }) // Render the page with the first match
+	} catch (err) {
+		console.log(err.stack)
+	}
+}
+
+// sorting in matches page
+exports.matchlist1 = async (req, res) => {
+	try {
+		const sortBy = req.body.sorteren;
+		let sortOption = {}
+	
+		if (sortBy === 'age') {
+		  sortOption = { age: 1 }
+		} else if (sortBy === 'name') {
+			sortOption = { name: 1 }
+		} else if (sortBy === '-name') {
+			sortOption = { name: -1 }
+		}
+	
+		const eersteMatch = await users
+		  .find({})
+		  .sort(sortOption)
+		  .toArray() // Retrieve all the documents in the collection, sorted by the user's selection
+
+		if (eersteMatch.length > 0) {
+			res.render('pages/matches', { eersteMatch })
+		} else {
+			res.send('no results')
+		}
+	} catch (err) {
+		console.log(err.stack)
+	}
+}
