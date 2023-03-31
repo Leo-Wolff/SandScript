@@ -3,7 +3,7 @@ const router = express.Router()
 
 const editorController = require("../controllers/editor.js")
 
-router.get("/matches", editorController.drafts)
+router.get("/drafts", editorController.drafts)
 
 router.get("/letter", editorController.letter)
 
