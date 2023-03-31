@@ -44,16 +44,6 @@ async function connectToDatabase() {
 
 connectToDatabase()
 
-// async function CreateNewDraft(collection, content, input) {
-// 	const draft = {
-// 		text: content,
-// 		signed: input,
-// 		dateUpdated: new Date().toISOString().slice(0, 10), // oorspronkelijk date is handiger voor aanpassen later
-// 	}
-
-// 	await collection.insertOne(draft)
-// }
-
 // set the view engine to ejs
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }))
@@ -71,51 +61,6 @@ app.use(
 		cookie: {},
 	})
 )
-//Login page
-// app.post("/uitloggen", (req, res) => {
-// 	req.session.destroy()
-// 	res.redirect("/inloggen")
-// })
-// app.get("/inloggen", (req, res) => {
-// 	res.render("pages/inloggen")
-// })
-// app.post("/inloggen", async (req, res) => {
-// 	const currentUser = await users.findOne({
-// 		username: req.body.username,
-// 	})
-// 	req.session.user = {
-// 		username: currentUser.username,
-// 		password: currentUser.password,
-// 		email: currentUser.email,
-// 	}
-// 	res.redirect("/account")
-// })
-
-//Profile page
-// app.get("/account", async (req, res) => {
-// 	const { username, email } = req.session.user
-// 	res.render("pages/account", {
-// 		username: username,
-// 		email: email,
-// 	})
-// })
-
-// app.post("/update", async (req, res) => {
-// 	await users.findOneAndUpdate(
-// 		{
-// 			username: req.session.user.username,
-// 		},
-// 		{
-// 			$set: {
-// 				username: req.body.username,
-// 				email: req.body.email,
-// 			},
-// 		}
-// 	)
-// 	req.session.user.username = req.body.username
-// 	req.session.user.email = req.body.email
-// 	res.redirect("/account")
-// })
 
 const homeRoutes = require("./routes/home.js")
 app.use("/", homeRoutes)
