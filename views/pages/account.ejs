@@ -1,0 +1,15 @@
+<section class="account">
+    <form action="/uitloggen" method="post">
+        <input type="submit" value="Uitloggen">
+    </form>
+    <h1>Hi<%= username %> leuk dat je er weer bent!</h1>
+    <p>Wijzig je gegevens</p>
+    <form action="/update" method="post">
+        <input type="text" id="username" name="username" placeholder="Gebruikersnaam" value="<%= username %> "
+            required>
+        <label for="fname"></label>
+        <input type="text" id="email" name="email" placeholder="E-mail" value="<%= email %> " required>
+        <label for="email"></label>
+        <input type="submit" value="Opslaan">
+    </form>
+</section>
