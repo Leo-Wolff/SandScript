@@ -8,7 +8,7 @@ exports.discover = async (req, res) => {
 			: {} // Get filters that are stored in the cookies
 
 			const ik = await users.findOne({username: 'MysteryMan'}) // Faked CurrentUser
-			const firstMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'}) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
+			const firstMatch = await users.findOne({...filters, username: { $nin: ik.liked, $not: {$eq: ik.username} }, status: 'new'}) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
 
 		res.render('pages/gefiltered', { firstMatch }) // Render the page with the first match
 	} catch (err) {
@@ -24,7 +24,7 @@ exports.discover1 = async (req, res) => {
 		res.cookie("selectedFilters", JSON.stringify(filters)) // Save selected filters in cookie
 
 		const ik = await users.findOne({username: 'MysteryMan'})
-		const firstMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
+		const firstMatch = await users.findOne({...filters, username: { $nin: ik.liked, $not: {$eq: ik.username} }, status: 'new'})
 
 		if (firstMatch) {
 			res.render("pages/gefiltered", { firstMatch })
@@ -47,7 +47,7 @@ exports.liked = async (req, res) => {
 
 		await users.updateOne( 
 			{ _id: ik._id }, // Update currentUser
-			{ $push: { likes: firstMatch.username} } // Add firstMatch username to likes
+			{ $push: { liked: firstMatch.username} } // Add firstMatch username to liked
 		)
 
 		await users.updateOne(
@@ -55,15 +55,15 @@ exports.liked = async (req, res) => {
 			{ $push: { likedBy: ik.username } } // Add currentUser username to likedBy
 		)
 
-		ik.likes.push(firstMatch.username)
+		ik.liked.push(firstMatch.username)
 		firstMatch.likedBy.push(ik.username)
 
-		if (ik.likes.includes(firstMatch.username) && ik.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
+		if (ik.liked.includes(firstMatch.username) && ik.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
 			console.log('match')
-			res.redirect('/discover/discover')
+			res.redirect('/discover')
 		} else { // Else no match redirect to discover page
 			console.log('geen match')
-			res.redirect('/discover/discover')
+			res.redirect('/discover')
 		}
 	} catch (err) {
 		console.log(err.stack)

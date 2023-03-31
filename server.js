@@ -72,24 +72,24 @@ app.use(
 	})
 )
 //Login page
-app.post("/uitloggen", (req, res) => {
-	req.session.destroy()
-	res.redirect("/inloggen")
-})
-app.get("/inloggen", (req, res) => {
-	res.render("pages/inloggen")
-})
-app.post("/inloggen", async (req, res) => {
-	const currentUser = await users.findOne({
-		username: req.body.username,
-	})
-	req.session.user = {
-		username: currentUser.username,
-		password: currentUser.password,
-		email: currentUser.email,
-	}
-	res.redirect("/account")
-})
+// app.post("/uitloggen", (req, res) => {
+// 	req.session.destroy()
+// 	res.redirect("/inloggen")
+// })
+// app.get("/inloggen", (req, res) => {
+// 	res.render("pages/inloggen")
+// })
+// app.post("/inloggen", async (req, res) => {
+// 	const currentUser = await users.findOne({
+// 		username: req.body.username,
+// 	})
+// 	req.session.user = {
+// 		username: currentUser.username,
+// 		password: currentUser.password,
+// 		email: currentUser.email,
+// 	}
+// 	res.redirect("/account")
+// })
 
 //Profile page
 // app.get("/account", async (req, res) => {
@@ -100,38 +100,34 @@ app.post("/inloggen", async (req, res) => {
 // 	})
 // })
 
-app.post("/update", async (req, res) => {
-	await users.findOneAndUpdate(
-		{
-			username: req.session.user.username,
-		},
-		{
-			$set: {
-				username: req.body.username,
-				email: req.body.email,
-			},
-		}
-	)
-	req.session.user.username = req.body.username
-	req.session.user.email = req.body.email
-	res.redirect("/account")
-})
-
-const editorRoutes = require("./routes/editor.js")
-app.use("/editor", editorRoutes)
+// app.post("/update", async (req, res) => {
+// 	await users.findOneAndUpdate(
+// 		{
+// 			username: req.session.user.username,
+// 		},
+// 		{
+// 			$set: {
+// 				username: req.body.username,
+// 				email: req.body.email,
+// 			},
+// 		}
+// 	)
+// 	req.session.user.username = req.body.username
+// 	req.session.user.email = req.body.email
+// 	res.redirect("/account")
+// })
 
 const homeRoutes = require("./routes/home.js")
-app.use("/home", homeRoutes)
+app.use("/", homeRoutes)
 
 const discoverRoutes = require("./routes/discover.js")
-app.use("/discover", discoverRoutes)
+app.use("/", discoverRoutes)
 
-// app.post("/editor/bottle", (req, res) => {
-// 	const db = client.db(dbName)
-// 	const collectionLetters = db.collection("letters")
-// 	CreateNewDraft(collectionLetters, req.body.content, req.body.signed)
-// 	res.render("pages/bottle")
-// })
+const editorRoutes = require("./routes/editor.js")
+app.use("/", editorRoutes)
+
+const accountRoutes = require("./routes/account.js")
+app.use("/", accountRoutes)
 
 app.listen(port, () => {
 	console.log(`Wow! Look at that ${port}`)

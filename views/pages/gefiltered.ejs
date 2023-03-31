@@ -73,7 +73,7 @@
 
 		<main>
 			<section id="filter">
-				<form method="post" action="/discover/discover" >
+				<form method="post" action="/discover" >
 					<section class="form-group">
 						<label for="email">Gender</label>
 						<article>
@@ -167,7 +167,7 @@
                       <p><%= firstMatch.country %></p>
                     </article>
 
-                    <form action="/discover/liked" method="post">
+                    <form action="/liked" method="post">
                         <button type="submit" name="matchId" value="<%= firstMatch._id %>">Liked</button>
                     </form>
 

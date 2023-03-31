@@ -22,10 +22,10 @@ async function GetDraftsFromDatabase(collection) {
 	return collection.find().toArray()
 }
 
-exports.profile = async (req, res) => {
-	const { username, email } = req.session.user
-	res.render("pages/account.ejs", {
-		username: username,
-		email: email,
-	})
-}
+// exports.profile = async (req, res) => {
+// 	const { username, email } = req.session.user
+// 	res.render("pages/account.ejs", {
+// 		username: username,
+// 		email: email,
+// 	})
+// }

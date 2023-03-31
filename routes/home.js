@@ -7,6 +7,6 @@ router.get("/", homeController.index)
 
 router.get("/matches", homeController.matches)
 
-router.get("/profile", homeController.profile)
+// router.get("/profile", homeController.profile)
 
 module.exports = router
