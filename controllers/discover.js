@@ -7,8 +7,10 @@ exports.discover = async (req, res) => {
 			? JSON.parse(req.cookies.selectedFilters)
 			: {} // Get filters that are stored in the cookies
 
-			const ik = await users.findOne({username: 'MysteryMan'}) // Faked CurrentUser
-			const firstMatch = await users.findOne({...filters, username: { $nin: ik.liked, $not: {$eq: ik.username} }, status: 'new'}) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
+			// const currentUser = await users.findOne({username: 'MysteryMan'}) // Faked CurrentUser
+			const currentUser = req.session.user
+			console.log(currentUser)
+			const firstMatch = await users.findOne({...filters, username: { $nin: [...currentUser.liked, ...currentUser.disliked], $not: {$eq: currentUser.username} } }) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
 
 		res.render('pages/gefiltered', { firstMatch }) // Render the page with the first match
 	} catch (err) {
@@ -23,8 +25,10 @@ exports.discover1 = async (req, res) => {
 
 		res.cookie("selectedFilters", JSON.stringify(filters)) // Save selected filters in cookie
 
-		const ik = await users.findOne({username: 'MysteryMan'})
-		const firstMatch = await users.findOne({...filters, username: { $nin: ik.liked, $not: {$eq: ik.username} }, status: 'new'})
+		// const currentUser = await users.findOne({username: 'MysteryMan'})
+		const currentUser = req.session.user
+		console.log(currentUser)
+		const firstMatch = await users.findOne({...filters, username: { $nin: [...currentUser.liked, ...currentUser.disliked], $not: {$eq: currentUser.username} }})
 
 		if (firstMatch) {
 			res.render("pages/gefiltered", { firstMatch })
@@ -43,28 +47,52 @@ exports.liked = async (req, res) => {
 			_id: new ObjectId(req.body.matchId)
 		})
 
-		const ik = await users.findOne({username: 'MysteryMan'})
+		// const currentUser = await users.findOne({username: 'MysteryMan'})
+		const currentUser = req.session.user
 
 		await users.updateOne( 
-			{ _id: ik._id }, // Update currentUser
+			{ _id: currentUser._id }, // Update currentUser
 			{ $push: { liked: firstMatch.username} } // Add firstMatch username to liked
 		)
 
 		await users.updateOne(
 			{ _id: firstMatch._id }, // Update firstMatched
-			{ $push: { likedBy: ik.username } } // Add currentUser username to likedBy
+			{ $push: { likedBy: currentUser.username } } // Add currentUser username to likedBy
 		)
 
-		ik.liked.push(firstMatch.username)
-		firstMatch.likedBy.push(ik.username)
+		currentUser.liked.push(firstMatch.username)
+		firstMatch.likedBy.push(currentUser.username)
 
-		if (ik.liked.includes(firstMatch.username) && ik.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
+		if (currentUser.liked.includes(firstMatch.username) && currentUser.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
 			console.log('match')
 			res.redirect('/discover')
 		} else { // Else no match redirect to discover page
 			console.log('geen match')
 			res.redirect('/discover')
 		}
+	} catch (err) {
+		console.log(err.stack)
+	}
+}
+
+exports.disliked = async (req, res) => {
+	try {
+		const firstMatch = await users.findOne({
+			_id: new ObjectId(req.body.matchId)
+		})
+
+		// const currentUser = await users.findOne({username: 'MysteryMan'})
+		const currentUser = req.session.user
+
+		await users.updateOne( 
+			{ _id: currentUser._id }, // Update currentUser
+			{ $push: { disliked: firstMatch.username} } // Add firstMatch username to liked
+		)
+
+		currentUser.disliked.push(firstMatch.username)
+
+		res.redirect('/discover')
+
 	} catch (err) {
 		console.log(err.stack)
 	}
