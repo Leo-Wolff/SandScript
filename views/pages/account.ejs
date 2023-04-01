@@ -2,7 +2,7 @@
     <form action="/uitloggen" method="post">
         <input type="submit" value="Uitloggen">
     </form>
-    <h1>Hi<%= username %> nice to see you again!</h1>
+    <h1>Hi <%= username %> nice to see you again!</h1>
     <p>do you want to change your details?</p>
     <form action="/update" method="post">
         <input type="text" id="username" name="username" placeholder="Username" value="<%= username %> "required>
@@ -15,17 +15,21 @@
         <label for="name"></label>
         <input type="number" id="age" name="age" placeholder="Age" value="<%= age %> " required>
         <label for="age"></label>
-        <input type="radio" id="male" name="Gender" value="male">
-        <label for="html">Male</label>
-        <input type="radio" id="female" name="Gender" value="Female">
-        <label for="css">Female</label>
+        <select name="gender">
+            <option value=""><%= gender %></option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
         <input type="text" id="interests" name="interests" placeholder="Interests" value="<%= interests %> " required>
         <label for="interests"></label>
-        <input type="text" id="status" name="status" placeholder="Status" value="<%= status %> " required>
-        <label for="status"></label>
         <input type="text" id="country" name="country" placeholder="Country" value="<%= country %> " required>
         <label for="country"></label>
+        <input type="text" id="language" name="language" placeholder="Language" value="<%= language %> " required>
+        <label for="language"></label>
         
         <input type="submit" value="Save">
     </form>
 </section>
+<script>
+    console.log()
+</script>
