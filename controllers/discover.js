@@ -49,19 +49,18 @@ exports.liked = async (req, res) => {
 
 		// const currentUser = await users.findOne({username: 'MysteryMan'})
 		const currentUser = req.session.user
+		currentUser.liked.push(firstMatch.username) // Update currentUser lokaal
+		req.session.user = currentUser
 
 		await users.updateOne( 
-			{ _id: currentUser._id }, // Update currentUser
+			{ _id: currentUser._id }, // Update currentUser db
 			{ $push: { liked: firstMatch.username} } // Add firstMatch username to liked
 		)
 
 		await users.updateOne(
-			{ _id: firstMatch._id }, // Update firstMatched
+			{ _id: firstMatch._id }, // Update firstMatched db
 			{ $push: { likedBy: currentUser.username } } // Add currentUser username to likedBy
 		)
-
-		currentUser.liked.push(firstMatch.username)
-		firstMatch.likedBy.push(currentUser.username)
 
 		if (currentUser.liked.includes(firstMatch.username) && currentUser.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
 			console.log('match')
@@ -83,13 +82,13 @@ exports.disliked = async (req, res) => {
 
 		// const currentUser = await users.findOne({username: 'MysteryMan'})
 		const currentUser = req.session.user
+		currentUser.disliked.push(firstMatch.username) // Update currentUser lokaal
+		req.session.user = currentUser
 
 		await users.updateOne( 
 			{ _id: currentUser._id }, // Update currentUser
 			{ $push: { disliked: firstMatch.username} } // Add firstMatch username to liked
 		)
-
-		currentUser.disliked.push(firstMatch.username)
 
 		res.redirect('/discover')
 

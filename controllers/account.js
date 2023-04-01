@@ -16,6 +16,7 @@ exports.inloggen1 = async (req, res) => {
 		password: currentUser.password,
 		email: currentUser.email,
 		liked: currentUser.liked,
+		likedBy: currentUser.likedBy,
 		disliked: currentUser.disliked
 	}
 	res.redirect("/account")
