@@ -28,6 +28,19 @@ exports.drafts = async (req, res) => {
 	})
 }
 
+exports.deleteDraft = async (req, res) => {
+	try {
+		const collectionLetters = db.collection("letters")
+		const result = await collectionLetters.deleteOne({
+			_id: ObjectID(req.body.documentId),
+		})
+		res.json({ message: `${result.deletedCount} document(s) deleted` })
+	} catch (err) {
+		console.error(err)
+		res.status(500).json({ error: err.message })
+	}
+}
+
 exports.letter = (req, res) => {
 	res.render("pages/letter.ejs")
 }

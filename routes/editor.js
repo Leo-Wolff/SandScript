@@ -11,4 +11,6 @@ router.get("/bottle", editorController.bottle)
 
 router.post("/bottle", editorController.bottle1)
 
+router.delete("/delete-draft", editorController.deleteDraft)
+
 module.exports = router
