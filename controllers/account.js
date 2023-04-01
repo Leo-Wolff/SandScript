@@ -1,13 +1,13 @@
 exports.uitloggen = (req, res) => {
 	req.session.destroy()
-	res.redirect("/inloggen")
+	res.redirect("/login")
 }
 
-exports.inloggen = (req, res) => {
-	res.render("pages/inloggen")
+exports.login = (req, res) => {
+	res.render("pages/login")
 }
 
-exports.inloggen1 = async (req, res) => {
+exports.login1 = async (req, res) => {
 	const currentUser = await users.findOne({
 		username: req.body.username,
 	})
@@ -27,7 +27,7 @@ exports.inloggen1 = async (req, res) => {
 }
 else {
 	console.log("Account not found")
-	res.redirect("/inloggen")
+	res.redirect("/login")
 }
 }
 

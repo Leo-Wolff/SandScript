@@ -5,9 +5,9 @@ const accountController = require("../controllers/account.js")
 
 router.post("/uitloggen", accountController.uitloggen)
 
-router.get("/inloggen", accountController.inloggen)
+router.get("/login", accountController.login)
 
-router.post("/inloggen", accountController.inloggen1)
+router.post("/login", accountController.login1)
 
 router.post("/update", accountController.update)
 

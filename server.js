@@ -61,8 +61,8 @@ app.use(
 	})
 )
 app.use((req, res, next) => {
-	if (!req.session.user && req.url != "/inloggen") {
-		res.redirect("/inloggen"); 
+	if (!req.session.user && req.url != "/login") {
+		res.redirect("/login"); 
 	} 
 	else { 
 		next(); 
