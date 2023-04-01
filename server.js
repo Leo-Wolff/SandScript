@@ -60,6 +60,14 @@ app.use(
 		cookie: {},
 	})
 )
+app.use((req, res, next) => {
+	if (!req.session.user && req.url != "/inloggen") {
+		res.redirect("/inloggen"); 
+	} 
+	else { 
+		next(); 
+	} 
+});
 
 const homeRoutes = require("./routes/home.js")
 app.use("/", homeRoutes)
