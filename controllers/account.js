@@ -41,6 +41,27 @@ exports.account = async (req, res) => {
 	const { username, email } = req.session.user
 	res.render("pages/account", {
 		username: username,
-		email: email
+		email: email,
 	})
+}
+
+// Register page
+exports.register = (req, res) => {
+	res.render("pages/register.ejs")
+}
+
+const bcrypt = require("bcrypt")
+
+exports.postRegister = async (req, res) => {
+	const username = req.body.username
+	const email = req.body.email
+	const password = req.body.password
+	const hashedPassword = await bcrypt.hash(password, 10)
+	const user = {
+		username,
+		email,
+		password: hashedPassword,
+	}
+	users.insertOne(user)
+	res.render("pages/account.ejs")
 }

@@ -93,25 +93,25 @@ window.addEventListener("load", () => {
 })
 
 function openForm() {
-    document.getElementById('filter').style.display = "block";
+	document.getElementById("filter").style.display = "block"
 }
-  
+
 function closeForm() {
-    document.getElementById('filter').style.display = "none";
+	document.getElementById("filter").style.display = "none"
 }
 
 function openSortForm() {
-    document.getElementById('sorter').style.display = "block";
+	document.getElementById("sorter").style.display = "block"
 }
-  
+
 function closeSortForm() {
-    document.getElementById('sorter').style.display = "none";
+	document.getElementById("sorter").style.display = "none"
 }
 
 function openSortForm() {
-    document.getElementById('sorter').style.display = "block";
+	document.getElementById("sorter").style.display = "block"
 }
-  
+
 function closeSortForm() {
-    document.getElementById('sorter').style.display = "none";
+	document.getElementById("sorter").style.display = "none"
 }
