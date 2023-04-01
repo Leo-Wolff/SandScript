@@ -53,19 +53,25 @@ exports.deleteDraft = async (req, res) => {
 // }
 
 exports.letter = async (req, res) => {
-	try {
-		let draft = await db.collection("letters").findOne({
-			_id: new ObjectId("6423f223d103efd53227829b"),
-		})
+	if (req.query.documentId != null) {
+		try {
+			let draft = await db.collection("letters").findOne({
+				_id: new ObjectId(req.query.documentId),
+			})
 
-		console.log(draft)
-		// quill.setContents(draft.text)
+			console.log(draft)
 
+			res.render("pages/letter.ejs", {
+				letters: draft,
+			})
+		} catch (err) {
+			console.error(err)
+		}
+	} else {
+		let draft = await getDataFromDatabase("letters")
 		res.render("pages/letter.ejs", {
 			letters: draft,
 		})
-	} catch (err) {
-		console.error(err)
 	}
 }
 

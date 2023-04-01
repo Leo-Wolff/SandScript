@@ -123,6 +123,31 @@ if (imagesDelete != null) {
 	})
 }
 
+//DRAFT ITEM IN QUILL EDITOR
+const draftItem = document.querySelectorAll(".draft-item")
+
+if (draftItem != null) {
+	draftItem.forEach((draftItem) => {
+		draftItem.addEventListener("click", () => {
+			const documentId = draftItem
+				.querySelector("img")
+				.getAttribute("data-document-id")
+			console.log(documentId)
+			// location.href = "letter"
+			window.location.href = `/letter?documentId=${encodeURIComponent(
+				documentId
+			)}`
+		})
+	})
+}
+
+const draftText = document.getElementById("editor-text").innerHTML
+
+if (draftText != null) {
+	console.log(draftText)
+	quill.container.firstChild.innerHTML = draftText
+}
+
 // CLOCK
 let remainingTime = 2 * 60 * 60 // Two hours in seconds
 let timerInterval
