@@ -65,13 +65,13 @@ const homeRoutes = require("./routes/home.js")
 app.use("/", homeRoutes)
 
 const discoverRoutes = require("./routes/discover.js")
-app.use("/discover", discoverRoutes)
+app.use("/", discoverRoutes)
 
 const editorRoutes = require("./routes/editor.js")
-app.use("/editor", editorRoutes)
+app.use("/", editorRoutes)
 
 const accountRoutes = require("./routes/account.js")
-app.use("/account", accountRoutes)
+app.use("/", accountRoutes)
 
 app.listen(port, () => {
 	console.log(`Wow! Look at that ${port}`)
