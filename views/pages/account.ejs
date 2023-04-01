@@ -1,9 +1,5 @@
 <section class="account">
-    <form action="/uitloggen" method="post">
-        <input type="submit" value="Uitloggen">
-    </form>
-    <h1>Hi <%= username %> nice to see you again!</h1>
-    <p>do you want to change your details?</p>
+    <p>Do you want to change your details?</p>
     <form action="/update" method="post">
         <input type="text" id="username" name="username" placeholder="Username" value="<%= username %>" required>
         <label for="username"></label>
@@ -26,10 +22,6 @@
         <label for="country"></label>
         <input type="text" id="language" name="language" placeholder="Language" value="<%= language %>" required>
         <label for="language"></label>
-        
         <input type="submit" value="Save">
     </form>
 </section>
-<script>
-    console.log()
-</script>

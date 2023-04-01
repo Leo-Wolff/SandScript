@@ -13,4 +13,6 @@ router.post("/update", accountController.update)
 
 router.get("/account", accountController.account)
 
+router.get("/profile", accountController.profile)
+
 module.exports = router

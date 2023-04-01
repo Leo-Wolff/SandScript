@@ -59,13 +59,28 @@ exports.update = async (req, res) => {
 	req.session.user.country = req.body.country
 	req.session.user.language = req.body.language
 	req.session.user.gender = req.body.gender
-	res.redirect("/account")
+	res.redirect("/profile")
 }
 
 // Profile page
 exports.account = async (req, res) => {
 	const { username, email, password, name, age, gender, interests, country, language } = req.session.user
 	res.render("pages/account", {
+		username: username,
+		email: email,
+		password: password,
+		name: name,
+		age: age,
+		gender: gender,
+		interests: interests,
+		country: country,
+		language: language
+	})
+}
+
+exports.profile = async (req, res) => {
+	const { username, email, password, name, age, gender, interests, country, language } = req.session.user
+	res.render("pages/profile", {
 		username: username,
 		email: email,
 		password: password,
