@@ -11,12 +11,18 @@ exports.inloggen1 = async (req, res) => {
 	const currentUser = await users.findOne({
 		username: req.body.username,
 	})
+	if(currentUser) {
 	req.session.user = {
 		username: currentUser.username,
 		password: currentUser.password,
 		email: currentUser.email,
 	}
 	res.redirect("/account")
+}
+else {
+	console.log("Account not found")
+	res.redirect("/inloggen")
+}
 }
 
 exports.update = async (req, res) => {
