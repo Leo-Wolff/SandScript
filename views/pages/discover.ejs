@@ -73,7 +73,7 @@
 
 		<main>
 			<section id="filter">
-				<form method="post" action="discover">
+				<form method="post" action="/discover">
 					<section class="form-group">
 						<label for="email">Gender</label>
 						<article>
@@ -159,10 +159,10 @@
 			</section>
 
 			<section>
-				<h1><%= eersteMatch.name %></h1>
+				<h1><%= firstMatch.name %></h1>
 
-				<form action="liked" method="post">
-					<button type="submit" name="matchId" value="<%= eersteMatch._id %>">
+				<form action="/liked" method="post">
+					<button type="submit" name="matchId" value="<%= firstMatch._id %>">
 						Liked
 					</button>
 				</form>

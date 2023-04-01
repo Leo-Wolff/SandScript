@@ -73,7 +73,7 @@
 
 		<main>
 			<section id="filter">
-				<form method="post" action="/discover" >
+				<form method="post" action="/discover">
 					<section class="form-group">
 						<label for="email">Gender</label>
 						<article>
@@ -152,29 +152,31 @@
 					</section>
 
 					<button type="submit" class="btn">Apply</button>
-					<button type="button" class="btn cancel" onclick="closeForm()">X</button>
+					<button type="button" class="btn cancel" onclick="closeForm()">
+						X
+					</button>
 				</form>
 			</section>
 
 			<section>
-               
-                    <article class="event-found">
-                      <h2><%= eersteMatch.name %></h2>
-                      <p><%= eersteMatch.age %></p>
-                      <p><%= eersteMatch.gender %></p>
-                      <p><%= eersteMatch.interests %></p>
-                      <p><%= eersteMatch.language %></p>
-                      <p><%= eersteMatch.country %></p>
-                    </article>
+				<article class="event-found">
+					<h2><%= firstMatch.name %></h2>
+					<p><%= firstMatch.age %></p>
+					<p><%= firstMatch.gender %></p>
+					<p><%= firstMatch.interests %></p>
+					<p><%= firstMatch.language %></p>
+					<p><%= firstMatch.country %></p>
+				</article>
 
-                    <form action="/liked" method="post">
-                        <button type="submit" name="matchId" value="<%= eersteMatch._id %>">Liked</button>
-                    </form>
-
+				<form action="/liked" method="post">
+					<button type="submit" name="matchId" value="<%= firstMatch._id %>">
+						Liked
+					</button>
+				</form>
 			</section>
 		</main>
 
-		<footer class="light"> <%- include('../partials/footer'); %> </footer>
+		<footer class="light"><%- include('../partials/footer'); %></footer>
 
 		<script src="/javascript/script.js"></script>
 	</body>
