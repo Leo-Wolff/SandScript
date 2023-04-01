@@ -3,7 +3,7 @@ const router = express.Router()
 
 const accountController = require("../controllers/account.js")
 
-router.post("/uitloggen", accountController.uitloggen)
+router.post("/logout", accountController.logout)
 
 router.get("/login", accountController.login)
 
