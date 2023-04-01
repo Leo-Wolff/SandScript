@@ -20,9 +20,10 @@ exports.inloggen1 = async (req, res) => {
 		age: currentUser.age,
 		gender: currentUser.gender,
 		interests: currentUser.interests,
+		country: currentUser.country,
 		language: currentUser.language,
 	}
-	res.redirect("/account")
+	res.redirect("/")
 }
 else {
 	console.log("Account not found")
