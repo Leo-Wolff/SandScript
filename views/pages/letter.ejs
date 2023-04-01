@@ -5,7 +5,7 @@
 	<body class="standard-bg container">
 		<header>
 			<!-- Click on img to go to pop-up "Do you want to stop for now?" -->
-			<img id="back-button" src="/img/back-button.svg" />
+			<img id="back-button" class="get-quill-data" src="/img/back-button.svg" />
 
 			<!-- Reciptient of letter -->
 			<h1>To: Bas Kramer</h1>
@@ -13,9 +13,10 @@
 
 		<!-- Quill text editor -->
 		<div id="editor"></div>
+		<div><%= draft %></div>
 
 		<!-- Confirm letter button that will lead to pop-up "" -->
-		<button class="confirm-letter">Fill bottle</button>
+		<button class="get-quill-data confirm-letter">Fill bottle</button>
 
 		<!-- POP-UPS -->
 		<section class="popup">
@@ -23,8 +24,14 @@
 				<img src="/img/close-button.svg" alt="Cancel" />
 				<h2>Do you want to stop for now?</h2>
 				<div>
-					<a href="../home/">Exit</a>
-					<a href="../home/matches">Save as draft</a>
+					<a href="../">Exit</a>
+					<a href="../drafts"
+						><input
+							form="save-draft"
+							formaction="drafts"
+							type="submit"
+							value="Save as draft"
+					/></a>
 				</div>
 			</section>
 
@@ -32,7 +39,9 @@
 				<img src="/img/close-button.svg" alt="Cancel" />
 				<h2>Do you want to sign your letter?</h2>
 				<div>
-					<a href="bottle">Don't sign</a>
+					<a>
+						<input form="save-draft" type="submit" value="Don't sign" />
+					</a>
 					<button class="styled-like-a">Sign</button>
 				</div>
 			</section>
@@ -41,7 +50,7 @@
 			<section class="hidden">
 				<img src="/img/close-button.svg" alt="Cancel" />
 
-				<form action="bottle" method="post">
+				<form id="save-draft" action="bottle" method="post">
 					<input id="content" type="hidden" name="content" />
 
 					<input id="signature" type="text" name="signed" />

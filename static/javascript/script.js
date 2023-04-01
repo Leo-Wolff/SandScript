@@ -80,30 +80,36 @@ if (photoInput != null) {
 }
 
 //TEXT EDITOR FORM POSTING
-if (document.querySelector(".styled-like-a") != null) {
-	document.querySelector(".styled-like-a").addEventListener("click", () => {
-		var delta = quill.container.firstChild.innerHTML
-		document.getElementById("content").value = delta
-		console.log(document.getElementById("content").value)
+const quillDataButton = document.querySelectorAll(".get-quill-data")
+
+if (quillDataButton != null) {
+	quillDataButton.forEach((element) => {
+		element.addEventListener("click", () => {
+			let delta = quill.container.firstChild.innerHTML
+			document.getElementById("content").value = delta
+			console.log(document.getElementById("content").value)
+		})
 	})
 }
 
 //DRAFT ITEM DELETE
-const deleteImg = async (documentId) => {
+const deleteDraftItem = async (draftId) => {
 	try {
-		console.log("Deleting document with _id:", documentId)
 		const response = await fetch("/delete-draft", {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ documentId }),
+			body: JSON.stringify({ draftId }),
 		})
 		const result = await response.json()
+		console.log("Deleted document with _id:", draftId)
 		console.log(result)
 	} catch (err) {
 		console.error(err)
 	}
+	location.reload()
+	return false
 }
 
 const imagesDelete = document.querySelectorAll(".draft-item img")
@@ -111,9 +117,8 @@ const imagesDelete = document.querySelectorAll(".draft-item img")
 if (imagesDelete != null) {
 	imagesDelete.forEach((img) => {
 		img.addEventListener("click", () => {
-			const documentId = img.dataset.documentId
-			deleteImg(documentId)
-			console.log("Delete document")
+			const draftId = img.dataset.documentId
+			deleteDraftItem(draftId)
 		})
 	})
 }
@@ -158,25 +163,25 @@ window.addEventListener("load", () => {
 })
 
 function openForm() {
-    document.getElementById('filter').style.display = "block";
+	document.getElementById("filter").style.display = "block"
 }
-  
+
 function closeForm() {
-    document.getElementById('filter').style.display = "none";
+	document.getElementById("filter").style.display = "none"
 }
 
 function openSortForm() {
-    document.getElementById('sorter').style.display = "block";
+	document.getElementById("sorter").style.display = "block"
 }
-  
+
 function closeSortForm() {
-    document.getElementById('sorter').style.display = "none";
+	document.getElementById("sorter").style.display = "none"
 }
 
 function openSortForm() {
-    document.getElementById('sorter').style.display = "block";
+	document.getElementById("sorter").style.display = "block"
 }
-  
+
 function closeSortForm() {
-    document.getElementById('sorter').style.display = "none";
+	document.getElementById("sorter").style.display = "none"
 }

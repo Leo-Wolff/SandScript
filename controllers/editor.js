@@ -1,17 +1,17 @@
+const { ObjectId } = require("mongodb") // Defining ObjectId
+
 async function CreateNewDraft(collection, content, input) {
 	const draft = {
 		text: content,
 		signed: input,
-		dateUpdated: new Date().toISOString().slice(0, 10), // oorspronkelijk date is handiger voor aanpassen later
+		dateUpdated: new Date(),
 	}
 
 	await collection.insertOne(draft)
 }
 
-// console.log(db)
 function getDataFromDatabase(dbCollection) {
-	// const db = client.db(dbName)
-	let collection = db.collection(dbCollection) // collectie naam
+	let collection = db.collection(dbCollection) // collection name
 	collection = GetDraftsFromDatabase(collection)
 
 	return collection
@@ -28,11 +28,18 @@ exports.drafts = async (req, res) => {
 	})
 }
 
+exports.postDraft = async (req, res) => {
+	const collectionLetters = db.collection("letters")
+	await CreateNewDraft(collectionLetters, req.body.content, req.body.signed)
+
+	res.redirect("/drafts")
+}
+
 exports.deleteDraft = async (req, res) => {
+	const collectionLetters = db.collection("letters")
 	try {
-		const collectionLetters = db.collection("letters")
 		const result = await collectionLetters.deleteOne({
-			_id: ObjectID(req.body.documentId),
+			_id: new ObjectId(req.body.draftId),
 		})
 		res.json({ message: `${result.deletedCount} document(s) deleted` })
 	} catch (err) {
@@ -41,8 +48,25 @@ exports.deleteDraft = async (req, res) => {
 	}
 }
 
-exports.letter = (req, res) => {
-	res.render("pages/letter.ejs")
+// exports.letter = async (req, res) => {
+// 	res.render("pages/letter.ejs")
+// }
+
+exports.letter = async (req, res) => {
+	try {
+		let draft = await db.collection("letters").findOne({
+			_id: new ObjectId("6423f223d103efd53227829b"),
+		})
+
+		console.log(draft)
+		// quill.setContents(draft.text)
+
+		res.render("pages/letter.ejs", {
+			letters: draft,
+		})
+	} catch (err) {
+		console.error(err)
+	}
 }
 
 exports.bottle = (req, res) => {

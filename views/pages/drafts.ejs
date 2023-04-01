@@ -49,7 +49,31 @@
 			</nav>
 
 			<section class="draft-list">
-				<%- include('../partials/drafts'); %>
+				<% letters.forEach((document)=> { %>
+				<div class="draft-item">
+					<img
+						data-document-id="<%= document._id %>"
+						src="/img/close-button.svg"
+						alt="Cancel"
+					/>
+
+					<img
+						src="/img/profile-picture.svg"
+						alt="Profile picture of recipient"
+					/>
+
+					<p>RE: <%= document.recipient %></p>
+					<div class="draft-content"><p><%- document.text %></p></div>
+					<p>
+						<% if (document.signed && document.signed.length) { %> - <%=
+						document.signed %> <% } else { %> <% } %>
+					</p>
+					<p>
+						Last updated: <%= new
+						Date(document.dateUpdated).toLocaleDateString() %>
+					</p>
+				</div>
+				<% }) %>
 			</section>
 		</main>
 

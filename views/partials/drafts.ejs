@@ -1,4 +1,4 @@
-<% letters.forEach((document)=> { %>
+<!-- <% letters.forEach((document)=> { %>
 <div class="draft-item">
 	<img
 		data-document-id="<%= document._id %>"
@@ -11,6 +11,8 @@
 	<p>RE: <%= document.recipient %></p>
 	<div class="draft-content"><p><%- document.text %></p></div>
 	<p>- <%= document.signed %></p>
-	<p>Last updated: <%= document.dateUpdated %></p>
+	<p>
+		Last updated: <%= new Date(document.dateUpdated).toLocaleDateString() %>
+	</p>
 </div>
-<% }) %>
+<% }) %> -->
