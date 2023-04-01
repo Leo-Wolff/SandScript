@@ -92,7 +92,7 @@ if (document.querySelector(".styled-like-a") != null) {
 const deleteImg = async (documentId) => {
 	try {
 		console.log("Deleting document with _id:", documentId)
-		const response = await fetch("/delete-image", {
+		const response = await fetch("/delete-draft", {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",

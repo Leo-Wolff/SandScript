@@ -122,11 +122,25 @@ app.use("/editor", editorRoutes)
 const homeRoutes = require("./routes/home.js")
 app.use("/home", homeRoutes)
 
-app.post("/bottle", (req, res) => {
+app.post("/editor/bottle", (req, res) => {
 	const db = client.db(dbName)
 	const collectionLetters = db.collection("letters")
 	CreateNewDraft(collectionLetters, req.body.content, req.body.signed)
 	res.render("pages/bottle")
+})
+
+app.delete("/delete-draft", async (req, res) => {
+	try {
+		await connectToDatabase()
+		const collectionLetters = db.collection("letters")
+		const result = await collectionLetters.deleteOne({
+			_id: ObjectID(req.body.documentId),
+		})
+		res.json({ message: `${result.deletedCount} document(s) deleted` })
+	} catch (err) {
+		console.error(err)
+		res.status(500).json({ error: err.message })
+	}
 })
 
 // discover page
@@ -134,7 +148,7 @@ app.post("/bottle", (req, res) => {
 // 	try {
 // 		const filters = req.cookies.selectedFilters
 // 			? JSON.parse(req.cookies.selectedFilters)
-// 			: {} // get filters from cookie 
+// 			: {} // get filters from cookie
 
 // 			const ik = await users.findOne({username: 'MysteryMan'})
 // 			const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
@@ -166,16 +180,20 @@ app.post("/bottle", (req, res) => {
 // })
 
 // filtering in discover page
-app.post('home/discover', async (req, res) => {
+app.post("home/discover", async (req, res) => {
 	try {
 		const filters = { gender: req.body.gender } // save input from user in filters
 
 		res.cookie("selectedFilters", JSON.stringify(filters)) // save filters in cookie
 
-		console.log(req.session);
+		console.log(req.session)
 
-		const ik = await users.findOne({username: 'MysteryMan'})
-		const eersteMatch = await users.findOne({...filters, username: { $nin: ik.likes, $not: {$eq: ik.username} }, status: 'new'})
+		const ik = await users.findOne({ username: "MysteryMan" })
+		const eersteMatch = await users.findOne({
+			...filters,
+			username: { $nin: ik.likes, $not: { $eq: ik.username } },
+			status: "new",
+		})
 
 		if (eersteMatch) {
 			res.render("pages/gefiltered", { eersteMatch })
@@ -190,15 +208,15 @@ app.post('home/discover', async (req, res) => {
 app.post("/liked", async (req, res) => {
 	try {
 		const eersteMatch = await users.findOne({
-			_id: new ObjectId(req.body.matchId)
+			_id: new ObjectId(req.body.matchId),
 		})
 
-		const ik = await users.findOne({username: 'MysteryMan'})
+		const ik = await users.findOne({ username: "MysteryMan" })
 		console.log(eersteMatch)
 
 		await users.updateOne(
 			{ _id: ik._id },
-			{ $push: { likes: eersteMatch.username} }
+			{ $push: { likes: eersteMatch.username } }
 		)
 
 		await users.updateOne(
@@ -209,12 +227,15 @@ app.post("/liked", async (req, res) => {
 		ik.likes.push(eersteMatch.username)
 		eersteMatch.likedBy.push(ik.username)
 
-		if (ik.likes.includes(eersteMatch.username) && ik.likedBy.includes(eersteMatch.username)) {
-			console.log('match')
-			res.redirect('home/discover')
+		if (
+			ik.likes.includes(eersteMatch.username) &&
+			ik.likedBy.includes(eersteMatch.username)
+		) {
+			console.log("match")
+			res.redirect("home/discover")
 		} else {
-			console.log('geen match')
-			res.redirect('home/discover')
+			console.log("geen match")
+			res.redirect("home/discover")
 		}
 	} catch (err) {
 		console.log(err.stack)

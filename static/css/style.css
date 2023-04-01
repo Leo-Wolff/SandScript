@@ -699,7 +699,7 @@ Draft partial
 	text-overflow: ellipsis;
 }
 
-img:not(header img) {
+/* img:not(header img) {
 	margin-top: 15em;
 	width: 5em;
-}
+} */
