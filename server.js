@@ -29,7 +29,6 @@ const dbName = "sandscript"
 global.db = client.db(dbName)
 global.users = db.collection("users")
 
-
 async function connectToDatabase() {
 	try {
 		console.log("Connecting to MongoDB Atlas cluster...")
@@ -66,13 +65,13 @@ const homeRoutes = require("./routes/home.js")
 app.use("/", homeRoutes)
 
 const discoverRoutes = require("./routes/discover.js")
-app.use("/", discoverRoutes)
+app.use("/discover", discoverRoutes)
 
 const editorRoutes = require("./routes/editor.js")
-app.use("/", editorRoutes)
+app.use("/editor", editorRoutes)
 
 const accountRoutes = require("./routes/account.js")
-app.use("/", accountRoutes)
+app.use("/account", accountRoutes)
 
 app.listen(port, () => {
 	console.log(`Wow! Look at that ${port}`)
