@@ -1,0 +1,18 @@
+/*====================
+ clock stijling
+ ====================*/
+#timer {
+	position: fixed;
+	top: 65%;
+	left: 50%;
+	transform: translate(-25%, -50%);
+	width: 100%;
+	color: #fff;
+}
+
+#timer > span {
+	font-family: var(--fontFamily);
+	font-weight: var(--fontMedium);
+	font-size: 60px;
+	color: #fff;
+}
