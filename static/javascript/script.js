@@ -57,25 +57,44 @@ if (document.querySelector(".styled-like-a") != null) {
 
 //bottle
 //variables
-const photoPopup = document.getElementById("insert-photo"),
-	photoInput = document.getElementById("insert-input")
+const photoPopup = document.querySelectorAll(".popup section")[1]
 
-if (photoInput != null) {
-	photoInput.addEventListener("change", (e) => {
+if (document.querySelector(".camera") != null) {
+	document.querySelector(".camera").addEventListener("click", () => {
+		photoPopup.classList.remove("hidden")
+		console.log("Open insert photo pop-up")
+	})
+}
+
+if (document.getElementById("insert-photo") != null) {
+	document.getElementById("insert-photo").addEventListener("change", (e) => {
 		let reader = new FileReader()
 
 		reader.onload = () => {
-			document.getElementById("output").src = reader.result
+			photoPopup.querySelector("div img").src = reader.result
 		}
 
 		reader.readAsDataURL(e.target.files[0])
 
 		// output is hidden so that the border style only shows when an image is uploaded
-		document.getElementById("output").classList.remove("hidden")
+		photoPopup.querySelector(".output").classList.remove("hidden")
 
 		// show a different button to fake a confirm button
-		document.getElementById("upload-photo").classList.add("hidden")
-		document.getElementById("confirm-photo").classList.remove("hidden")
+		photoPopup.querySelector("div label").classList.add("hidden")
+		photoPopup.querySelector("div p").classList.remove("hidden")
+	})
+}
+
+// Add photo to bottle
+if (photoPopup.querySelector("div p") != null) {
+	photoPopup.querySelector("div p").addEventListener("click", () => {
+		document.querySelector(".bottle").src = "/img/open-img-bottle.svg" // add a polaroid photo into the bottle when a photo is selected
+
+		photoPopup.classList.add("hidden") // hide the select photo pop-up
+
+		//make it so that when the user clicks on the pop-up again, they can upload a different photo
+		photoPopup.querySelector("div label").classList.remove("hidden")
+		photoPopup.querySelector("div p").classList.add("hidden")
 	})
 }
 

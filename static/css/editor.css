@@ -3,10 +3,7 @@ Letter.ejs
  ====================*/
 
 body header img {
-	position: absolute;
-	top: 2em;
-	left: 0.5em;
-
+	margin: 2em 0 0 0.5em;
 	border-radius: 360px;
 	padding: 1em 1.625em 1em 1.375em;
 
@@ -21,10 +18,10 @@ body header h1 {
 	left: calc(1.5em + 2.5em); /* plus the width body header img is taking up */
 
 	font-weight: var(--fontRegular);
-	font-size: 1.6em;
+	font-size: 1.4em;
 }
 
-.confirm-letter {
+.confirm-button {
 	position: absolute;
 	top: 90%;
 	left: calc(50% - ((100% - 1em) / 2));
@@ -136,7 +133,7 @@ body .ql-toolbar.ql-snow {
 }
 
 /*====================
-Pop-ups letter.ejs
+Pop-ups letter
  ====================*/
 .popup {
 	position: absolute;
@@ -163,8 +160,9 @@ Pop-ups letter.ejs
 	width: 1.25em;
 }
 
-.confirm-letter:hover,
+.confirm-button:hover,
 .popup img:hover,
+.bottle-editor svg:hover,
 #back-button:hover {
 	cursor: pointer;
 }
@@ -342,7 +340,88 @@ Draft partial
 	text-overflow: ellipsis;
 }
 
-img:not(header img) {
-	margin-top: 15em;
-	width: 5em;
+/*====================
+Bottle.ejs
+ ====================*/
+
+.bottle-editor {
+	width: calc(100% - 1em);
+}
+
+.bottle-editor h1 {
+	position: absolute;
+	top: 2.45em;
+	left: calc(1.5em + 3.25em);
+
+	font-weight: var(--fontRegular);
+	font-size: 1.3em;
+}
+
+.bottle-editor svg {
+	margin: 2em 0 0 0.5em;
+	border-radius: 360px;
+	padding: 0.5em;
+
+	height: 4.125em;
+
+	background-color: var(--blue);
+}
+
+.bottle {
+	position: absolute;
+	top: calc(50% - 12.5em);
+	left: calc(50% - (10em / 2));
+
+	width: 10em;
+}
+
+/*====================
+Pop-ups bottle
+ ====================*/
+.popup section:nth-of-type(2) div {
+	flex-wrap: wrap;
+}
+
+.popup section:nth-of-type(2) label,
+.popup section:nth-of-type(2) p {
+	/* border: 0;
+	padding: 1em 0 1em 0;
+	border-radius: 0 0 5px 5px;
+
+	width: 100%; */
+	border: 0;
+	border-radius: 0 0 5px 5px;
+	padding: 1em 0em 1em 0em;
+
+	cursor: pointer;
+	width: 143%;
+
+	font-size: 1em;
+	text-align: center;
+
+	background-color: var(--darkBlue);
+}
+
+.popup section:nth-of-type(2) p {
+	margin: 0;
+}
+
+.popup section:nth-of-type(2) .output {
+	position: relative;
+	top: 0;
+	right: 0;
+	float: none;
+
+	margin: 1em;
+	border: 5px solid var(--brown-dark);
+	padding: 15px;
+	border-radius: 5px;
+
+	width: 10em;
+
+	background-color: var(--brown);
+}
+
+.popup section:nth-of-type(2) .output:hover {
+	cursor: auto;
 }
