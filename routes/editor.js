@@ -5,9 +5,9 @@ const editorController = require("../controllers/editor.js")
 
 router.get("/drafts", editorController.drafts)
 
-router.post("/drafts", editorController.postDraft)
-
 router.delete("/delete-draft", editorController.deleteDraft)
+
+router.post("/drafts", editorController.postDraft)
 
 router.get("/letter", editorController.letter)
 

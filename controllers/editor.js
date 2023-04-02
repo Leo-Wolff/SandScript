@@ -1,7 +1,7 @@
 const { ObjectId } = require("mongodb") // Defining ObjectId
 const collectionLetters = db.collection("letters") // Connect to letters collection
 
-async function createNewDraft(collection, content, input) {
+async function createDraft(collection, content, input) {
 	const create = {
 		text: content,
 		signed: input,
@@ -11,9 +11,13 @@ async function createNewDraft(collection, content, input) {
 	await collection.insertOne(create)
 }
 
-// async function deleteDraft {
+async function deleteDraft(req, res) {
+	const result = await collectionLetters.deleteOne({
+		_id: new ObjectId(req.body.draftID),
+	})
 
-// }
+	res.json({ message: `${result.deletedCount} document(s) deleted` })
+}
 
 async function updateDraft(
 	collection,
@@ -59,8 +63,12 @@ exports.drafts = async (req, res) => {
 	})
 }
 
+exports.deleteDraft = async (req, res) => {
+	await deleteDraft(req, res)
+}
+
 exports.postDraft = async (req, res) => {
-	if (req.body.id != null) {
+	if (ObjectId.isValid(req.body.id)) {
 		// If a draft item was clicked update the data
 
 		console.log("Updated document ID:", req.body.id)
@@ -77,22 +85,14 @@ exports.postDraft = async (req, res) => {
 		// If no draft item was clicked create a new draft
 
 		console.log("No document ID specified.")
-		await createNewDraft(collectionLetters, req.body.content, req.body.signed)
+		await createDraft(collectionLetters, req.body.content, req.body.signed)
 
 		res.redirect("/drafts")
 	}
 }
 
-exports.deleteDraft = async (req, res) => {
-	const result = await collectionLetters.deleteOne({
-		_id: new ObjectId(req.body.draftID),
-	})
-
-	res.json({ message: `${result.deletedCount} document(s) deleted` })
-}
-
 exports.letter = async (req, res) => {
-	if (ObjectId.isValid(req.body.id)) {
+	if (req.query.documentId != null) {
 		// If a draft item was clicked find the data for it
 
 		const draftID = new ObjectId(req.query.documentId)
@@ -135,7 +135,7 @@ exports.postBottle = async (req, res) => {
 		// If no draft item was clicked create a new draft
 
 		console.log("No document ID specified.")
-		await createNewDraft(collectionLetters, req.body.content, req.body.signed)
+		await createDraft(collectionLetters, req.body.content, req.body.signed)
 
 		res.redirect("/bottle")
 	}
