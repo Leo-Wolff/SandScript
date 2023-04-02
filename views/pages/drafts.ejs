@@ -49,10 +49,10 @@
 			</nav>
 
 			<section class="draft-list">
-				<% letters.forEach((document)=> { %>
+				<% letters.forEach((draft)=> { %>
 				<div class="draft-item">
 					<img
-						data-document-id="<%= document._id %>"
+						data-id="<%= draft._id %>"
 						src="/img/close-button.svg"
 						alt="Cancel"
 					/>
@@ -62,15 +62,15 @@
 						alt="Profile picture of recipient"
 					/>
 
-					<p>RE: <%= document.recipient %></p>
-					<div class="draft-content"><p><%- document.text %></p></div>
+					<p>RE: <%= draft.recipient %></p>
+					<div class="draft-content"><p><%- draft.text %></p></div>
 					<p>
-						<% if (document.signed && document.signed.length) { %> - <%=
-						document.signed %> <% } else { %> <% } %>
+						<% if (draft.signed && draft.signed.length) { %> - <%= draft.signed
+						%> <% } else { %> <% } %>
 					</p>
 					<p>
-						Last updated: <%= new
-						Date(document.dateUpdated).toLocaleDateString() %>
+						Last updated: <%= new Date(draft.dateUpdated).toLocaleDateString()
+						%>
 					</p>
 				</div>
 				<% }) %>

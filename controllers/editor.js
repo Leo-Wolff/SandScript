@@ -1,23 +1,54 @@
 const { ObjectId } = require("mongodb") // Defining ObjectId
+const collectionLetters = db.collection("letters") // Connect to letters collection
 
-async function CreateNewDraft(collection, content, input) {
-	const draft = {
+async function createNewDraft(collection, content, input) {
+	const create = {
 		text: content,
 		signed: input,
 		dateUpdated: new Date(),
 	}
 
-	await collection.insertOne(draft)
+	await collection.insertOne(create)
+}
+
+// async function deleteDraft {
+
+// }
+
+async function updateDraft(
+	collection,
+	draftID,
+	content,
+	input,
+	shouldUpdateSigned
+) {
+	const filter = { _id: new ObjectId(draftID) }
+	const update = {
+		$set: {
+			text: content,
+			dateUpdated: new Date(),
+		},
+	}
+
+	// when updating a draft through postDraft, you can't specify signed, so true/false statement to not update the signature
+	if (shouldUpdateSigned) {
+		update.$set.signed = input
+	}
+
+	const result = await collection.updateOne(filter, update)
+	// console.log("Updated document count:", result.modifiedCount)
+
+	return result
 }
 
 function getDataFromDatabase(dbCollection) {
 	let collection = db.collection(dbCollection) // collection name
-	collection = GetDraftsFromDatabase(collection)
+	collection = getDraftsFromDatabase(collection)
 
 	return collection
 }
 
-async function GetDraftsFromDatabase(collection) {
+async function getDraftsFromDatabase(collection) {
 	return collection.find().toArray()
 }
 
@@ -29,45 +60,52 @@ exports.drafts = async (req, res) => {
 }
 
 exports.postDraft = async (req, res) => {
-	const collectionLetters = db.collection("letters")
-	await CreateNewDraft(collectionLetters, req.body.content, req.body.signed)
+	if (req.body.id != null) {
+		// If a draft item was clicked update the data
 
-	res.redirect("/drafts")
-}
+		console.log("Updated document ID:", req.body.id)
+		await updateDraft(
+			collectionLetters,
+			req.body.id,
+			req.body.content,
+			req.body.signed,
+			false
+		)
 
-exports.deleteDraft = async (req, res) => {
-	const collectionLetters = db.collection("letters")
-	try {
-		const result = await collectionLetters.deleteOne({
-			_id: new ObjectId(req.body.draftId),
-		})
-		res.json({ message: `${result.deletedCount} document(s) deleted` })
-	} catch (err) {
-		console.error(err)
-		res.status(500).json({ error: err.message })
+		res.redirect("/drafts")
+	} else {
+		// If no draft item was clicked create a new draft
+
+		console.log("No document ID specified.")
+		await createNewDraft(collectionLetters, req.body.content, req.body.signed)
+
+		res.redirect("/drafts")
 	}
 }
 
-// exports.letter = async (req, res) => {
-// 	res.render("pages/letter.ejs")
-// }
+exports.deleteDraft = async (req, res) => {
+	const result = await collectionLetters.deleteOne({
+		_id: new ObjectId(req.body.draftID),
+	})
+
+	res.json({ message: `${result.deletedCount} document(s) deleted` })
+}
 
 exports.letter = async (req, res) => {
 	if (req.query.documentId != null) {
-		try {
-			let draft = await db.collection("letters").findOne({
-				_id: new ObjectId(req.query.documentId),
-			})
+		// If a draft item was clicked find the data for it
 
-			console.log(draft)
+		const draftID = new ObjectId(req.query.documentId)
+		const draft = await collectionLetters.findOne({ _id: draftID })
 
-			res.render("pages/letter.ejs", {
-				letters: draft,
-			})
-		} catch (err) {
-			console.error(err)
-		}
+		console.log("Showing document:", req.query.documentId)
+
+		res.render("pages/letter.ejs", {
+			letters: draft,
+		})
 	} else {
+		// If no draft item was clicked, don't fetch any particular document (and thus, no data to show)
+
 		let draft = await getDataFromDatabase("letters")
 		res.render("pages/letter.ejs", {
 			letters: draft,
@@ -79,8 +117,26 @@ exports.bottle = (req, res) => {
 	res.render("pages/bottle.ejs")
 }
 
-exports.bottle1 = (req, res) => {
-	const collectionLetters = db.collection("letters")
-	CreateNewDraft(collectionLetters, req.body.content, req.body.signed)
-	res.render("pages/bottle.ejs")
+exports.postBottle = async (req, res) => {
+	if (req.body.id != null) {
+		// If a draft item was clicked update the data
+
+		console.log("Updated document ID:", req.body.id)
+		await updateDraft(
+			collectionLetters,
+			req.body.id,
+			req.body.content,
+			req.body.signed,
+			true
+		)
+
+		res.redirect("/bottle")
+	} else {
+		// If no draft item was clicked create a new draft
+
+		console.log("No document ID specified.")
+		await createNewDraft(collectionLetters, req.body.content, req.body.signed)
+
+		res.redirect("/bottle")
+	}
 }

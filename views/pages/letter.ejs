@@ -51,6 +51,8 @@
 				<img src="/img/close-button.svg" alt="Cancel" />
 
 				<form id="save-draft" action="bottle" method="post">
+					<input type="hidden" name="id" value="<%= letters._id %>" />
+
 					<input id="content" type="hidden" name="content" />
 
 					<input id="signature" type="text" name="signed" />
