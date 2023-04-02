@@ -92,7 +92,7 @@ exports.deleteDraft = async (req, res) => {
 }
 
 exports.letter = async (req, res) => {
-	if (req.query.documentId != null) {
+	if (ObjectId.isValid(req.body.id)) {
 		// If a draft item was clicked find the data for it
 
 		const draftID = new ObjectId(req.query.documentId)
@@ -118,7 +118,7 @@ exports.bottle = (req, res) => {
 }
 
 exports.postBottle = async (req, res) => {
-	if (req.body.id != null) {
+	if (ObjectId.isValid(req.body.id)) {
 		// If a draft item was clicked update the data
 
 		console.log("Updated document ID:", req.body.id)
