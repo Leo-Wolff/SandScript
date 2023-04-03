@@ -26,13 +26,20 @@ exports.discover1 = async (req, res) => {
 		const currentUser = req.session.user
 		const firstMatch = await users.findOne({...filters, username: { $nin: [...currentUser.liked, ...currentUser.disliked], $not: {$eq: currentUser.username} }})
 
-		if (firstMatch) {
-			res.render("pages/gefiltered", { firstMatch })
-		} else { // If no results show this
-			res.send("no results")
-		}
+		res.render("pages/gefiltered", { firstMatch })
 	} catch (err) {
 		console.log(err.stack)
+	}
+}
+
+exports.match = async (req, res) => {
+	try {
+		const currentUser = req.session.user
+		const userMatch = await users.findOne({ username: { $in: currentUser.matches.slice(-1) }} )
+
+		res.render("pages/match.ejs", { userMatch }) // Match pagina met als route /match
+	} catch (error) {
+		console.error(error);
 	}
 }
 
@@ -71,7 +78,7 @@ exports.liked = async (req, res) => {
 
 			currentUser.matches.push(firstMatch.username)
 			
-			res.redirect('/discover')
+			res.redirect('/match')
 		} else { // Else no match redirect to discover page
 			console.log('geen match')
 			res.redirect('/discover')
@@ -110,13 +117,7 @@ exports.matchlist = async (req, res) => {
 		const userMatches = await users.find({ username: { $in: currentUser.matches }}).toArray()
 		console.log(userMatches)
 
-		const filters = req.cookies.selectedFilters
-			? JSON.parse(req.cookies.selectedFilters)
-			: {} // get filters from cookie 
-
-		const eersteMatch = await users.find({ }).toArray() // filter between the selcted filters and status new
-
-		res.render('pages/matches', { userMatches }) // Render the page with the first match
+		res.render('pages/matches', { userMatches }) // Render the page with the matches
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -126,8 +127,6 @@ exports.matchlist = async (req, res) => {
 exports.matchlist1 = async (req, res) => {
 	try {
 		const currentUser = req.session.user
-		// const userMatches = await users.find({ username: { $in: currentUser.matches }}).toArray()
-		console.log(userMatches)
 
 		const sortBy = req.body.sorteren;
 		let sortOption = {}
@@ -142,7 +141,7 @@ exports.matchlist1 = async (req, res) => {
 	
 		const userMatches = await users.find({ username: { $in: currentUser.matches }}).sort(sortOption).toArray() // Retrieve all the documents in the collection, sorted by the user's selection
 
-		if (eersteMatch.length > 0) {
+		if (userMatches.length > 0) {
 			res.render('pages/matches', { userMatches })
 		} else {
 			res.send('no results')

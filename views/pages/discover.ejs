@@ -158,8 +158,16 @@
 				</form>
 			</section>
 
+			<% if (firstMatch) { %>
 			<section>
-				<h1><%= firstMatch.name %></h1>
+				<article class="event-found">
+					<h2><%= firstMatch.name %></h2>
+					<p><%= firstMatch.age %></p>
+					<p><%= firstMatch.gender %></p>
+					<p><%= firstMatch.interests %></p>
+					<p><%= firstMatch.language %></p>
+					<p><%= firstMatch.country %></p>
+				  </article>
 
 				<form action="/liked" method="post">
 					<button type="submit" name="matchId" value="<%= firstMatch._id %>">
@@ -173,6 +181,9 @@
 					</button>
 				</form>
 			</section>
+			<% } else { %>
+				<p>GEEN MATCHES</p>
+			<% } %>
 		</main>
 
 		<footer class="light"><%- include('../partials/footer'); %></footer>

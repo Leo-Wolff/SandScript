@@ -156,8 +156,8 @@
 				</form>
 			</section>
 
+			<% if (firstMatch) { %>
 			<section>
-               
                     <article class="event-found">
                       <h2><%= firstMatch.name %></h2>
                       <p><%= firstMatch.age %></p>
@@ -176,8 +176,10 @@
 							Liked
 						</button>
 					</form>
-
 			</section>
+			<% } else { %>
+				<p>GEEN MATCHES</p>
+			<% } %>
 		</main>
 
 		<footer class="light"> <%- include('../partials/footer'); %> </footer>
