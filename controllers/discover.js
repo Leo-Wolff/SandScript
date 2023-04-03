@@ -92,7 +92,7 @@ exports.disliked = async (req, res) => {
 		req.session.user = currentUser
 
 		await users.updateOne( 
-			{ _id: currentUser._id }, // Update currentUser
+			{ username: currentUser.username }, // Update currentUser
 			{ $push: { disliked: firstMatch.username} } // Add firstMatch username to liked
 		)
 
