@@ -161,12 +161,15 @@
 			<% if (firstMatch) { %>
 			<section>
 				<article class="event-found">
-					<h2><%= firstMatch.name %></h2>
+				<div class="event-title">
+					<h2><%= firstMatch.name %>,</h2>
 					<p><%= firstMatch.age %></p>
-					<p><%= firstMatch.gender %></p>
-					<p><%= firstMatch.interests %></p>
-					<p><%= firstMatch.language %></p>
+				</div>
 					<p><%= firstMatch.country %></p>
+					<p>Gender:<%= firstMatch.gender %></p>
+					<p>Interests:<%= firstMatch.interests %></p>
+					<p>Language:<%= firstMatch.language %></p>
+					<p>Country:<%= firstMatch.country %></p>
 				  </article>
 
 				<form action="/liked" method="post">
@@ -177,7 +180,7 @@
 
 				<form action="/disliked" method="post">
 					<button type="submit" name="matchId" value="<%= firstMatch._id %>">
-						Liked
+						Disliked
 					</button>
 				</form>
 			</section>

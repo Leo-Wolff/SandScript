@@ -158,14 +158,17 @@
 
 			<% if (firstMatch) { %>
 			<section>
-                    <article class="event-found">
-                      <h2><%= firstMatch.name %></h2>
-                      <p><%= firstMatch.age %></p>
-                      <p><%= firstMatch.gender %></p>
-                      <p><%= firstMatch.interests %></p>
-                      <p><%= firstMatch.language %></p>
-                      <p><%= firstMatch.country %></p>
-                    </article>
+				<article class="event-found">
+					<div class="event-title">
+						<h2><%= firstMatch.name %>,</h2>
+						<p><%= firstMatch.age %></p>
+					</div>
+						<p><%= firstMatch.country %></p>
+						<p>Gender:<%= firstMatch.gender %></p>
+						<p>Interests:<%= firstMatch.interests %></p>
+						<p>Language:<%= firstMatch.language %></p>
+						<p>Country:<%= firstMatch.country %></p>
+					  </article>
 
                     <form action="/liked" method="post">
                         <button type="submit" name="matchId" value="<%= firstMatch._id %>">Liked</button>
