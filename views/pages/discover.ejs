@@ -6,36 +6,7 @@
 	<body class="standard-bg container">
 		<header>
 			<button class="dark first">
-				<svg
-					class="bag"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 64.97 199.69"
-				>
-					<g id="Laag_2-2" data-name="Laag 2">
-						<g id="bottle">
-							<path
-								class="cls-1"
-								d="m44.41,54.37c-.53-6.57-.12-23.31-.12-23.31l-22.08-.06s-.17,18.17-.06,23.33c.11,5.16-20.83,17.11-20.85,24.72-.02,6.94-.26,95.07-.3,110.68,0,1.84.99,3.51,2.61,4.4,3.5,1.92,11.39,4.51,28.49,4.56,17.44.05,25.48-2.6,29.02-4.52,1.58-.86,2.55-2.53,2.55-4.34.04-15.56.27-101.17.3-110.61.03-10.4-19.03-18.29-19.56-24.85Z"
-							/>
-							<path
-								class="cls-1"
-								d="m41.08,28.44h-16.63l-2.64-24.11c-.19-1.78,1.2-3.33,2.98-3.33h15.94c1.79,0,3.18,1.55,2.98,3.33l-2.64,24.11Z"
-							/>
-							<path
-								class="cls-1"
-								d="m44.17,36.12l-22.84-.06c-3.3,0-6-2.72-5.99-6.02h0c0-3.3,2.72-6,6.02-5.99l22.84.06c3.3,0,6,2.72,5.99,6.02h0c0,3.3-2.72,6-6.02,5.99Z"
-							/>
-							<path
-								class="cls-2"
-								d="m46.77,74.19s-.03-.01-.05-.02c.02-.08.05-.17.05-.25,0-2.06-6.27-3.73-14.01-3.73s-14.01,1.67-14.01,3.73c0,.08.03.17.05.25-.02,0,4.16,47.35,4.16,47.35.52,5.9.52,11.83,0,17.72l-4.21,47.34s.04.01.06.02c-.03.1-.06.21-.06.31,0,2.06,6.27,3.73,14.01,3.73s14.01-1.67,14.01-3.73c0-.11-.03-.21-.06-.31.02,0,.04-.01.06-.02l-4.21-47.34c-.52-5.9-.52-11.83,0-17.72l4.21-47.34Z"
-							/>
-							<path
-								class="cls-2"
-								d="m18.81,74.18s4.65,10.12,18.04,6.07-7.65-6.07-7.65-6.07"
-							/>
-						</g>
-					</g>
-				</svg>
+				<%- include('../partials/bag'); %>
 			</button>
 			<button class="dark first" onclick="openForm()">
 				<svg
@@ -75,45 +46,29 @@
 			<section id="filter">
 				<form method="post" action="/discover">
 					<section class="form-group">
-						<label for="email">Gender</label>
 						<article>
 							<label for="email">Male</label>
 							<input type="checkbox" id="male" name="gender" value="Male" />
 							<label for="email">Female</label>
 							<input type="checkbox" id="female" name="gender" value="Female" />
-							<label for="email">Non Binairy</label>
-							<input
-								type="checkbox"
-								id="non-binairy"
-								name="gender"
-								value="Non Binairy"
-							/>
 						</article>
 					</section>
 
 					<section class="form-group">
 						<label for="email">Age</label>
-						<input type="number" id="age-l" name="age" />
-						<input type="number" id="age-h" name="age" />
+						<input type="number" id="age-l" name="minAge" />
+						<input type="number" id="age-h" name="maxAge" />
 					</section>
 
 					<section class="form-group">
 						<label for="language">Language</label>
 						<select name="language" id="lang">
 							<option value="choose">- Choose a language</option>
-							<option value="Norway">Norway</option>
-							<option value="Greenland">Greenland</option>
-							<option value="Greece">Greece</option>
-							<option value="UK">United Kingdom</option>
-							<option value="Italy">Italy</option>
-							<option value="Croatia">Croatia</option>
-							<option value="Denmark">Denmark</option>
-							<option value="Iceland">Iceland</option>
-							<option value="Netherlands">Netherlands</option>
-							<option value="Germany">Germany</option>
-							<option value="Belgium">Belgium</option>
-							<option value="France">France</option>
-							<option value="Spain">Spain</option>
+							<option value="Dutch">Dutch</option>
+							<option value="German">German</option>
+							<option value="Flemish">Flemish</option>
+							<option value="French">French</option>
+							<option value="Spanish">Spanish</option>
 						</select>
 					</section>
 
@@ -121,14 +76,6 @@
 						<label for="country">Country</label>
 						<select name="country" id="country">
 							<option value="choose">- Choose a country</option>
-							<option value="Norway">Norway</option>
-							<option value="Greenland">Greenland</option>
-							<option value="Greece">Greece</option>
-							<option value="UK">United Kingdom</option>
-							<option value="Italy">Italy</option>
-							<option value="Croatia">Croatia</option>
-							<option value="Denmark">Denmark</option>
-							<option value="Iceland">Iceland</option>
 							<option value="Netherlands">Netherlands</option>
 							<option value="Germany">Germany</option>
 							<option value="Belgium">Belgium</option>
@@ -159,34 +106,58 @@
 			</section>
 
 			<% if (firstMatch) { %>
-			<section>
-				<article class="event-found">
-				<div class="event-title">
-					<h2><%= firstMatch.name %>,</h2>
-					<p><%= firstMatch.age %></p>
-				</div>
-					<p><%= firstMatch.country %></p>
-					<p>Gender:<%= firstMatch.gender %></p>
-					<p>Interests:<%= firstMatch.interests %></p>
-					<p>Language:<%= firstMatch.language %></p>
-					<p>Country:<%= firstMatch.country %></p>
-				  </article>
+				<section class="matchable">
+						<article class="event-found">
+						  <h2><%= firstMatch.name %></h2>
+						  <p>, <%= firstMatch.age %></p>
+						  <p>, <%= firstMatch.gender %></p>
+						  <p>Interests:</p>
+						  <p><%= firstMatch.interests %></p>
+						  <p>Language:</p>
+						  <p><%= firstMatch.language %></p>
+						  <p>Country:</p>
+						  <p><%= firstMatch.country %></p>
+						</article>
+	
+					
+	
+				</section>
+	
+				<section class="match-btn">
+					<form action="/disliked" method="post">
+						<button class="dark dislike" type="submit" name="matchId" value="<%= firstMatch._id %>">
+							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 250 250" style="enable-background:new 0 0 250 250;" xml:space="preserve">
+							<path class="dislike-button" d="M32.32,43.53c-3.1-3.1-3.1-8.11,0-11.21s8.11-3.1,11.21,0L125,113.81l81.47-81.49c3.1-3.1,8.11-3.1,11.21,0
+							 s3.1,8.11,0,11.21l0,0L136.19,125l81.49,81.47c3.1,3.1,3.1,8.11,0,11.21s-8.11,3.1-11.21,0L125,136.19l-81.47,81.49
+							c-3.1,3.1-8.11,3.1-11.21,0s-3.1-8.11,0-11.21L113.81,125L32.32,43.53z"/>
+							</svg>
+						</button>
+					</form>
+					<form action="/liked" method="post">
+						<button class="dark" type="submit" name="matchId" value="<%= firstMatch._id %>"><g id="like">
+							<svg version="1.1" id="Menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 viewBox="0 0 250 250" style="enable-background:new 0 0 250 250;" xml:space="preserve">
+	<g class="like-btn">
+		<path class="like-btn" d="M100.75,181.21
+			c8.79-2.79,17.06-5.85,24.75-9.12c8.32-12.5,15.78-30.54,20.65-55.09c2.91-15.19,6.69-30.2,11.34-44.95
+			c-3.92,1.81-7.89,3.75-11.91,5.82c4.48-3.73,8.97-7.18,13.42-10.32c1.12-3.28,2.23-6.29,3.31-9.06c-4.73,2.97-9.6,6.13-14.61,9.48
+			c5.4-4.46,10.69-8.64,15.81-12.49C171.49,35.93,177.75,30,177.75,30s-45.15,1.98-79.21,53.81c1.56,10.94,2.15,22.01,1.77,33.05
+			c-1.75-9.14-3.82-17.77-6.22-25.89c-4.24,7.29-7.98,14.86-11.2,22.66c-3.34,7.98-5.98,16.23-7.88,24.67
+			c3.96,9.39,7.16,19.08,9.58,28.99c-3.61-7.22-7.34-14.01-11.2-20.36l-0.05,0.32c3.08,7.96,5.65,16.1,7.69,24.38
+			c-2.79-5.59-5.65-10.91-8.58-15.96c-1.25,18.96,3.39,33.54,13.68,37.82c9.34,3.88,22.53-0.21,34.66-15.02
+			c-6.34,1.18-13.07,2.1-20.07,2.73"/>
+		<path class="like-btn" d="M80.61,202.85
+			c11.36-32.28,39.7-95.16,54.36-126.34c2.74-5.83,11.78-22.99,11.78-22.99L77.36,219.41c-0.12,0.43-0.57,0.69-1,0.57
+			s-0.69-0.57-0.57-1c1.69-6.04,3.63-12.74,4.82-16.11"/>
+	</g>
+	</svg></button>
+					</form>
+				</section>
+	
+				<% } else { %>
+					<p>Helaas, er zijn geen matches gevonden</p>
+				<% } %>
 
-				<form action="/liked" method="post">
-					<button type="submit" name="matchId" value="<%= firstMatch._id %>">
-						Liked
-					</button>
-				</form>
-
-				<form action="/disliked" method="post">
-					<button type="submit" name="matchId" value="<%= firstMatch._id %>">
-						Disliked
-					</button>
-				</form>
-			</section>
-			<% } else { %>
-				<p>GEEN MATCHES</p>
-			<% } %>
 		</main>
 
 		<footer class="light"><%- include('../partials/footer'); %></footer>
