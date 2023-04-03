@@ -58,6 +58,7 @@ exports.discover1 = async (req, res) => {
 		})
 
 		res.render('pages/gefiltered', { firstMatch })
+
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -145,12 +146,13 @@ exports.matchlist = async (req, res) => {
 	try {
 		const currentUser = req.session.user
 
+
 		const userMatches = await users
 			.find({ username: { $in: currentUser.matches } })
 			.toArray()
 
 		console.log(userMatches)
-
+    
 		res.render('pages/matches', { userMatches }) // Render the page with the matches
 	} catch (err) {
 		console.log(err.stack)
@@ -158,10 +160,10 @@ exports.matchlist = async (req, res) => {
 }
 
 // sorting in matches page
-
 exports.matchlist1 = async (req, res) => {
 	try {
 		const currentUser = req.session.user
+
 		const sortBy = req.body.sorteren
 
 		let sortOption = {}
@@ -177,7 +179,7 @@ exports.matchlist1 = async (req, res) => {
 		const userMatches = await users
 			.find({ username: { $in: currentUser.matches } })
 			.sort(sortOption)
-			.toArray() // Retrieve all the documents in the collection, sorted by the user's selection
+			.toArray() // Retrieve all the matches, sorted by the user's selection
 
 		if (userMatches.length > 0) {
 			res.render('pages/matches', { userMatches })

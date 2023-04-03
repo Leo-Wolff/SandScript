@@ -68,18 +68,20 @@
   </form>
 </section>
 
-
-
-<% userMatches.forEach((item)=> { %> 
+<% if (userMatches) { %>
+<% userMatches.forEach((match)=> { %> 
 <section class="matchable m-page">
   <article class="event-found">
-    <h2><%= item.name %></h2>
-    <p>, <%= item.age %></p>
-    <p>, <%= item.gender %></p>
-    <p><%= item.country %></p>
+    <h2><%= match.name %></h2>
+    <p>, <%= match.age %></p>
+    <p>, <%= match.gender %></p>
+    <p><%= match.country %></p>
   </article>
 </section>
 <% }) %>
+<% } else { %>
+  <p>Je hebt helaas geen matches</p>
+<% } %>
 
 </main>
 
