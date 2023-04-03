@@ -271,10 +271,6 @@ article.event-found {
   font-family: var(--fontFamily);
 }
 
-article.event-found h2, article.event-found p {
-	color: var(--black);
-}
-
 .event-found p:nth-of-type(3),
 .event-found p:nth-of-type(4),
 .event-found p:nth-of-type(5) {
