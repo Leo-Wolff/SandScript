@@ -33,6 +33,7 @@ exports.discover1 = async (req, res) => {
 
 		const filters = { gender: req.body.gender }
 		
+		// Werkt nu niet? filtert niet maar bobvenstaande werkt wel
 		// const filters = {
 		// 	$or: [
 		// 		{ gender: req.body.gender },
