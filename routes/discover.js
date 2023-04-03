@@ -11,6 +11,8 @@ router.post("/liked", discoverController.liked) // Like the FirstMatch
 
 router.post("/disliked", discoverController.disliked) // Like the FirstMatch
 
+router.get("/match", discoverController.match) // The matched person
+
 router.get("/matches", discoverController.matchlist) // Match list of all your matches
 
 router.post("/matches", discoverController.matchlist1)
