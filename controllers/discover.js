@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongodb") // Defining ObjectId
+const { ObjectId } = require('mongodb') // Defining ObjectId
 
 // Load firstMatch on pageload
 exports.discover = async (req, res) => {
@@ -7,8 +7,14 @@ exports.discover = async (req, res) => {
 			? JSON.parse(req.cookies.selectedFilters)
 			: {} // Get filters that are stored in the cookies
 
-			const ik = await users.findOne({username: 'MysteryMan'}) // Faked CurrentUser
-			const firstMatch = await users.findOne({...filters, username: { $nin: ik.liked, $not: {$eq: ik.username} }, status: 'new'}) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
+		const currentUser = req.session.user // Current user thats logged im
+		const firstMatch = await users.findOne({
+			...filters,
+			username: {
+				$nin: [...currentUser.liked, ...currentUser.disliked],
+				$not: { $eq: currentUser.username }
+			}
+		}) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
 
 		res.render('pages/gefiltered', { firstMatch }) // Render the page with the first match
 	} catch (err) {
@@ -19,20 +25,53 @@ exports.discover = async (req, res) => {
 // If filtered show firstMatch
 exports.discover1 = async (req, res) => {
 	try {
-		const filters = { gender: req.body.gender } // Save input from user in filters
+		// const minAge = parseInt(req.body.minAge)
+		// const maxAge = parseInt(req.body.maxAge)
+		// const language = req.body.language
+		// const country = req.body.country
+		// const interests = req.body.interests
 
-		res.cookie("selectedFilters", JSON.stringify(filters)) // Save selected filters in cookie
+		const filters = { gender: req.body.gender }
+		
+		// Werkt nu niet? filtert niet maar bobvenstaande werkt wel
+		// const filters = {
+		// 	$or: [
+		// 		{ gender: req.body.gender },
+		// 		{ age: { $gte: minAge, $lte: maxAge } },
+		// 		{ language: language !== 'choose' ? language : { $exists: true } },
+		// 		{ country: country !== 'choose' ? country : { $exists: true } },
+		// 		{ interests: interests !== 'choose' ? interests : { $exists: true } }
+		// 	]
+		// }
 
-		const ik = await users.findOne({username: 'MysteryMan'})
-		const firstMatch = await users.findOne({...filters, username: { $nin: ik.liked, $not: {$eq: ik.username} }, status: 'new'})
+		console.log(filters)
 
-		if (firstMatch) {
-			res.render("pages/gefiltered", { firstMatch })
-		} else { // If no results show this
-			res.send("no results")
-		}
+		res.cookie('selectedFilters', JSON.stringify(filters)) // Save selected filters in cookie
+
+		const currentUser = req.session.user
+		const firstMatch = await users.findOne({
+			...filters,
+			username: {
+				$nin: [...currentUser.liked, ...currentUser.disliked],
+				$not: { $eq: currentUser.username }
+			}
+		})
+
+		res.render('pages/gefiltered', { firstMatch })
+
 	} catch (err) {
 		console.log(err.stack)
+	}
+}
+
+exports.match = async (req, res) => {
+	try {
+		const currentUser = req.session.user
+		const userMatch = await users.findOne({ username: { $in: currentUser.matches.slice(-1) }} )
+
+		res.render("pages/match.ejs", { userMatch }) // Match pagina met als route /match
+	} catch (error) {
+		console.error(error);
 	}
 }
 
@@ -43,24 +82,35 @@ exports.liked = async (req, res) => {
 			_id: new ObjectId(req.body.matchId)
 		})
 
-		const ik = await users.findOne({username: 'MysteryMan'})
-
-		await users.updateOne( 
-			{ _id: ik._id }, // Update currentUser
-			{ $push: { liked: firstMatch.username} } // Add firstMatch username to liked
+		const currentUser = req.session.user
+		currentUser.liked.push(firstMatch.username) // Update currentUser lokaal
+		req.session.user = currentUser
+		
+		await users.updateOne(
+			{ username: currentUser.username }, // Update firstMatched db
+			{ $push: { liked: firstMatch.username } } // Add currentUser username to liked
 		)
 
 		await users.updateOne(
-			{ _id: firstMatch._id }, // Update firstMatched
-			{ $push: { likedBy: ik.username } } // Add currentUser username to likedBy
+			{ username: firstMatch.username }, // Update firstMatched db
+			{ $push: { likedBy: currentUser.username } } // Add currentUser username to likedBy
 		)
 
-		ik.liked.push(firstMatch.username)
-		firstMatch.likedBy.push(ik.username)
-
-		if (ik.liked.includes(firstMatch.username) && ik.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
+		if (currentUser.liked.includes(firstMatch.username) && currentUser.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
 			console.log('match')
-			res.redirect('/discover')
+			await users.updateOne(
+				{ username: currentUser.username }, // Update firstMatched db
+				{ $push: { matches: firstMatch.username } } // Add currentUser username to matches
+			)
+	
+			await users.updateOne(
+				{ username: firstMatch.username }, // Update firstMatched db
+				{ $push: { matches: currentUser.username } } // Add currentUser username to matches
+			)
+
+			currentUser.matches.push(firstMatch.username)
+			
+			res.redirect('/match')
 		} else { // Else no match redirect to discover page
 			console.log('geen match')
 			res.redirect('/discover')
@@ -70,16 +120,40 @@ exports.liked = async (req, res) => {
 	}
 }
 
+exports.disliked = async (req, res) => {
+	try {
+		const firstMatch = await users.findOne({
+			_id: new ObjectId(req.body.matchId)
+		})
+
+		const currentUser = req.session.user
+		currentUser.disliked.push(firstMatch.username) // Update currentUser lokaal
+		req.session.user = currentUser
+
+		await users.updateOne(
+			{ username: currentUser.username }, // Update currentUser
+			{ $push: { disliked: firstMatch.username } } // Add firstMatch username to liked
+		)
+
+		res.redirect('/discover')
+	} catch (err) {
+		console.log(err.stack)
+	}
+}
+
 // Matches page
 exports.matchlist = async (req, res) => {
 	try {
-		const filters = req.cookies.selectedFilters
-			? JSON.parse(req.cookies.selectedFilters)
-			: {} // get filters from cookie 
+		const currentUser = req.session.user
 
-		const eersteMatch = await users.find({ }).toArray() // filter between the selcted filters and status new
 
-		res.render('pages/matches', { eersteMatch }) // Render the page with the first match
+		const userMatches = await users
+			.find({ username: { $in: currentUser.matches } })
+			.toArray()
+
+		console.log(userMatches)
+    
+		res.render('pages/matches', { userMatches }) // Render the page with the matches
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -88,24 +162,27 @@ exports.matchlist = async (req, res) => {
 // sorting in matches page
 exports.matchlist1 = async (req, res) => {
 	try {
-		const sortBy = req.body.sorteren;
+		const currentUser = req.session.user
+
+		const sortBy = req.body.sorteren
+
 		let sortOption = {}
-	
+
 		if (sortBy === 'age') {
-		  sortOption = { age: 1 }
+			sortOption = { age: 1 }
 		} else if (sortBy === 'name') {
 			sortOption = { name: 1 }
 		} else if (sortBy === '-name') {
 			sortOption = { name: -1 }
 		}
-	
-		const eersteMatch = await users
-		  .find({})
-		  .sort(sortOption)
-		  .toArray() // Retrieve all the documents in the collection, sorted by the user's selection
 
-		if (eersteMatch.length > 0) {
-			res.render('pages/matches', { eersteMatch })
+		const userMatches = await users
+			.find({ username: { $in: currentUser.matches } })
+			.sort(sortOption)
+			.toArray() // Retrieve all the matches, sorted by the user's selection
+
+		if (userMatches.length > 0) {
+			res.render('pages/matches', { userMatches })
 		} else {
 			res.send('no results')
 		}

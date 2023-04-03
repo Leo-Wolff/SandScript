@@ -101,17 +101,9 @@ function closeForm() {
 }
 
 function openSortForm() {
-	document.getElementById("sorter").style.display = "block"
+    document.getElementById('sorter').style.display = "block";
 }
-
+  
 function closeSortForm() {
-	document.getElementById("sorter").style.display = "none"
-}
-
-function openSortForm() {
-	document.getElementById("sorter").style.display = "block"
-}
-
-function closeSortForm() {
-	document.getElementById("sorter").style.display = "none"
+    document.getElementById('sorter').style.display = "none";
 }

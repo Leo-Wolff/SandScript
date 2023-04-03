@@ -22,6 +22,10 @@ exports.login1 = async (req, res) => {
 		interests: currentUser.interests,
 		country: currentUser.country,
 		language: currentUser.language,
+		liked: currentUser.liked,
+		likedBy: currentUser.likedBy,
+		disliked: currentUser.disliked,
+		matches: currentUser.matches
 	}
 	res.redirect("/")
 }
