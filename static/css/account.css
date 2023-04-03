@@ -1,0 +1,32 @@
+/*====================
+Register page
+====================*/
+
+.standard-bg h2 {
+	text-align: center;
+
+	margin-top: 1em;
+}
+
+.register-form {
+	display: grid;
+	justify-content: center;
+	margin-top: 1em;
+}
+
+label {
+	color: var(--white);
+}
+
+.register-form input {
+	margin-bottom: 1em;
+}
+
+.register-form .btn {
+	background-color: var(--lightBlue);
+	margin-bottom: 1.5em;
+}
+
+.log-in-prompt {
+	text-align: center;
+}

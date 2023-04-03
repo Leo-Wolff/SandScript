@@ -29,7 +29,6 @@ const dbName = "sandscript"
 global.db = client.db(dbName)
 global.users = db.collection("users")
 
-
 async function connectToDatabase() {
 	try {
 		console.log("Connecting to MongoDB Atlas cluster...")
@@ -61,6 +60,14 @@ app.use(
 		cookie: {},
 	})
 )
+app.use((req, res, next) => {
+	if (!req.session.user && req.url != "/login") {
+		res.redirect("/login"); 
+	} 
+	else { 
+		next(); 
+	} 
+});
 
 const homeRoutes = require("./routes/home.js")
 app.use("/", homeRoutes)
@@ -73,6 +80,25 @@ app.use("/", editorRoutes)
 
 const accountRoutes = require("./routes/account.js")
 app.use("/", accountRoutes)
+
+// Register
+// app.get("/register", (req, res) => {
+// 	res.render("pages/register.ejs")
+// })
+
+// app.post("/account", async (req, res) => {
+// 	const username = req.body.username
+// 	const email = req.body.email
+// 	const password = req.body.password
+// 	const hashedPassword = await bcrypt.hash(password, 10)
+// 	const user = {
+// 		username,
+// 		email,
+// 		password: hashedPassword,
+// 	}
+// 	users.insertOne(user)
+// 	res.render("pages/account.ejs")
+// })
 
 app.listen(port, () => {
 	console.log(`Wow! Look at that ${port}`)
