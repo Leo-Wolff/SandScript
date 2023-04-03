@@ -116,7 +116,7 @@ exports.matchlist = async (req, res) => {
 
 		const eersteMatch = await users.find({ }).toArray() // filter between the selcted filters and status new
 
-		res.render('pages/matches', { eersteMatch }) // Render the page with the first match
+		res.render('pages/matches', { userMatches }) // Render the page with the first match
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -126,7 +126,7 @@ exports.matchlist = async (req, res) => {
 exports.matchlist1 = async (req, res) => {
 	try {
 		const currentUser = req.session.user
-		const userMatches = await users.find({ username: { $in: currentUser.matches }}).toArray()
+		// const userMatches = await users.find({ username: { $in: currentUser.matches }}).toArray()
 		console.log(userMatches)
 
 		const sortBy = req.body.sorteren;
@@ -140,13 +140,10 @@ exports.matchlist1 = async (req, res) => {
 			sortOption = { name: -1 }
 		}
 	
-		const eersteMatch = await users
-		  .find({})
-		  .sort(sortOption)
-		  .toArray() // Retrieve all the documents in the collection, sorted by the user's selection
+		const userMatches = await users.find({ username: { $in: currentUser.matches }}).sort(sortOption).toArray() // Retrieve all the documents in the collection, sorted by the user's selection
 
 		if (eersteMatch.length > 0) {
-			res.render('pages/matches', { eersteMatch })
+			res.render('pages/matches', { userMatches })
 		} else {
 			res.send('no results')
 		}
