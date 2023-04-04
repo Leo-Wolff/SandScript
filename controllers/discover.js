@@ -25,24 +25,27 @@ exports.discover = async (req, res) => {
 // If filtered show firstMatch
 exports.discover1 = async (req, res) => {
 	try {
-		// const minAge = parseInt(req.body.minAge)
-		// const maxAge = parseInt(req.body.maxAge)
-		// const language = req.body.language
-		// const country = req.body.country
-		// const interests = req.body.interests
-
-		const filters = { gender: req.body.gender }
-		
-		// Werkt nu niet? filtert niet maar bobvenstaande werkt wel
-		// const filters = {
-		// 	$or: [
-		// 		{ gender: req.body.gender },
-		// 		{ age: { $gte: minAge, $lte: maxAge } },
-		// 		{ language: language !== 'choose' ? language : { $exists: true } },
-		// 		{ country: country !== 'choose' ? country : { $exists: true } },
-		// 		{ interests: interests !== 'choose' ? interests : { $exists: true } }
-		// 	]
-		// }
+		// chazz helped me with this
+		// Create an empty object 
+		let filters = {} 
+		// Get all the keys from the req.body 
+		const keys = Object.keys(req.body) 
+		// Loop through the keys 
+		keys.forEach((key) => { // If the key is not empty 
+			if (req.body[key]) { // Check if the key is minAge or maxAge 
+				if (key === "minAge" || key === "maxAge") {
+					 filters.age = { $gte: parseInt(req.body.minAge), $lte: parseInt(req.body.maxAge), } 
+					} else if (key === "gender") { 
+						filters.gender = req.body.gender 
+					} else if (key === "language" && req.body.language !== "choose") { 
+						filters.language = req.body.language 
+					} else if (key === "country" && req.body.country !== "choose") { 
+						filters.country = req.body.country 
+					} else if (key === "interests" && req.body.interests !== "choose") {
+						filters.interests = req.body.interests 
+					} 
+				} 
+			})
 
 		console.log(filters)
 
