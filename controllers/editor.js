@@ -1,10 +1,12 @@
 const { ObjectId } = require("mongodb") // Defining ObjectId
 const collectionLetters = db.collection("letters") // Connect to letters collection
 
-async function createDraft(collection, content, input) {
+async function createDraft(currentUser, collection, content, input) {
 	// find collection data author and recipient
+	const author = await dataFromDatabase("users", currentUser)
 
 	const create = {
+		author: author.username,
 		text: content,
 		signed: input,
 		dateUpdated: new Date(),
@@ -62,19 +64,80 @@ async function getDraftsFromDatabase(collection) {
 	// filter on author (in find)
 }
 
-exports.drafts = async (req, res) => {
-	let draft = await getDataFromDatabase("letters")
+async function dataFromDatabase(dbCollection, currentUser) {
+	let collection = db.collection(dbCollection)
+	let user = await getUserFromDatabase(collection, currentUser)
 
-	res.render("pages/drafts.ejs", {
-		letters: draft,
-	})
+	return user
 }
+
+async function draftsFromDatabase(dbCollection, currentUser) {
+	let collection = db.collection(dbCollection)
+	let user = await userDraftsFromDatabase(collection, currentUser)
+
+	return user
+}
+
+async function getUserFromDatabase(collection, currentUser) {
+	return collection.findOne({ username: currentUser })
+}
+
+async function userDraftsFromDatabase(collection, currentUser) {
+	return collection.find({ author: currentUser }).toArray()
+}
+
+exports.test = async (req, res) => {
+	const currentUser = req.session.user.username
+	const userCollection = "users"
+	const letterCollection = "letters"
+
+	try {
+		const user = await dataFromDatabase(userCollection, currentUser)
+		const drafts = await draftsFromDatabase(letterCollection, user.username)
+
+		res.render("pages/test.ejs", { user })
+
+		console.log(user.username)
+		console.log(drafts)
+	} catch (err) {
+		console.error(err)
+		res.status(500).send("Internal Server Error")
+	}
+}
+
+exports.drafts = async (req, res) => {
+	const currentUser = req.session.user.username
+	const userCollection = "users"
+	const letterCollection = "letters"
+
+	try {
+		let user = await dataFromDatabase(userCollection, currentUser)
+		let draft = await draftsFromDatabase(letterCollection, user.username)
+
+		res.render("pages/drafts.ejs", {
+			letters: draft,
+		})
+	} catch (err) {
+		console.error(err)
+		res.status(500).send("Internal Server Error")
+	}
+}
+
+// exports.drafts = async (req, res) => {
+// 	let draft = await getDataFromDatabase("letters")
+
+// 	res.render("pages/drafts.ejs", {
+// 		letters: draft,
+// 	})
+// }
 
 exports.deleteDraft = async (req, res) => {
 	await deleteDraft(req, res)
 }
 
 exports.postDraft = async (req, res) => {
+	const currentUser = req.session.user.username
+
 	if (ObjectId.isValid(req.body.id)) {
 		// If a draft item was clicked update the data
 
@@ -92,7 +155,12 @@ exports.postDraft = async (req, res) => {
 		// If no draft item was clicked create a new draft
 
 		console.log("No document ID specified.")
-		await createDraft(collectionLetters, req.body.content, req.body.signed)
+		await createDraft(
+			currentUser,
+			collectionLetters,
+			req.body.content,
+			req.body.signed
+		)
 
 		res.redirect("/drafts")
 	}

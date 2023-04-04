@@ -3,6 +3,8 @@ const router = express.Router()
 
 const editorController = require("../controllers/editor.js")
 
+router.get("/test", editorController.test)
+
 router.get("/drafts", editorController.drafts)
 
 router.delete("/delete-draft", editorController.deleteDraft)
