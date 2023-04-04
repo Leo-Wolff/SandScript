@@ -14,11 +14,11 @@ body header img {
 
 body header h1 {
 	position: absolute;
-	top: 1.9em;
-	left: calc(1.5em + 2.5em); /* plus the width body header img is taking up */
+	top: 1.975em;
+	left: calc(1.5em + 2.25em); /* plus the width body header img is taking up */
 
 	font-weight: var(--fontRegular);
-	font-size: 1.4em;
+	font-size: 1.5em;
 }
 
 .confirm-button {
@@ -102,8 +102,8 @@ body .ql-toolbar.ql-snow {
 }
 
 .ql-container {
-	top: 13.9em;
-	left: 0.65em;
+	top: 6.575em;
+	left: 0.625em;
 
 	border: 0;
 	padding: 0;
@@ -162,6 +162,8 @@ Pop-ups letter
 
 .confirm-button:hover,
 .popup img:hover,
+.popup a input:hover,
+.popup div button:hover,
 .bottle-editor svg:hover,
 #back-button:hover {
 	cursor: pointer;
@@ -198,6 +200,20 @@ Pop-ups letter
 
 	font-size: 1em;
 	text-decoration: none;
+}
+
+.popup a input {
+	margin: 0;
+	border: 0;
+	padding: 0;
+
+	color: var(--white);
+	font-size: 1em;
+	background: none;
+}
+
+.popup section:first-of-type a input {
+	font-weight: var(--fontBold);
 }
 
 .popup a:first-of-type {
@@ -367,7 +383,7 @@ Bottle.ejs
 	background-color: var(--blue);
 }
 
-.bottle {
+.bottle-img {
 	position: absolute;
 	top: calc(50% - 12.5em);
 	left: calc(50% - (10em / 2));
@@ -378,17 +394,12 @@ Bottle.ejs
 /*====================
 Pop-ups bottle
  ====================*/
-.popup section:nth-of-type(2) div {
+.bottle section:nth-of-type(2) div {
 	flex-wrap: wrap;
 }
 
-.popup section:nth-of-type(2) label,
-.popup section:nth-of-type(2) p {
-	/* border: 0;
-	padding: 1em 0 1em 0;
-	border-radius: 0 0 5px 5px;
-
-	width: 100%; */
+.bottle section:nth-of-type(2) label,
+.bottle section:nth-of-type(2) p {
 	border: 0;
 	border-radius: 0 0 5px 5px;
 	padding: 1em 0em 1em 0em;
@@ -402,11 +413,11 @@ Pop-ups bottle
 	background-color: var(--darkBlue);
 }
 
-.popup section:nth-of-type(2) p {
+.bottle section:nth-of-type(2) p {
 	margin: 0;
 }
 
-.popup section:nth-of-type(2) .output {
+.bottle section:nth-of-type(2) .output {
 	position: relative;
 	top: 0;
 	right: 0;
@@ -422,6 +433,6 @@ Pop-ups bottle
 	background-color: var(--brown);
 }
 
-.popup section:nth-of-type(2) .output:hover {
+.bottle section:nth-of-type(2) .output:hover {
 	cursor: auto;
 }

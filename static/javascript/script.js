@@ -36,28 +36,33 @@ if (closeButtons != null) {
 if (document.getElementById("back-button") != null) {
 	document.getElementById("back-button").addEventListener("click", () => {
 		stopPopup.classList.remove("hidden")
+		signPopup.classList.add("hidden")
+		signForm.classList.add("hidden")
 		console.log("Open stop writing letter pop-up")
 	})
 }
 
-if (document.querySelector(".confirm-letter") != null) {
-	document.querySelector(".confirm-letter").addEventListener("click", () => {
+if (document.querySelector(".confirm-button") != null && signForm != null) {
+	document.querySelector(".confirm-button").addEventListener("click", () => {
 		signPopup.classList.remove("hidden")
+		stopPopup.classList.add("hidden")
+		signForm.classList.add("hidden")
 		console.log("Open sign letter pop-up")
 	})
 }
 
 if (document.querySelector(".styled-like-a") != null) {
 	document.querySelector(".styled-like-a").addEventListener("click", () => {
-		signPopup.classList.add("hidden")
 		signForm.classList.remove("hidden")
+		stopPopup.classList.add("hidden")
+		signPopup.classList.add("hidden")
 		console.log("Open sign letter form")
 	})
 }
 
 //bottle
 //variables
-const photoPopup = document.querySelectorAll(".popup section")[1]
+const photoPopup = document.querySelectorAll(".bottle section")[1]
 
 if (document.querySelector(".camera") != null) {
 	document.querySelector(".camera").addEventListener("click", () => {
@@ -86,9 +91,9 @@ if (document.getElementById("insert-photo") != null) {
 }
 
 // Add photo to bottle
-if (photoPopup.querySelector("div p") != null) {
+if (photoPopup != null) {
 	photoPopup.querySelector("div p").addEventListener("click", () => {
-		document.querySelector(".bottle").src = "/img/open-img-bottle.svg" // add a polaroid photo into the bottle when a photo is selected
+		document.querySelector(".bottle-img").src = "/img/open-img-bottle.svg" // add a polaroid photo into the bottle when a photo is selected
 
 		photoPopup.classList.add("hidden") // hide the select photo pop-up
 
@@ -123,6 +128,7 @@ const deleteDraftItem = async (draftID, callback) => {
 		const response = await fetch("/delete-draft", {
 			method: "DELETE",
 			headers: {
+				// headers = extra information
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ draftID }),

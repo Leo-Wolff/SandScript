@@ -2,6 +2,8 @@ const { ObjectId } = require("mongodb") // Defining ObjectId
 const collectionLetters = db.collection("letters") // Connect to letters collection
 
 async function createDraft(collection, content, input) {
+	// find collection data author and recipient
+
 	const create = {
 		text: content,
 		signed: input,
@@ -9,6 +11,8 @@ async function createDraft(collection, content, input) {
 	}
 
 	await collection.insertOne(create)
+
+	// insert info author and recipient
 }
 
 async function deleteDraft(req, res) {
@@ -54,10 +58,13 @@ function getDataFromDatabase(dbCollection) {
 
 async function getDraftsFromDatabase(collection) {
 	return collection.find().toArray()
+
+	// filter on author (in find)
 }
 
 exports.drafts = async (req, res) => {
 	let draft = await getDataFromDatabase("letters")
+
 	res.render("pages/drafts.ejs", {
 		letters: draft,
 	})
