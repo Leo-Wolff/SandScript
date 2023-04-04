@@ -15,7 +15,7 @@
 
 		<main>
 			<section id="filter">
-				<form method="post" action="/discover" >
+				<form method="post" action="/discover">
 					<section class="form-group">
 						<article>
 							<label for="email">Male</label>
@@ -70,7 +70,9 @@
 					</section>
 
 					<button type="submit" class="btn">Apply</button>
-					<button type="button" class="btn cancel" onclick="closeForm()">X</button>
+					<button type="button" class="btn cancel" onclick="closeForm()">
+						X
+					</button>
 				</form>
 			</section>
 
@@ -127,7 +129,7 @@
 
 		</main>
 
-		<footer class="light"> <%- include('../partials/footer'); %> </footer>
+		<footer class="light"><%- include('../partials/footer'); %></footer>
 
 		<script src="/javascript/script.js"></script>
 	</body>

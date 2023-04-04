@@ -22,23 +22,23 @@
   </ul>
 </nav>
 
-<section id="sorter">
-  <form method="post" action="/matches" >
-    <section class="form-group">
-      <label for="interests">Sorteren op:</label>
-      <select name="sorteren" id="sorteren">
-        <option value="choose">- Choose a sort</option>
-        <option value="age">Age</option>
-        <option value="name">Name A-Z</option>
-        <option value="-name">Name Z-A</option>
-      </select>
-    </section>
+			<section id="sorter">
+				<form method="post" action="/matches">
+					<section class="form-group">
+						<label for="interests">Sorteren op:</label>
+						<select name="sorteren" id="sorteren">
+							<option value="choose">- Choose a sort</option>
+							<option value="age">Age</option>
+							<option value="name">Name A-Z</option>
+							<option value="-name">Name Z-A</option>
+						</select>
+					</section>
 
     <button type="submit" class="btn">Apply</button>
     <button type="button" class="btn cancel" onclick="closeSortForm()">X</button>
   </form>
 </section>
-
+<div class="match-list">
 <% if (userMatches) { %>
 <% userMatches.forEach((match)=> { %> 
 <section class="matchable m-page">
@@ -51,6 +51,7 @@
       <div class="bio">
         <h2><%= match.name %></h2>
     <p>, <%= match.age %></p>
+    <p class="username"><%= match.username %></p>
     <p>, <%= match.gender %></p>
     <p>, <%= match.country %></p>
       </div>
@@ -61,13 +62,12 @@
 <% } else { %>
   <p>Je hebt helaas geen matches</p>
 <% } %>
+</div>
 
 		<footer class="light"><%- include('../partials/footer'); %></footer>
 
-<footer class="light">
-  <%- include('../partials/footer'); %>
-</footer>
+		<footer class="light"><%- include('../partials/footer'); %></footer>
 
-<script src="/javascript/script.js"></script>
-</body>
+		<script src="/javascript/script.js"></script>
+	</body>
 </html>

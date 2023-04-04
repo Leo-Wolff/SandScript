@@ -49,13 +49,36 @@
 			</nav>
 
 			<section class="draft-list">
-				<!-- A template of how drafts is going to look like after dynamic data is set up  -->
-				<%- include('../partials/drafts'); %>
+				<% letters.forEach((draft)=> { %>
+				<div class="draft-item">
+					<img
+						data-id="<%= draft._id %>"
+						src="/img/close-button.svg"
+						alt="Cancel"
+					/>
+
+					<img
+						src="/img/profile-picture.svg"
+						alt="Profile picture of recipient"
+					/>
+
+					<p>RE: <%= draft.recipient %></p>
+					<div class="draft-content"><p><%- draft.text %></p></div>
+					<p>
+						<% if (draft.signed && draft.signed.length) { %> - <%= draft.signed
+						%> <% } else { %> <% } %>
+					</p>
+					<p>
+						Last updated: <%= new Date(draft.dateUpdated).toLocaleDateString()
+						%>
+					</p>
+				</div>
+				<% }) %>
 			</section>
 		</main>
 
 		<footer class="light"><%- include('../partials/footer'); %></footer>
 
-		<script src="js/index.js"></script>
+		<script src="/javascript/script.js"></script>
 	</body>
 </html>

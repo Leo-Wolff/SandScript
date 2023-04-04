@@ -15,6 +15,8 @@
 	--white: #fff;
 	--red: #db4b3c;
 	--beige: #f2e8cf;
+	--brown: #e8c274;
+	--brown-dark: #c7a864;
 	--black: #001f3f;
 	--fontFamily: "Ubuntu", sans-serif;
 	--fontLight: 300;
@@ -31,14 +33,16 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+label,
+input {
 	color: var(--white);
 	font-family: var(--fontFamily);
 	text-decoration: none;
 }
 
 /*====================
- Algemene stijling
+ General styling
  ====================*/
 body.container {
 	width: 95%;
@@ -133,16 +137,16 @@ svg.treasure .cls-2 {
 	stroke-width: 2px;
 }
 
-svg.filtering{
+svg.filtering {
 	height: 2.5em;
 	width: 100%;
 }
 
 svg g#Icons path {
-    fill: var(--white);
+	fill: var(--white);
 }
 
-svg.sorting{
+svg.sorting {
 	height: 2em;
 	width: 100%;
 }
