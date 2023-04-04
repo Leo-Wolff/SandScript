@@ -1,27 +1,96 @@
-<section class="account">
-    <p>Do you want to change your details?</p>
-    <form action="/update" method="post">
-        <input type="text" id="username" name="username" placeholder="Username" value="<%= username %>" required>
-        <label for="username"></label>
-        <input type="email" id="email" name="email" placeholder="E-mail" value="<%= email %>" required>
-        <label for="email"></label>
-        <input type="password" id="password" name="password" placeholder="Password" value="<%= password %>" required>
-        <label for="password"></label>
-        <input type="text" id="name" name="name" placeholder="Name" value="<%= name %>" required>
-        <label for="name"></label>
-        <input type="number" id="age" name="age" placeholder="Age" value="<%= age %>" required>
-        <label for="age"></label>
-        <select name="gender">
-            <option value=""><%= gender %></option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-        </select>
-        <input type="text" id="interests" name="interests" placeholder="Interests" value="<%= interests %>" required>
-        <label for="interests"></label>
-        <input type="text" id="country" name="country" placeholder="Country" value="<%= country %>" required>
-        <label for="country"></label>
-        <input type="text" id="language" name="language" placeholder="Language" value="<%= language %>" required>
-        <label for="language"></label>
-        <input type="submit" value="Save">
-    </form>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="standard-bg container">
+		<main class="account">
+			<section class="account">
+				<p>Do you want to change your details?</p>
+				<form action="/update" method="post">
+					<input
+						type="text"
+						id="username"
+						name="username"
+						placeholder="Username"
+						value="<%= username %>"
+						required
+					/>
+					<label for="username"></label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						placeholder="E-mail"
+						value="<%= email %>"
+						required
+					/>
+					<label for="email"></label>
+					<input
+						type="password"
+						id="password"
+						name="password"
+						placeholder="Password"
+						value="<%= password %>"
+						required
+					/>
+					<label for="password"></label>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						placeholder="Name"
+						value="<%= name %>"
+						required
+					/>
+					<label for="name"></label>
+					<input
+						type="number"
+						id="age"
+						name="age"
+						placeholder="Age"
+						value="<%= age %>"
+						required
+					/>
+					<label for="age"></label>
+					<select name="gender">
+						<option value=""><%= gender %></option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+					</select>
+					<input
+						type="text"
+						id="interests"
+						name="interests"
+						placeholder="Interests"
+						value="<%= interests %>"
+						required
+					/>
+					<label for="interests"></label>
+					<input
+						type="text"
+						id="country"
+						name="country"
+						placeholder="Country"
+						value="<%= country %>"
+						required
+					/>
+					<label for="country"></label>
+					<input
+						type="text"
+						id="language"
+						name="language"
+						placeholder="Language"
+						value="<%= language %>"
+						required
+					/>
+					<label for="language"></label>
+					<input type="submit" value="Save" />
+				</form>
+			</section>
+		</main>
+		<footer class="light"> <%- include('../partials/footer'); %> </footer>
+
+		<script src="/javascript/script.js"></script>
+	</body>
+</html>

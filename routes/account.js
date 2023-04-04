@@ -15,4 +15,8 @@ router.get("/account", accountController.account)
 
 router.get("/profile", accountController.profile)
 
+router.post("/profile", accountController.postRegister)
+
+router.get("/register", accountController.register)
+
 module.exports = router
