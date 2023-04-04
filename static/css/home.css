@@ -1,18 +1,22 @@
 /*====================
  clock stijling
  ====================*/
-#timer {
+ .timer {
 	position: fixed;
-	top: 65%;
-	left: 50%;
-	transform: translate(-25%, -50%);
+	text-align: center;
+	margin-top: 4em;
 	width: 100%;
 	color: #fff;
 }
 
-#timer > span {
+.timer p {
 	font-family: var(--fontFamily);
 	font-weight: var(--fontMedium);
 	font-size: 60px;
 	color: #fff;
+}
+
+body.home-bg section svg:nth-of-type(2) {
+    width: 25%;
+    margin-left: 3em;
 }
