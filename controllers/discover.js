@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb') // Defining ObjectId
+const { ObjectId } = require("mongodb") // Defining ObjectId
 
 // Load firstMatch on pageload
 exports.discover = async (req, res) => {
@@ -12,11 +12,11 @@ exports.discover = async (req, res) => {
 			...filters,
 			username: {
 				$nin: [...currentUser.liked, ...currentUser.disliked],
-				$not: { $eq: currentUser.username }
-			}
+				$not: { $eq: currentUser.username },
+			},
 		}) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
 
-		res.render('pages/gefiltered', { firstMatch }) // Render the page with the first match
+		res.render("pages/gefiltered", { firstMatch }) // Render the page with the first match
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -32,7 +32,7 @@ exports.discover1 = async (req, res) => {
 		// const interests = req.body.interests
 
 		const filters = { gender: req.body.gender }
-		
+
 		// Werkt nu niet? filtert niet maar bobvenstaande werkt wel
 		// const filters = {
 		// 	$or: [
@@ -46,19 +46,18 @@ exports.discover1 = async (req, res) => {
 
 		console.log(filters)
 
-		res.cookie('selectedFilters', JSON.stringify(filters)) // Save selected filters in cookie
+		res.cookie("selectedFilters", JSON.stringify(filters)) // Save selected filters in cookie
 
 		const currentUser = req.session.user
 		const firstMatch = await users.findOne({
 			...filters,
 			username: {
 				$nin: [...currentUser.liked, ...currentUser.disliked],
-				$not: { $eq: currentUser.username }
-			}
+				$not: { $eq: currentUser.username },
+			},
 		})
 
-		res.render('pages/gefiltered', { firstMatch })
-
+		res.render("pages/gefiltered", { firstMatch })
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -67,25 +66,26 @@ exports.discover1 = async (req, res) => {
 exports.match = async (req, res) => {
 	try {
 		const currentUser = req.session.user
-		const userMatch = await users.findOne({ username: { $in: currentUser.matches.slice(-1) }} )
+		const userMatch = await users.findOne({
+			username: { $in: currentUser.matches.slice(-1) },
+		})
 
 		res.render("pages/match.ejs", { userMatch }) // Match pagina met als route /match
 	} catch (error) {
-		console.error(error);
+		console.error(error)
 	}
 }
-
 
 exports.liked = async (req, res) => {
 	try {
 		const firstMatch = await users.findOne({
-			_id: new ObjectId(req.body.matchId)
+			_id: new ObjectId(req.body.matchId),
 		})
 
 		const currentUser = req.session.user
 		currentUser.liked.push(firstMatch.username) // Update currentUser lokaal
 		req.session.user = currentUser
-		
+
 		await users.updateOne(
 			{ username: currentUser.username }, // Update firstMatched db
 			{ $push: { liked: firstMatch.username } } // Add currentUser username to liked
@@ -96,24 +96,29 @@ exports.liked = async (req, res) => {
 			{ $push: { likedBy: currentUser.username } } // Add currentUser username to likedBy
 		)
 
-		if (currentUser.liked.includes(firstMatch.username) && currentUser.likedBy.includes(firstMatch.username)) { // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
-			console.log('match')
+		if (
+			currentUser.liked.includes(firstMatch.username) &&
+			currentUser.likedBy.includes(firstMatch.username)
+		) {
+			// If firstMatch username is in the currentUser Liked and likedBy redirect to matched
+			console.log("match")
 			await users.updateOne(
 				{ username: currentUser.username }, // Update firstMatched db
 				{ $push: { matches: firstMatch.username } } // Add currentUser username to matches
 			)
-	
+
 			await users.updateOne(
 				{ username: firstMatch.username }, // Update firstMatched db
 				{ $push: { matches: currentUser.username } } // Add currentUser username to matches
 			)
 
 			currentUser.matches.push(firstMatch.username)
-			
-			res.redirect('/match')
-		} else { // Else no match redirect to discover page
-			console.log('geen match')
-			res.redirect('/discover')
+
+			res.redirect("/match")
+		} else {
+			// Else no match redirect to discover page
+			console.log("geen match")
+			res.redirect("/discover")
 		}
 	} catch (err) {
 		console.log(err.stack)
@@ -123,7 +128,7 @@ exports.liked = async (req, res) => {
 exports.disliked = async (req, res) => {
 	try {
 		const firstMatch = await users.findOne({
-			_id: new ObjectId(req.body.matchId)
+			_id: new ObjectId(req.body.matchId),
 		})
 
 		const currentUser = req.session.user
@@ -135,7 +140,7 @@ exports.disliked = async (req, res) => {
 			{ $push: { disliked: firstMatch.username } } // Add firstMatch username to liked
 		)
 
-		res.redirect('/discover')
+		res.redirect("/discover")
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -146,14 +151,13 @@ exports.matchlist = async (req, res) => {
 	try {
 		const currentUser = req.session.user
 
-
 		const userMatches = await users
 			.find({ username: { $in: currentUser.matches } })
 			.toArray()
 
-		console.log(userMatches)
-    
-		res.render('pages/matches', { userMatches }) // Render the page with the matches
+		// console.log(userMatches)
+
+		res.render("pages/matches", { userMatches }) // Render the page with the matches
 	} catch (err) {
 		console.log(err.stack)
 	}
@@ -168,11 +172,11 @@ exports.matchlist1 = async (req, res) => {
 
 		let sortOption = {}
 
-		if (sortBy === 'age') {
+		if (sortBy === "age") {
 			sortOption = { age: 1 }
-		} else if (sortBy === 'name') {
+		} else if (sortBy === "name") {
 			sortOption = { name: 1 }
-		} else if (sortBy === '-name') {
+		} else if (sortBy === "-name") {
 			sortOption = { name: -1 }
 		}
 
@@ -182,9 +186,9 @@ exports.matchlist1 = async (req, res) => {
 			.toArray() // Retrieve all the matches, sorted by the user's selection
 
 		if (userMatches.length > 0) {
-			res.render('pages/matches', { userMatches })
+			res.render("pages/matches", { userMatches })
 		} else {
-			res.send('no results')
+			res.send("no results")
 		}
 	} catch (err) {
 		console.log(err.stack)

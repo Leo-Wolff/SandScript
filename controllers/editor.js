@@ -1,20 +1,24 @@
 const { ObjectId } = require("mongodb") // Defining ObjectId
-const collectionLetters = db.collection("letters") // Connect to letters collection
+const userCollection = "users"
+const letterCollection = "letters"
+const collectionLetters = db.collection(letterCollection) // Connect to letters collection
 
-async function createDraft(currentUser, collection, content, input) {
-	// find collection data author and recipient
-	const author = await dataFromDatabase("users", currentUser)
-
+async function createDraft(
+	collection,
+	currentUser,
+	matchUsername,
+	content,
+	input
+) {
 	const create = {
-		author: author.username,
+		author: currentUser,
+		recipient: matchUsername,
 		text: content,
 		signed: input,
 		dateUpdated: new Date(),
 	}
 
 	await collection.insertOne(create)
-
-	// insert info author and recipient
 }
 
 async function deleteDraft(req, res) {
@@ -51,29 +55,20 @@ async function updateDraft(
 	return result
 }
 
-function getDataFromDatabase(dbCollection) {
+function dataFromDatabase(dbCollection) {
 	let collection = db.collection(dbCollection) // collection name
-	collection = getDraftsFromDatabase(collection)
+	collection = getDataFromDatabase(collection)
 
 	return collection
 }
 
-async function getDraftsFromDatabase(collection) {
+async function getDataFromDatabase(collection) {
 	return collection.find().toArray()
-
-	// filter on author (in find)
 }
 
-async function dataFromDatabase(dbCollection, currentUser) {
+async function userFromDatabase(dbCollection, currentUser) {
 	let collection = db.collection(dbCollection)
 	let user = await getUserFromDatabase(collection, currentUser)
-
-	return user
-}
-
-async function draftsFromDatabase(dbCollection, currentUser) {
-	let collection = db.collection(dbCollection)
-	let user = await userDraftsFromDatabase(collection, currentUser)
 
 	return user
 }
@@ -82,108 +77,45 @@ async function getUserFromDatabase(collection, currentUser) {
 	return collection.findOne({ username: currentUser })
 }
 
-async function userDraftsFromDatabase(collection, currentUser) {
+async function draftsFromDatabase(dbCollection, currentUser) {
+	let collection = db.collection(dbCollection)
+	let user = await getDraftsFromDatabase(collection, currentUser)
+
+	return user
+}
+
+async function getDraftsFromDatabase(collection, currentUser) {
 	return collection.find({ author: currentUser }).toArray()
-}
-
-exports.test = async (req, res) => {
-	const currentUser = req.session.user.username
-	const userCollection = "users"
-	const letterCollection = "letters"
-
-	try {
-		const user = await dataFromDatabase(userCollection, currentUser)
-		const drafts = await draftsFromDatabase(letterCollection, user.username)
-
-		res.render("pages/test.ejs", { user })
-
-		console.log(user.username)
-		console.log(drafts)
-	} catch (err) {
-		console.error(err)
-		res.status(500).send("Internal Server Error")
-	}
-}
-
-exports.drafts = async (req, res) => {
-	const currentUser = req.session.user.username
-	const userCollection = "users"
-	const letterCollection = "letters"
-
-	try {
-		let user = await dataFromDatabase(userCollection, currentUser)
-		let draft = await draftsFromDatabase(letterCollection, user.username)
-
-		res.render("pages/drafts.ejs", {
-			letters: draft,
-		})
-	} catch (err) {
-		console.error(err)
-		res.status(500).send("Internal Server Error")
-	}
-}
-
-// exports.drafts = async (req, res) => {
-// 	let draft = await getDataFromDatabase("letters")
-
-// 	res.render("pages/drafts.ejs", {
-// 		letters: draft,
-// 	})
-// }
-
-exports.deleteDraft = async (req, res) => {
-	await deleteDraft(req, res)
-}
-
-exports.postDraft = async (req, res) => {
-	const currentUser = req.session.user.username
-
-	if (ObjectId.isValid(req.body.id)) {
-		// If a draft item was clicked update the data
-
-		console.log("Updated document ID:", req.body.id)
-		await updateDraft(
-			collectionLetters,
-			req.body.id,
-			req.body.content,
-			req.body.signed,
-			false
-		)
-
-		res.redirect("/drafts")
-	} else {
-		// If no draft item was clicked create a new draft
-
-		console.log("No document ID specified.")
-		await createDraft(
-			currentUser,
-			collectionLetters,
-			req.body.content,
-			req.body.signed
-		)
-
-		res.redirect("/drafts")
-	}
 }
 
 exports.letter = async (req, res) => {
 	if (req.query.documentId != null) {
 		// If a draft item was clicked find the data for it
 
-		const draftID = new ObjectId(req.query.documentId)
-		const draft = await collectionLetters.findOne({ _id: draftID })
+		let draftID = new ObjectId(req.query.documentId)
+		let draftContent = await collectionLetters.findOne({ _id: draftID })
+		let matchUser = null
 
 		console.log("Showing document:", req.query.documentId)
 
 		res.render("pages/letter.ejs", {
-			letters: draft,
+			letters: draftContent,
+			matchUser: matchUser,
 		})
 	} else {
 		// If no draft item was clicked, don't fetch any particular document (and thus, no data to show)
+		const matchId = req.query.MatchId
+		const matchUser = decodeURIComponent(matchId).trim()
 
-		let draft = await getDataFromDatabase("letters")
+		req.session.matchUser = matchUser
+
+		console.log(matchUser)
+
+		let noData = await dataFromDatabase("letters")
+
 		res.render("pages/letter.ejs", {
-			letters: draft,
+			letters: noData,
+			matchUser: matchUser,
 		})
 	}
 }
@@ -208,10 +140,82 @@ exports.postBottle = async (req, res) => {
 		res.redirect("/bottle")
 	} else {
 		// If no draft item was clicked create a new draft
+		const currentUser = req.session.user.username
+
+		const matchUser = req.session.matchUser
+		console.log(matchUser)
+
+		let user = await userFromDatabase(userCollection, currentUser)
+
+		console.log(user.username)
 
 		console.log("No document ID specified.")
-		await createDraft(collectionLetters, req.body.content, req.body.signed)
+		await createDraft(
+			collectionLetters,
+			user.username,
+			matchUser,
+			req.body.content,
+			req.body.signed
+		)
 
 		res.redirect("/bottle")
+	}
+}
+
+exports.drafts = async (req, res) => {
+	const currentUser = req.session.user.username
+
+	try {
+		let user = await userFromDatabase(userCollection, currentUser)
+		let draft = await draftsFromDatabase(letterCollection, user.username)
+
+		res.render("pages/drafts.ejs", {
+			letters: draft,
+		})
+	} catch (err) {
+		console.error(err)
+		res.status(500).send("Internal Server Error")
+	}
+}
+
+exports.deleteDraft = async (req, res) => {
+	await deleteDraft(req, res)
+}
+
+exports.postDraft = async (req, res) => {
+	if (ObjectId.isValid(req.body.id)) {
+		// If a draft item was clicked update the data
+
+		console.log("Updated document ID:", req.body.id)
+		await updateDraft(
+			collectionLetters,
+			req.body.id,
+			req.body.content,
+			req.body.signed,
+			false
+		)
+
+		res.redirect("/drafts")
+	} else {
+		// If no draft item was clicked create a new draft
+		const currentUser = req.session.user.username
+
+		const matchUser = req.session.matchUser
+		console.log(matchUser)
+
+		let user = await userFromDatabase(userCollection, currentUser)
+
+		console.log(user.username)
+
+		console.log("No document ID specified.")
+		await createDraft(
+			collectionLetters,
+			user.username,
+			matchUser,
+			req.body.content,
+			req.body.signed
+		)
+
+		res.redirect("/drafts")
 	}
 }

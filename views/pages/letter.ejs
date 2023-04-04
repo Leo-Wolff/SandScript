@@ -8,7 +8,11 @@
 			<img id="back-button" class="get-quill-data" src="/img/back-button.svg" />
 
 			<!-- Reciptient of letter -->
-			<h1>To: Bas Kramer</h1>
+			<% if (matchUser) { %>
+			<h1>To: <%= matchUser %></h1>
+			<% } else { %>
+			<h1>To: <%= letters.recipient %></h1>
+			<% } %>
 		</header>
 
 		<!-- Quill text editor -->

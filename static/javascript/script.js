@@ -116,6 +116,22 @@ if (quillDataButton != null) {
 	})
 }
 
+//LETTER
+// Create new letter
+const matchItem = document.querySelectorAll(".matchable")
+
+const clickMatch = (e) => {
+	const MatchId = e.currentTarget.querySelector(".username").innerHTML
+	console.log(MatchId)
+	window.location.href = `/letter?MatchId=${encodeURIComponent(MatchId)}`
+}
+
+if (matchItem != null) {
+	matchItem.forEach((matchItem) => {
+		matchItem.addEventListener("click", clickMatch)
+	})
+}
+
 //DRAFTS
 //variables
 const deleteButton = document.querySelectorAll(".draft-item img"),

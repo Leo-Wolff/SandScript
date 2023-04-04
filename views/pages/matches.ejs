@@ -67,7 +67,7 @@
     <button type="button" class="btn cancel" onclick="closeSortForm()">X</button>
   </form>
 </section>
-
+<div class="match-list">
 <% if (userMatches) { %>
 <% userMatches.forEach((match)=> { %> 
 <section class="matchable m-page">
@@ -75,6 +75,7 @@
     <h2><%= match.name %></h2>
     <p>, <%= match.age %></p>
     <p>, <%= match.gender %></p>
+    <p class="username"><%= match.username %></p>
     <p><%= match.country %></p>
   </article>
 </section>
@@ -82,6 +83,7 @@
 <% } else { %>
   <p>Je hebt helaas geen matches</p>
 <% } %>
+</div>
 
 		<footer class="light"><%- include('../partials/footer'); %></footer>
 
