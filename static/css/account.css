@@ -18,6 +18,7 @@ label {
 
 .register-form input {
 	margin-bottom: 1em;
+    color: var(--black);
 }
 
 .register-form .btn {
