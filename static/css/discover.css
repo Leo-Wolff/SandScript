@@ -38,6 +38,7 @@ Discover page stijling
     padding: 10px;
     margin-bottom: 0.3em;
     width: 33%;
+	color: var(--black);
 }
 
 #filter form input#male,
@@ -99,6 +100,11 @@ Discover page stijling
   .event-found p b {
 	display: block;
   }
+
+  .event-found p.username {
+    margin-bottom: 0;
+    text-align: start;
+}
   
   section.m-page .container {
 	  display: grid; 
@@ -213,6 +219,10 @@ section.match-btn button.dark.like {
 	  text-align: center;
 	  font-family: var(--fontFamily);
 	  font-weight: var(--fontLight);
+  }
+
+  .standard-bg main nav li a{
+	color: var(--black);
   }
   
   .standard-bg main.matches-page nav li:first-of-type {
