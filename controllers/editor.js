@@ -94,13 +94,16 @@ exports.letter = async (req, res) => {
 
 		let draftID = new ObjectId(req.query.documentId)
 		let draftContent = await collectionLetters.findOne({ _id: draftID })
-		let matchUser = null
+		let recipientProfile = await userFromDatabase(
+			"users",
+			draftContent.recipient
+		)
 
 		console.log("Showing document:", req.query.documentId)
 
 		res.render("pages/letter.ejs", {
 			letters: draftContent,
-			matchUser: matchUser,
+			recipient: recipientProfile,
 		})
 	} else {
 		// If no draft item was clicked, don't fetch any particular document (and thus, no data to show)
@@ -111,11 +114,13 @@ exports.letter = async (req, res) => {
 
 		console.log(matchUser)
 
+		let recipientProfile = await userFromDatabase("users", matchUser)
+
 		let noData = await dataFromDatabase("letters")
 
 		res.render("pages/letter.ejs", {
 			letters: noData,
-			matchUser: matchUser,
+			recipient: recipientProfile,
 		})
 	}
 }

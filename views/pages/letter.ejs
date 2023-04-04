@@ -8,12 +8,12 @@
 			<img id="back-button" class="get-quill-data" src="/img/back-button.svg" />
 
 			<!-- Reciptient of letter -->
-			<% if (matchUser) { %>
-			<h1>To: <%= matchUser %></h1>
-			<% } else { %>
-			<h1>To: <%= letters.recipient %></h1>
-			<% } %>
+			<h1 class="recipient">To: <%= recipient.username %></h1>
 		</header>
+
+		<section class="match-profile">
+			<%- include('../partials/match-profile'); %>
+		</section>
 
 		<!-- Quill text editor -->
 		<div id="editor"></div>

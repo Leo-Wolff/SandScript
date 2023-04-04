@@ -118,7 +118,8 @@ if (quillDataButton != null) {
 
 //LETTER
 // Create new letter
-const matchItem = document.querySelectorAll(".matchable")
+const matchItem = document.querySelectorAll(".matchable"),
+	matchProfile = document.querySelectorAll(".match-profile")
 
 const clickMatch = (e) => {
 	const MatchId = e.currentTarget.querySelector(".username").innerHTML
@@ -129,6 +130,14 @@ const clickMatch = (e) => {
 if (matchItem != null) {
 	matchItem.forEach((matchItem) => {
 		matchItem.addEventListener("click", clickMatch)
+	})
+}
+
+// Show match profile
+if (document.querySelector("recipient") != null) {
+	document.querySelector("recipient").addEventListener("click", () => {
+		matchProfile.classList.remove("hidden")
+		console.log("Show recipient's profile")
 	})
 }
 
