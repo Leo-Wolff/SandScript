@@ -265,6 +265,73 @@ main.account section:first-of-type form input[type="submit"] {
 }
 
 /*====================
+profile stijling
+ ====================*/
+
+ main.profile {
+    position: relative;
+    height: 100vh;
+}
+
+main.profile section:first-of-type {
+    left: 50%;
+    position: relative;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #000;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+}
+
+/* main.profile section.account p {
+    font-size: 2em;
+    margin-bottom: 1em;
+} */
+
+main.profile section:first-of-type form input {
+    width: 100%;
+    background: #fff;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+main.profile section:first-of-type form input[type="submit"] {
+    background: var(--blue);
+    border-radius: 10px;
+    color: var(--white);
+}
+
+main.profile section:last-of-type {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #000;
+    padding: 50px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(1px);
+	width: 100%;
+}
+
+main.profile section:last-of-type a {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+main.profile section:last-of-type a svg {
+    width: 30px;
+}
+
+/*====================
  clock stijling
  ====================*/
 .timer {
