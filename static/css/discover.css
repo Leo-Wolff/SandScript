@@ -118,13 +118,13 @@ section.match-btn {
 	display: inline;
 }
 
-.standard-bg main nav {
+/* .standard-bg main nav {
 	background: #fff;
 	width: 80%;
 	margin: auto;
 	border-radius: 10px;
 	margin-top: 30px;
-}
+} */
 
 section.matchable:last-of-type {
 	margin-bottom: 150px;
