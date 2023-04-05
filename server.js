@@ -26,6 +26,7 @@ const dbName = "sandscript"
 // collections aanroepen
 global.db = client.db(dbName)
 global.users = db.collection("users")
+global.letters = db.collection("letters")
 
 async function connectToDatabase() {
 	try {

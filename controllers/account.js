@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt")
+
 exports.logout = (req, res) => {
 	req.session.destroy()
 	res.redirect("/account/login")
@@ -120,8 +122,6 @@ exports.profile = async (req, res) => {
 exports.register = (req, res) => {
 	res.render("pages/register.ejs")
 }
-
-const bcrypt = require("bcrypt")
 
 exports.postRegister = async (req, res) => {
 	const username = req.body.username

@@ -157,7 +157,7 @@ const deleteButton = document.querySelectorAll(".draft-item img"),
 const deleteDraftItem = async (draftID, callback) => {
 	try {
 		// fetches objectID of the document that will be deleted and sends a HTTP DELETE request (which gets handled in the controller)
-		const response = await fetch("/delete-draft", {
+		const response = await fetch("/editor/delete-draft", {
 			method: "DELETE",
 			headers: {
 				// headers = extra information
