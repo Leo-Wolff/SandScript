@@ -3,22 +3,20 @@ const router = express.Router()
 
 const accountController = require("../controllers/account.js")
 
-// say what each pages is meant to do
+router.post("/logout", accountController.logout) // Log out of account and get send to log in page
 
-router.post("/logout", accountController.logout)
+router.get("/login", accountController.login) // Get log in page
 
-router.get("/login", accountController.login)
+router.post("/login", accountController.postLogin) // Log into account and get send to home page
 
-router.post("/login", accountController.postLogin)
+router.post("/update", accountController.update) // Post edit profile changes
 
-router.post("/update", accountController.update)
+router.get("/edit", accountController.editProfile) // Get account page to edit profile
 
-router.get("/edit", accountController.editProfile)
+router.get("/profile", accountController.profile) // Get profile page
 
-router.get("/profile", accountController.profile)
+router.post("/profile", accountController.postRegister) // Register a new account
 
-router.post("/profile", accountController.postRegister)
-
-router.get("/register", accountController.register)
+router.get("/register", accountController.register) // Get register page
 
 module.exports = router
