@@ -18,12 +18,11 @@
 	--brown: #e8c274;
 	--brown-dark: #c7a864;
 	--black: #001f3f;
-	--fontFamily: "Ubuntu", sans-serif;
+	--fontFamily: 'Ubuntu', sans-serif;
 	--fontLight: 300;
 	--fontRegular: 400;
 	--fontMedium: 500;
 	--fontBold: 700;
-	--fontMenu: 14px;
 }
 
 p,
@@ -50,46 +49,48 @@ body.container {
 	margin: auto;
 	display: block;
 }
-
 body.home-bg {
 	background: var(--bgClr);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	height: 100%;
 }
-
 body.standard-bg {
 	background: var(--darkBlue);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	height: 100%;
 }
-
 .standard-bg header {
 	display: flex;
 	justify-content: space-between;
 }
-
 .standard-bg main nav {
-	background: #fff;
+	background: var(--white);
 	margin: auto;
-	border-radius: 10px;
-	margin-top: 30px;
+	border-radius: 0.8em;
+	margin-top: 1.5em;
+}
+.hidden {
+	display: none;
 }
 
+/*====================
+SVG Buttons Styling 
+====================*/
 button svg {
-	height: 40px;
+	height: 3.5em;
 }
 
 button.dark,
 button.light {
-	width: 60px;
-	height: 60px;
+	width: 4.5em;
+	height: 4.5em;
 	border: none;
 	border-radius: 50%;
 }
 button.first {
-	margin-top: 20px;
+	margin-top: 2em;
 }
 button.light {
 	background-color: var(--lightBlue);
@@ -98,76 +99,45 @@ button.light {
 .standard-bg button.light {
 	background-color: var(--blue);
 }
-
-.hidden {
-	display: none;
-}
-
-/*====================
-SVG Buttons Styling 
-====================*/
-
 svg .cls-1 {
 	stroke-miterlimit: 10;
 }
-
 svg .cls-1,
 svg .cls-2 {
 	fill: var(--darkBlue);
-	stroke: #fff;
-	stroke-width: 5px;
+	stroke: var(--white);
+	stroke-width: 0.4em;
 }
-
 svg .cls-2 {
 	stroke-linecap: round;
 	stroke-linejoin: round;
 }
-
-svg.treasure {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	height: 130px;
-}
-
-svg.treasure .cls-1,
-svg.treasure .cls-2 {
-	fill: var(--darkBlue);
-	stroke-width: 2px;
-}
-
 svg.filtering {
 	height: 2.5em;
 	width: 100%;
 }
-
 svg g#Icons path {
 	fill: var(--white);
 }
-
 svg.sorting {
 	height: 2em;
 	width: 100%;
 }
-
 svg.menu-item {
-	height: 50px;
+	height: 3em;
 	width: 100%;
 }
 footer nav ul li:nth-of-type(3) a svg.menu-item {
 	transform: rotate(10deg);
 }
-
 footer.light svg .cls-1,
 svg .cls-2 {
 	fill: var(--blue);
-	stroke: #fff;
-	stroke-width: 5px;
+	stroke: var(--white);
+	stroke-width: 0.4em;
 }
-
 footer.light svg.active .cls-1,
 footer.light svg.active .cls-2 {
-	fill: #fff;
+	fill: var(--white);
 	stroke: transparent;
 }
