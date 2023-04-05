@@ -1,28 +1,28 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
+    box-sizing: border-box;
+    margin: 0;
 }
 :root {
-	--bgClr: linear-gradient(
-		180deg,
-		rgba(0, 197, 175, 1) 0%,
-		rgba(0, 177, 190, 1) 42%,
-		rgba(0, 122, 171, 1) 100%
-	);
-	--darkBlue: #032847;
-	--blue: #00b1be;
-	--lightBlue: #00c5af;
-	--white: #fff;
-	--red: #db4b3c;
-	--beige: #f2e8cf;
-	--brown: #e8c274;
-	--brown-dark: #c7a864;
-	--black: #001f3f;
-	--fontFamily: 'Ubuntu', sans-serif;
-	--fontLight: 300;
-	--fontRegular: 400;
-	--fontMedium: 500;
-	--fontBold: 700;
+    --bgClr: linear-gradient(
+        180deg,
+        rgba(0, 197, 175, 1) 0%,
+        rgba(0, 177, 190, 1) 42%,
+        rgba(0, 122, 171, 1) 100%
+    );
+    --darkBlue: #032847;
+    --blue: #00b1be;
+    --lightBlue: #00c5af;
+    --white: #fff;
+    --red: #db4b3c;
+    --beige: #f2e8cf;
+    --brown: #e8c274;
+    --brown-dark: #c7a864;
+    --black: #001f3f;
+    --fontFamily: "Ubuntu", sans-serif;
+    --fontLight: 300;
+    --fontRegular: 400;
+    --fontMedium: 500;
+    --fontBold: 700;
 }
 
 p,
@@ -35,109 +35,109 @@ h5,
 h6,
 label,
 input {
-	color: var(--white);
-	font-family: var(--fontFamily);
-	text-decoration: none;
+    color: var(--white);
+    font-family: var(--fontFamily);
+    text-decoration: none;
 }
 
 /*====================
  General styling
  ====================*/
 body.container {
-	width: 95%;
-	position: relative;
-	margin: auto;
-	display: block;
+    width: 95%;
+    position: relative;
+    margin: auto;
+    display: block;
 }
 body.home-bg {
-	background: var(--bgClr);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	height: 100%;
+    background: var(--bgClr);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
 }
 body.standard-bg {
-	background: var(--darkBlue);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	height: 100%;
+    background: var(--darkBlue);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
 }
 .standard-bg header {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 .standard-bg main nav {
-	background: var(--white);
-	margin: auto;
-	border-radius: 0.8em;
-	margin-top: 1.5em;
+    background: var(--white);
+    margin: auto;
+    border-radius: 0.8em;
+    margin-top: 1.5em;
 }
 .hidden {
-	display: none;
+    display: none;
 }
 
 /*====================
 SVG Buttons Styling 
 ====================*/
 button svg {
-	height: 3.5em;
+    height: 3.5em;
 }
 
 button.dark,
 button.light {
-	width: 4.5em;
-	height: 4.5em;
-	border: none;
-	border-radius: 50%;
+    width: 4.5em;
+    height: 4.5em;
+    border: none;
+    border-radius: 50%;
 }
 button.first {
-	margin-top: 2em;
+    margin-top: 2em;
 }
 button.light {
-	background-color: var(--lightBlue);
+    background-color: var(--lightBlue);
 }
 .standard-bg button.dark,
 .standard-bg button.light {
-	background-color: var(--blue);
+    background-color: var(--blue);
 }
 svg .cls-1 {
-	stroke-miterlimit: 10;
+    stroke-miterlimit: 10;
 }
 svg .cls-1,
 svg .cls-2 {
-	fill: var(--darkBlue);
-	stroke: var(--white);
-	stroke-width: 0.4em;
+    fill: var(--darkBlue);
+    stroke: var(--white);
+    stroke-width: 0.4em;
 }
 svg .cls-2 {
-	stroke-linecap: round;
-	stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 svg.filtering {
-	height: 2.5em;
-	width: 100%;
+    height: 2.5em;
+    width: 100%;
 }
 svg g#Icons path {
-	fill: var(--white);
+    fill: var(--white);
 }
 svg.sorting {
-	height: 2em;
-	width: 100%;
+    height: 2em;
+    width: 100%;
 }
 svg.menu-item {
-	height: 3em;
-	width: 100%;
+    height: 3em;
+    width: 100%;
 }
 footer nav ul li:nth-of-type(3) a svg.menu-item {
-	transform: rotate(10deg);
+    transform: rotate(10deg);
 }
 footer.light svg .cls-1,
 svg .cls-2 {
-	fill: var(--blue);
-	stroke: var(--white);
-	stroke-width: 0.4em;
+    fill: var(--blue);
+    stroke: var(--white);
+    stroke-width: 0.4em;
 }
 footer.light svg.active .cls-1,
 footer.light svg.active .cls-2 {
-	fill: var(--white);
-	stroke: transparent;
+    fill: var(--white);
+    stroke: transparent;
 }

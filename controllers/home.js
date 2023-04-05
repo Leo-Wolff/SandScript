@@ -1,3 +1,3 @@
 exports.index = (req, res) => {
-	res.render("pages/index.ejs")
+    res.render("pages/index.ejs")
 }

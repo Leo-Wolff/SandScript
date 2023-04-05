@@ -1,71 +1,83 @@
 <html lang="en">
-	<head>
-		<%- include('../partials/head'); %>
-	</head>
-	<body class="standard-bg container">
-		<header>
-			<!-- Click on img to go to pop-up "Do you want to stop for now?" -->
-			<img id="back-button" class="get-quill-data" src="/img/back-button.svg" />
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body class="standard-bg container">
+        <header>
+            <!-- Click on img to go to pop-up "Do you want to stop for now?" -->
+            <img
+                id="back-button"
+                class="get-quill-data"
+                src="/img/back-button.svg"
+            />
 
-			<!-- Reciptient of letter -->
-			<h1 class="recipient">To: <%= recipient.username %></h1>
-		</header>
+            <!-- Reciptient of letter -->
+            <h1 class="recipient">To: <%= recipient.username %></h1>
+        </header>
 
-		<section class="hidden match-profile">
-			<%- include('../partials/match-profile'); %>
-		</section>
+        <section class="hidden match-profile">
+            <%- include('../partials/match-profile'); %>
+        </section>
 
-		<!-- Quill text editor -->
-		<div id="editor"></div>
-		<div id="editor-text" class="hidden"><%- letters.text %></div>
+        <!-- Quill text editor -->
+        <div id="editor"></div>
+        <div id="editor-text" class="hidden"><%- letters.text %></div>
 
-		<!-- Confirm letter button that will lead to pop-up "" -->
-		<button class="get-quill-data confirm-button">Fill bottle</button>
+        <!-- Confirm letter button that will lead to pop-up "" -->
+        <button class="get-quill-data confirm-button">Fill bottle</button>
 
-		<!-- POP-UPS -->
-		<section class="popup">
-			<section class="hidden">
-				<img src="/img/close-button.svg" alt="Cancel" />
-				<h2>Do you want to stop for now?</h2>
-				<div>
-					<a href="../">Exit</a>
-					<a href="../drafts"
-						><input
-							form="save-draft"
-							formaction="drafts"
-							type="submit"
-							value="Save as draft"
-					/></a>
-				</div>
-			</section>
+        <!-- POP-UPS -->
+        <section class="popup">
+            <section class="hidden">
+                <img src="/img/close-button.svg" alt="Cancel" />
+                <h2>Do you want to stop for now?</h2>
+                <div>
+                    <a href="../">Exit</a>
+                    <a href="../drafts"
+                        ><input
+                            form="save-draft"
+                            formaction="drafts"
+                            type="submit"
+                            value="Save as draft"
+                    /></a>
+                </div>
+            </section>
 
-			<section class="hidden">
-				<img src="/img/close-button.svg" alt="Cancel" />
-				<h2>Do you want to sign your letter?</h2>
-				<div>
-					<a>
-						<input form="save-draft" type="submit" value="Don't sign" />
-					</a>
-					<button class="styled-like-a">Sign</button>
-				</div>
-			</section>
+            <section class="hidden">
+                <img src="/img/close-button.svg" alt="Cancel" />
+                <h2>Do you want to sign your letter?</h2>
+                <div>
+                    <a>
+                        <input
+                            form="save-draft"
+                            type="submit"
+                            value="Don't sign"
+                        />
+                    </a>
+                    <button class="styled-like-a">Sign</button>
+                </div>
+            </section>
 
-			<!-- Insert what name your letter will be signed under -->
-			<section class="hidden">
-				<img src="/img/close-button.svg" alt="Cancel" />
+            <!-- Insert what name your letter will be signed under -->
+            <section class="hidden">
+                <img src="/img/close-button.svg" alt="Cancel" />
 
-				<form id="save-draft" action="bottle" method="post">
-					<input type="hidden" name="id" value="<%= letters._id %>" />
+                <form id="save-draft" action="bottle" method="post">
+                    <input type="hidden" name="id" value="<%= letters._id %>" />
 
-					<input id="content" type="hidden" name="content" />
+                    <input id="content" type="hidden" name="content" />
 
-					<input id="signature" type="text" name="signed" />
+                    <input id="signature" type="text" name="signed" />
 
-					<input id="submit-letter" type="submit" value="Sign your letter" />
-				</form>
-			</section>
-		</section>
+                    <input
+                        id="submit-letter"
+                        type="submit"
+                        value="Sign your letter"
+                    />
+                </form>
+            </section>
+        </section>
 
-		<script src="/javascript/script.js"></script>
-	</body>
+        <script src="/javascript/script.js"></script>
+    </body>
 </html>

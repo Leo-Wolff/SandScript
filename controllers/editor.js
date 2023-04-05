@@ -1,226 +1,152 @@
 const { ObjectId } = require("mongodb") // Defining ObjectId
-const userCollection = "users"
-const letterCollection = "letters"
-const collectionLetters = db.collection(letterCollection) // Connect to letters collection
+const dbController = require("./editor-functions.js")
 
-async function createDraft(
-	collection,
-	currentUser,
-	matchUsername,
-	content,
-	input
-) {
-	const create = {
-		author: currentUser,
-		recipient: matchUsername,
-		text: content,
-		signed: input,
-		dateUpdated: new Date(),
-	}
-
-	await collection.insertOne(create)
-}
-
-async function deleteDraft(req, res) {
-	const result = await collectionLetters.deleteOne({
-		_id: new ObjectId(req.body.draftID),
-	})
-
-	res.json({ message: `${result.deletedCount} document(s) deleted` })
-}
-
-async function updateDraft(
-	collection,
-	draftID,
-	content,
-	input,
-	shouldUpdateSigned
-) {
-	const filter = { _id: new ObjectId(draftID) }
-	const update = {
-		$set: {
-			text: content,
-			dateUpdated: new Date(),
-		},
-	}
-
-	// when updating a draft through postDraft, you can't specify signed, so true/false statement to not update the signature
-	if (shouldUpdateSigned) {
-		update.$set.signed = input
-	}
-
-	const result = await collection.updateOne(filter, update)
-	// console.log("Updated document count:", result.modifiedCount)
-
-	return result
-}
-
-function dataFromDatabase(dbCollection) {
-	let collection = db.collection(dbCollection) // collection name
-	collection = getDataFromDatabase(collection)
-
-	return collection
-}
-
-async function getDataFromDatabase(collection) {
-	return collection.find().toArray()
-}
-
-async function userFromDatabase(dbCollection, currentUser) {
-	let collection = db.collection(dbCollection)
-	let user = await getUserFromDatabase(collection, currentUser)
-
-	return user
-}
-
-async function getUserFromDatabase(collection, currentUser) {
-	return collection.findOne({ username: currentUser })
-}
-
-async function draftsFromDatabase(dbCollection, currentUser) {
-	let collection = db.collection(dbCollection)
-	let user = await getDraftsFromDatabase(collection, currentUser)
-
-	return user
-}
-
-async function getDraftsFromDatabase(collection, currentUser) {
-	return collection.find({ author: currentUser }).toArray()
-}
-
+// TEXT EDITOR RELATED PAGES
 exports.letter = async (req, res) => {
-	if (req.query.documentId != null) {
-		// If a draft item was clicked find the data for it
+    if (req.query.draftID != null) {
+        // If a draft item was clicked find the data for it
 
-		let draftID = new ObjectId(req.query.documentId)
-		let draftContent = await collectionLetters.findOne({ _id: draftID })
-		let recipientProfile = await userFromDatabase(
-			"users",
-			draftContent.recipient
-		)
+        let draftID = new ObjectId(req.query.draftID)
+        let draftContent = await letters.findOne({ _id: draftID })
+        let recipientProfile = await dbController.userFromUsers(
+            "users",
+            draftContent.recipient
+        )
 
-		console.log("Showing document:", req.query.documentId)
+        console.log("Showing document:", req.query.documentId)
 
-		res.render("pages/letter.ejs", {
-			letters: draftContent,
-			recipient: recipientProfile,
-		})
-	} else {
-		// If no draft item was clicked, don't fetch any particular document (and thus, no data to show)
-		const matchId = req.query.MatchId
-		const matchUser = decodeURIComponent(matchId).trim()
+        res.render("pages/letter.ejs", {
+            letters: draftContent,
+            recipient: recipientProfile,
+        })
+    } else {
+        // If no draft item was clicked, don't fetch any particular document (and thus, no data to show)
+        const matchID = req.query.matchID
+        const matchUser = decodeURIComponent(matchID).trim()
 
-		req.session.matchUser = matchUser
+        req.session.matchUser = matchUser
 
-		console.log(matchUser)
+        console.log(matchUser)
 
-		let recipientProfile = await userFromDatabase("users", matchUser)
+        let recipientProfile = await dbController.userFromUsers(
+            "users",
+            matchUser
+        )
 
-		let noData = await dataFromDatabase("letters")
+        let noData = await dbController.dataFromDatabase("letters")
 
-		res.render("pages/letter.ejs", {
-			letters: noData,
-			recipient: recipientProfile,
-		})
-	}
+        res.render("pages/letter.ejs", {
+            letters: noData,
+            recipient: recipientProfile,
+        })
+    }
 }
 
+// BOTTLE RELATED PAGES
 exports.bottle = (req, res) => {
-	res.render("pages/bottle.ejs")
+    res.render("pages/bottle.ejs")
 }
 
 exports.postBottle = async (req, res) => {
-	if (ObjectId.isValid(req.body.id)) {
-		// If a draft item was clicked update the data
+    if (ObjectId.isValid(req.body.id)) {
+        // If a draft item was clicked update the data
 
-		console.log("Updated document ID:", req.body.id)
-		await updateDraft(
-			collectionLetters,
-			req.body.id,
-			req.body.content,
-			req.body.signed,
-			true
-		)
+        console.log("Updated document ID:", req.body.id)
+        await dbController.updateDraft(
+            letters,
+            req.body.id,
+            req.body.content,
+            req.body.signed,
+            true
+        )
 
-		res.redirect("/bottle")
-	} else {
-		// If no draft item was clicked create a new draft
-		const currentUser = req.session.user.username
+        res.redirect("/editor/bottle")
+    } else {
+        // If no draft item was clicked create a new draft
+        const currentUser = req.session.user.username
 
-		const matchUser = req.session.matchUser
-		console.log(matchUser)
+        const matchUser = req.session.matchUser
+        console.log(matchUser)
 
-		let user = await userFromDatabase(userCollection, currentUser)
+        let user = await dbController.userFromUsers("users", currentUser)
 
-		console.log(user.username)
+        console.log(user.username)
 
-		console.log("No document ID specified.")
-		await createDraft(
-			collectionLetters,
-			user.username,
-			matchUser,
-			req.body.content,
-			req.body.signed
-		)
+        console.log("No document ID specified.")
+        await dbController.createDraft(
+            letters,
+            user.username,
+            matchUser,
+            req.body.content,
+            req.body.signed
+        )
 
-		res.redirect("/bottle")
-	}
+        res.redirect("/editor/bottle")
+    }
 }
 
+// DRAFTS RELATED PAGES
 exports.drafts = async (req, res) => {
-	const currentUser = req.session.user.username
+    const currentUser = req.session.user.username
 
-	try {
-		let user = await userFromDatabase(userCollection, currentUser)
-		let draft = await draftsFromDatabase(letterCollection, user.username)
+    try {
+        let user = await dbController.userFromUsers("users", currentUser)
+        let draft = await dbController.draftsFromLetters(
+            "letters",
+            user.username
+        )
 
-		res.render("pages/drafts.ejs", {
-			letters: draft,
-		})
-	} catch (err) {
-		console.error(err)
-		res.status(500).send("Internal Server Error")
-	}
+        res.render("pages/drafts.ejs", {
+            letters: draft,
+        })
+    } catch (err) {
+        console.error(err)
+        res.status(500).send("Internal Server Error")
+    }
 }
 
 exports.deleteDraft = async (req, res) => {
-	await deleteDraft(req, res)
+    const result = await letters.deleteOne({
+        _id: new ObjectId(req.body.draftID),
+    })
+
+    res.json({ message: `${result.deletedCount} document(s) deleted` })
 }
 
 exports.postDraft = async (req, res) => {
-	if (ObjectId.isValid(req.body.id)) {
-		// If a draft item was clicked update the data
+    if (ObjectId.isValid(req.body.id)) {
+        // If a draft item was clicked update the data
 
-		console.log("Updated document ID:", req.body.id)
-		await updateDraft(
-			collectionLetters,
-			req.body.id,
-			req.body.content,
-			req.body.signed,
-			false
-		)
+        console.log("Updated document ID:", req.body.id)
+        await dbController.updateDraft(
+            letters,
+            req.body.id,
+            req.body.content,
+            req.body.signed,
+            false
+        )
 
-		res.redirect("/drafts")
-	} else {
-		// If no draft item was clicked create a new draft
-		const currentUser = req.session.user.username
+        res.redirect("/editor/drafts")
+    } else {
+        // If no draft item was clicked create a new draft
+        const currentUser = req.session.user.username
 
-		const matchUser = req.session.matchUser
-		console.log(matchUser)
+        const matchUser = req.session.matchUser
+        console.log(matchUser)
 
-		let user = await userFromDatabase(userCollection, currentUser)
+        let user = await dbController.userFromUsers("users", currentUser)
 
-		console.log(user.username)
+        console.log(user.username)
 
-		console.log("No document ID specified.")
-		await createDraft(
-			collectionLetters,
-			user.username,
-			matchUser,
-			req.body.content,
-			req.body.signed
-		)
+        console.log("No document ID specified.")
+        await dbController.createDraft(
+            letters,
+            user.username,
+            matchUser,
+            req.body.content,
+            req.body.signed
+        )
 
-		res.redirect("/drafts")
-	}
+        res.redirect("/editor/drafts")
+    }
 }
