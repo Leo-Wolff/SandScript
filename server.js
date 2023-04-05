@@ -62,14 +62,13 @@ app.use(
 
 // Redirect user to log in page if they are not logged in or registered
 // app.use((req, res, next) => {
-//     const notLoggedInroutes = ["/login", "/register"];
-//   if (!req.session.user && !notLoggedInroutes.includes(req.url)) {
-//     res.redirect("/login");
-//   }
-//   else {
-//     next();
-//   }
-// });
+//     const notLoggedInroutes = ["/account/login", "/account/register"]
+//     if (!req.session.user && !notLoggedInroutes.includes(req.url)) {
+//         res.redirect("/account/login")
+//     } else {
+//         next()
+//     }
+// })
 
 const homeRoutes = require("./routes/home.js")
 app.use("/", homeRoutes)
