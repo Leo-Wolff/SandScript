@@ -1,27 +1,40 @@
 /*====================
 Register page
 ===================*/
-.standard-bg h2 {
-	text-align: center;
+main.register {
+    position: relative;
+    height: 100vh;
 }
-.register-form {
-	display: grid;
-	justify-content: center;
-	margin-top: 1em;
+main.register section {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #000;
+    padding: 50px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(1px);
+	width: 90%;
 }
-label {
-	color: var(--white);
+main.register section h2 {
+    font-size: 3em;
+    margin-bottom: 30px;
 }
-.register-form input {
-	margin-bottom: 1em;
-	color: var(--black);
+main.register section form input {
+    width: 100%;
+    background: #fff;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #000;
 }
-.register-form .btn {
-	background-color: var(--lightBlue);
-	margin-bottom: 1.5em;
-}
-.log-in-prompt {
-	text-align: center;
+main.register section form input[type="submit"] {
+    background: var(--blue);
+    border-radius: 10px;
+    color: var(--white);
+    cursor: pointer;
 }
 
 /*====================
