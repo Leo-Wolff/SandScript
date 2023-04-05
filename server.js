@@ -82,6 +82,7 @@ const accountRoutes = require("./routes/account.js")
 app.use("/account", accountRoutes)
 
 //404 Error
+// 404 page is not worked into mvc model since in the rare case the controller folder breaks, this page still needs to be able to load
 app.get("*", (req, res) => {
 	res.status(404)
 
