@@ -1,11 +1,12 @@
 const { ObjectId } = require('mongodb') // Defining ObjectId
 const dbController = require('./editor-functions.js')
 
+// TEXT EDITOR RELATED PAGES
 exports.letter = async (req, res) => {
-    if (req.query.documentId != null) {
+    if (req.query.draftID != null) {
         // If a draft item was clicked find the data for it
 
-        let draftID = new ObjectId(req.query.documentId)
+        let draftID = new ObjectId(req.query.draftID)
         let draftContent = await letters.findOne({ _id: draftID })
         let recipientProfile = await dbController.userFromUsers(
             'users',
@@ -20,8 +21,8 @@ exports.letter = async (req, res) => {
         })
     } else {
         // If no draft item was clicked, don't fetch any particular document (and thus, no data to show)
-        const matchId = req.query.MatchId
-        const matchUser = decodeURIComponent(matchId).trim()
+        const matchID = req.query.matchID
+        const matchUser = decodeURIComponent(matchID).trim()
 
         req.session.matchUser = matchUser
 
@@ -41,6 +42,7 @@ exports.letter = async (req, res) => {
     }
 }
 
+// BOTTLE RELATED PAGES
 exports.bottle = (req, res) => {
     res.render('pages/bottle.ejs')
 }
@@ -83,6 +85,7 @@ exports.postBottle = async (req, res) => {
     }
 }
 
+// DRAFTS RELATED PAGES
 exports.drafts = async (req, res) => {
     const currentUser = req.session.user.username
 

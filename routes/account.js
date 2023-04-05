@@ -1,22 +1,24 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
 
-const accountController = require("../controllers/account.js")
+const accountController = require('../controllers/account.js')
 
-router.post("/logout", accountController.logout)
+// say what each pages is meant to do
 
-router.get("/login", accountController.login)
+router.post('/logout', accountController.logout)
 
-router.post("/login", accountController.postLogin)
+router.get('/login', accountController.login)
 
-router.post("/update", accountController.update)
+router.post('/login', accountController.postLogin)
 
-router.get("/edit", accountController.editProfile)
+router.post('/update', accountController.update)
 
-router.get("/profile", accountController.profile)
+router.get('/edit', accountController.editProfile)
 
-router.post("/profile", accountController.postRegister)
+router.get('/profile', accountController.profile)
 
-router.get("/register", accountController.register)
+router.post('/profile', accountController.postRegister)
+
+router.get('/register', accountController.register)
 
 module.exports = router
