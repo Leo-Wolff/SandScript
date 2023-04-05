@@ -22,6 +22,10 @@ exports.login1 = async (req, res) => {
 		interests: currentUser.interests,
 		country: currentUser.country,
 		language: currentUser.language,
+		liked: currentUser.liked,
+		likedBy: currentUser.likedBy,
+		disliked: currentUser.disliked,
+		matches: currentUser.matches
 	}
 	res.redirect("/")
 }
@@ -95,7 +99,7 @@ exports.profile = async (req, res) => {
 
 // Register page
 exports.register = (req, res) => {
-	res.render("pages/register.ejs")
+	res.render("pages/register")
 }
 
 const bcrypt = require("bcrypt")
@@ -111,5 +115,5 @@ exports.postRegister = async (req, res) => {
 		password: hashedPassword,
 	}
 	users.insertOne(user)
-	res.render("pages/account.ejs")
+	res.redirect("/profile")
 }

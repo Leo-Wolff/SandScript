@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <%- include('../partials/head'); %>
 </head>
@@ -8,113 +7,67 @@
 
 <header>
   <button class="dark first">
-    <svg
-      class="bag"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64.97 199.69"
-    >
-      <g id="Laag_2-2" data-name="Laag 2">
-        <g id="bottle">
-          <path
-            class="cls-1"
-            d="m44.41,54.37c-.53-6.57-.12-23.31-.12-23.31l-22.08-.06s-.17,18.17-.06,23.33c.11,5.16-20.83,17.11-20.85,24.72-.02,6.94-.26,95.07-.3,110.68,0,1.84.99,3.51,2.61,4.4,3.5,1.92,11.39,4.51,28.49,4.56,17.44.05,25.48-2.6,29.02-4.52,1.58-.86,2.55-2.53,2.55-4.34.04-15.56.27-101.17.3-110.61.03-10.4-19.03-18.29-19.56-24.85Z"
-          />
-          <path
-            class="cls-1"
-            d="m41.08,28.44h-16.63l-2.64-24.11c-.19-1.78,1.2-3.33,2.98-3.33h15.94c1.79,0,3.18,1.55,2.98,3.33l-2.64,24.11Z"
-          />
-          <path
-            class="cls-1"
-            d="m44.17,36.12l-22.84-.06c-3.3,0-6-2.72-5.99-6.02h0c0-3.3,2.72-6,6.02-5.99l22.84.06c3.3,0,6,2.72,5.99,6.02h0c0,3.3-2.72,6-6.02,5.99Z"
-          />
-          <path
-            class="cls-2"
-            d="m46.77,74.19s-.03-.01-.05-.02c.02-.08.05-.17.05-.25,0-2.06-6.27-3.73-14.01-3.73s-14.01,1.67-14.01,3.73c0,.08.03.17.05.25-.02,0,4.16,47.35,4.16,47.35.52,5.9.52,11.83,0,17.72l-4.21,47.34s.04.01.06.02c-.03.1-.06.21-.06.31,0,2.06,6.27,3.73,14.01,3.73s14.01-1.67,14.01-3.73c0-.11-.03-.21-.06-.31.02,0,.04-.01.06-.02l-4.21-47.34c-.52-5.9-.52-11.83,0-17.72l4.21-47.34Z"
-          />
-          <path
-            class="cls-2"
-            d="m18.81,74.18s4.65,10.12,18.04,6.07-7.65-6.07-7.65-6.07"
-          />
-        </g>
-      </g>
-    </svg>
+    <%- include('../partials/bag'); %>
   </button>
   <button class="dark first" onclick="openSortForm()">
-    <svg
-      class="bag"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64.97 199.69"
-    >
-      <g id="Laag_2-2" data-name="Laag 2">
-        <g id="bottle">
-          <path
-            class="cls-1"
-            d="m44.41,54.37c-.53-6.57-.12-23.31-.12-23.31l-22.08-.06s-.17,18.17-.06,23.33c.11,5.16-20.83,17.11-20.85,24.72-.02,6.94-.26,95.07-.3,110.68,0,1.84.99,3.51,2.61,4.4,3.5,1.92,11.39,4.51,28.49,4.56,17.44.05,25.48-2.6,29.02-4.52,1.58-.86,2.55-2.53,2.55-4.34.04-15.56.27-101.17.3-110.61.03-10.4-19.03-18.29-19.56-24.85Z"
-          />
-          <path
-            class="cls-1"
-            d="m41.08,28.44h-16.63l-2.64-24.11c-.19-1.78,1.2-3.33,2.98-3.33h15.94c1.79,0,3.18,1.55,2.98,3.33l-2.64,24.11Z"
-          />
-          <path
-            class="cls-1"
-            d="m44.17,36.12l-22.84-.06c-3.3,0-6-2.72-5.99-6.02h0c0-3.3,2.72-6,6.02-5.99l22.84.06c3.3,0,6,2.72,5.99,6.02h0c0,3.3-2.72,6-6.02,5.99Z"
-          />
-          <path
-            class="cls-2"
-            d="m46.77,74.19s-.03-.01-.05-.02c.02-.08.05-.17.05-.25,0-2.06-6.27-3.73-14.01-3.73s-14.01,1.67-14.01,3.73c0,.08.03.17.05.25-.02,0,4.16,47.35,4.16,47.35.52,5.9.52,11.83,0,17.72l-4.21,47.34s.04.01.06.02c-.03.1-.06.21-.06.31,0,2.06,6.27,3.73,14.01,3.73s14.01-1.67,14.01-3.73c0-.11-.03-.21-.06-.31.02,0,.04-.01.06-.02l-4.21-47.34c-.52-5.9-.52-11.83,0-17.72l4.21-47.34Z"
-          />
-          <path
-            class="cls-2"
-            d="m18.81,74.18s4.65,10.12,18.04,6.07-7.65-6.07-7.65-6.07"
-          />
-        </g>
-      </g>
-    </svg>
+    <%- include('../partials/sortIcon'); %>
   </button>
 </header>
 
-					<li>Drafts</li>
-				</ul>
-			</nav>
+<main class="matches-page">
+<nav>
+  <ul>
+    <li>Matches</li>
+    <li><a href="/drafts">Drafts</a></li>
+  </ul>
+</nav>
 
-<section id="sorter">
-  <form method="post" action="/matches" >
-    <section class="form-group">
-      <label for="interests">Sorteren op:</label>
-      <select name="sorteren" id="sorteren">
-        <option value="choose">- Choose a sort</option>
-        <option value="age">Age</option>
-        <option value="name">Name A-Z</option>
-        <option value="-name">Name Z-A</option>
-      </select>
-    </section>
+			<section id="sorter">
+				<form method="post" action="/matches">
+					<section class="form-group">
+						<label for="interests">Sorteren op:</label>
+						<select name="sorteren" id="sorteren">
+							<option value="choose">- Choose a sort</option>
+							<option value="age">Age</option>
+							<option value="name">Name A-Z</option>
+							<option value="-name">Name Z-A</option>
+						</select>
+					</section>
 
     <button type="submit" class="btn">Apply</button>
     <button type="button" class="btn cancel" onclick="closeSortForm()">X</button>
   </form>
 </section>
-
-
-
-<% eersteMatch.forEach((item)=> { %> 
+<div class="match-list">
+<% if (userMatches) { %>
+<% userMatches.forEach((match)=> { %> 
 <section class="matchable m-page">
   <article class="event-found">
-    <h2><%= item.name %></h2>
-    <p>, <%= item.age %></p>
-    <p>, <%= item.gender %></p>
-    <p><%= item.country %></p>
-    <p><b>Language</b> <%= item.language %></p>
-    <p><b>Interests</b> <%= item.interests %></p>
+
+    <div class="container">
+      <div class="Photo">
+        <img src="<%= match.photo %>" alt="Photo of user"/>
+      </div>
+      <div class="bio">
+        <h2><%= match.name %></h2>
+    <p>, <%= match.age %></p>
+    <p>, <%= match.gender %></p>
+    <p>, <%= match.country %></p>
+    <p class="username"><%= match.username %></p>
+      </div>
+    </div>
   </article>
 </section>
 <% }) %>
+<% } else { %>
+  <p>Je hebt helaas geen matches</p>
+<% } %>
+</div>
 
 		<footer class="light"><%- include('../partials/footer'); %></footer>
 
-<footer class="light">
-  <%- include('../partials/footer'); %>
-</footer>
+		<footer class="light"><%- include('../partials/footer'); %></footer>
 
-<script src="/javascript/script.js"></script>
-</body>
+		<script src="/javascript/script.js"></script>
+	</body>
 </html>

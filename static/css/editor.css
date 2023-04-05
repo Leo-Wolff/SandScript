@@ -3,10 +3,7 @@ Letter.ejs
  ====================*/
 
 body header img {
-	position: absolute;
-	top: 2em;
-	left: 0.5em;
-
+	margin: 2em 0 0 0.5em;
 	border-radius: 360px;
 	padding: 1em 1.625em 1em 1.375em;
 
@@ -17,14 +14,20 @@ body header img {
 
 body header h1 {
 	position: absolute;
-	top: 1.9em;
-	left: calc(1.5em + 2.5em); /* plus the width body header img is taking up */
+	top: 1.975em;
+	left: calc(1.5em + 2.25em); /* plus the width body header img is taking up */
+
+	height: 1.5em;
+	width: calc(70% + 0.25em);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
 	font-weight: var(--fontRegular);
-	font-size: 1.6em;
+	font-size: 1.5em;
 }
 
-.confirm-letter {
+.confirm-button {
 	position: absolute;
 	top: 90%;
 	left: calc(50% - ((100% - 1em) / 2));
@@ -105,8 +108,8 @@ body .ql-toolbar.ql-snow {
 }
 
 .ql-container {
-	top: 13.9em;
-	left: 0.65em;
+	top: 6.575em;
+	left: 0.625em;
 
 	border: 0;
 	padding: 0;
@@ -136,7 +139,7 @@ body .ql-toolbar.ql-snow {
 }
 
 /*====================
-Pop-ups letter.ejs
+Pop-ups letter
  ====================*/
 .popup {
 	position: absolute;
@@ -163,8 +166,11 @@ Pop-ups letter.ejs
 	width: 1.25em;
 }
 
-.confirm-letter:hover,
+.confirm-button:hover,
 .popup img:hover,
+.popup a input:hover,
+.popup div button:hover,
+.bottle-editor svg:hover,
 #back-button:hover {
 	cursor: pointer;
 }
@@ -191,6 +197,7 @@ Pop-ups letter.ejs
 }
 
 .popup a,
+.popup label,
 .styled-like-a {
 	border: 0;
 	padding: 1em 0 1em 0;
@@ -199,6 +206,20 @@ Pop-ups letter.ejs
 
 	font-size: 1em;
 	text-decoration: none;
+}
+
+.popup a input {
+	margin: 0;
+	border: 0;
+	padding: 0;
+
+	color: var(--white);
+	font-size: 1em;
+	background: none;
+}
+
+.popup section:first-of-type a input {
+	font-weight: var(--fontBold);
 }
 
 .popup a:first-of-type {
@@ -233,6 +254,8 @@ Pop-ups letter.ejs
 
 	width: 100%;
 	height: 2em;
+
+	color: var(--black);
 }
 
 .popup section:nth-of-type(3) input[type="text"]:focus {
@@ -330,8 +353,8 @@ Draft partial
 .draft-content {
 	overflow: hidden;
 
-	line-height: 1em;
-	max-height: calc(1em * 3);
+	line-height: 1.25em;
+	max-height: calc(1.25em * 2.475);
 }
 
 .draft-content p {
@@ -339,4 +362,85 @@ Draft partial
 	max-width: 32.5ch;
 
 	text-overflow: ellipsis;
+}
+
+/*====================
+Bottle.ejs
+ ====================*/
+
+.bottle-editor {
+	width: calc(100% - 1em);
+}
+
+.bottle-editor h1 {
+	position: absolute;
+	top: 2.45em;
+	left: calc(1.5em + 3.25em);
+
+	font-weight: var(--fontRegular);
+	font-size: 1.3em;
+}
+
+.bottle-editor svg {
+	margin: 2em 0 0 0.5em;
+	border-radius: 360px;
+	padding: 0.5em;
+
+	height: 4.125em;
+
+	background-color: var(--blue);
+}
+
+.bottle-img {
+	position: absolute;
+	top: calc(50% - 12.5em);
+	left: calc(50% - (10em / 2));
+
+	width: 10em;
+}
+
+/*====================
+Pop-ups bottle
+ ====================*/
+.bottle section:nth-of-type(2) div {
+	flex-wrap: wrap;
+}
+
+.bottle section:nth-of-type(2) label,
+.bottle section:nth-of-type(2) p {
+	border: 0;
+	border-radius: 0 0 5px 5px;
+	padding: 1em 0em 1em 0em;
+
+	cursor: pointer;
+	width: 143%;
+
+	font-size: 1em;
+	text-align: center;
+
+	background-color: var(--darkBlue);
+}
+
+.bottle section:nth-of-type(2) p {
+	margin: 0;
+}
+
+.bottle section:nth-of-type(2) .output {
+	position: relative;
+	top: 0;
+	right: 0;
+	float: none;
+
+	margin: 1em;
+	border: 5px solid var(--brown-dark);
+	padding: 15px;
+	border-radius: 5px;
+
+	width: 10em;
+
+	background-color: var(--brown);
+}
+
+.bottle section:nth-of-type(2) .output:hover {
+	cursor: auto;
 }

@@ -102,5 +102,5 @@ app.use("/", accountRoutes)
 // })
 
 app.listen(port, () => {
-	console.log(`Wow! Look at that ${port}`)
+	console.log(`Wow! Look at that port ${port}`)
 })

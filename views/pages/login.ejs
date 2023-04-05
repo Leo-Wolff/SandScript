@@ -1,4 +1,11 @@
-<section>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="standard-bg container">
+		<main class="inloggen">
+			<section>
     <h2>Login</h2>
 
     <form action="/login" method="post">
@@ -7,6 +14,12 @@
         <input type="submit" value="login">
     </form>
 
-    <p>Nog geen account?</p>
-    <a href="/register">Meld je nu aan!</a>
-</section>
+				<p>Nog geen account?</p>
+				<a href="/registreren">Meld je nu aan!</a>
+			</section>
+		</main>
+		<footer> </footer>
+
+		<script src="/javascript/script.js"></script>
+	</body>
+</html>
