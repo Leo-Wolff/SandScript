@@ -23,7 +23,7 @@ const client = new MongoClient(uri, {
 
 const dbName = "sandscript"
 
-// collections aanroepen
+// Database variables that are used in controllers
 global.db = client.db(dbName)
 global.users = db.collection("users")
 global.letters = db.collection("letters")
@@ -60,6 +60,7 @@ app.use(
 	})
 )
 
+// Redirect user to log in page if they are not logged in or registered
 app.use((req, res, next) => {
 	if (!req.session.user && req.url != "/account/login") {
 		res.redirect("/account/login")
