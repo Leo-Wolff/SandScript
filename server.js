@@ -81,6 +81,13 @@ app.use("/editor", editorRoutes)
 const accountRoutes = require("./routes/account.js")
 app.use("/account", accountRoutes)
 
+//404 Error
+app.get("*", (req, res) => {
+	res.status(404)
+
+	res.render("404.ejs")
+})
+
 app.listen(port, () => {
 	console.log(`Wow! Look at that port ${port}`)
 })
