@@ -17,7 +17,7 @@ exports.discover = async (req, res) => {
             },
         }) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
 
-        res.render("pages/gefiltered", { firstMatch }) // Render the page with the first match
+        res.render("pages/filtered.ejs", { firstMatch }) // Render the page with the first match
     } catch (err) {
         console.log(err.stack)
         res.status(500).send("Internal Server Error")
@@ -73,7 +73,7 @@ exports.postDiscover = async (req, res) => {
             },
         })
 
-        res.render("pages/gefiltered", { firstMatch })
+        res.render("pages/filtered.ejs", { firstMatch })
     } catch (err) {
         console.log(err.stack)
         res.status(500).send("Internal Server Error")

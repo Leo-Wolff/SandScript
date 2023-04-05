@@ -135,12 +135,25 @@ exports.postRegister = async (req, res) => {
     const email = req.body.email
     const password = req.body.password
     const hashedPassword = await bcrypt.hash(password, 10)
+
     const user = {
-        username,
-        email,
+        username: username,
+        email: email,
         password: hashedPassword,
     }
 
+    console.log(user)
+
     users.insertOne(user)
+
+    // set session user to the new user's username
+    req.session.user = username
+
+    // req.session.user = {
+    //     username: username,
+    //     password: password,
+    //     email: email,
+    // }
+
     res.redirect("/account/profile")
 }

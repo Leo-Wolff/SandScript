@@ -12,6 +12,10 @@ To run the app, navigate to your files in your CLI of a choice and then once in 
 
 You can now head over to (http://localhost:8000/)[http://localhost:8000/] to open the app.
 
+## Getting started
+
+To start using this app, make an account. You can then use that account to login and start matching with people. You can do this under 'Discover'. If you match with someone, you can write them a letter and do more as described by 'Features'.
+
 ## Features
 
 Sandscript has the following features:
@@ -32,7 +36,3 @@ Sandscript has the following features:
 [Kevin Boere](https://github.com/Kboere)
 [Enis Okic](https://github.com/enisokic)
 [Sven Doejaaren](https://github.com/svendoejaaren)
-
-## Getting started
-
-To start using this app, make an account. You can then use that account to login and start matching with people. You can do this under 'Discover'. If you match with someone, you can write them a letter and do more as described by 'Features'.
