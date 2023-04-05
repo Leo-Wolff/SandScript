@@ -61,12 +61,13 @@ app.use(
 	})
 )
 app.use((req, res, next) => {
-	if (!req.session.user && req.url != "/login") {
-		res.redirect("/login"); 
-	} 
-	else { 
-		next(); 
-	} 
+    const notLoggedInroutes = ["/login", "/register"];
+  if (!req.session.user && !notLoggedInroutes.includes(req.url)) {
+    res.redirect("/login");
+  } 
+  else {
+    next();
+  }
 });
 
 const homeRoutes = require("./routes/home.js")
