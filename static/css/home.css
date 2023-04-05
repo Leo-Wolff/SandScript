@@ -1,19 +1,19 @@
 /*====================
  clock stijling
  ====================*/
- .timer {
-	position: fixed;
-	text-align: center;
-	margin-top: 4em;
-	width: 100%;
-	color: #fff;
+.timer {
+    position: fixed;
+    text-align: center;
+    margin-top: 4em;
+    width: 100%;
+    color: #fff;
 }
 
 .timer p {
-	font-family: var(--fontFamily);
-	font-weight: var(--fontMedium);
-	font-size: 60px;
-	color: #fff;
+    font-family: var(--fontFamily);
+    font-weight: var(--fontMedium);
+    font-size: 60px;
+    color: #fff;
 }
 
 body.home-bg section svg:nth-of-type(2) {

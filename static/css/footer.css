@@ -2,66 +2,66 @@
  Footer stijling
  ====================*/
 
- footer {
-	position: fixed;
-	bottom: -20px;
-	left: 50%;
-	transform: translate(-50%, -50%);
+footer {
+    position: fixed;
+    bottom: -20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 footer nav {
-	background: var(--darkBlue);
-	border-radius: 10px;
-	padding: 15px 20px;
+    background: var(--darkBlue);
+    border-radius: 10px;
+    padding: 15px 20px;
 }
 footer nav ul {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: nowrap;
-	align-items: center;
-	padding: 0;
-	list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0;
+    list-style-type: none;
 }
 footer nav ul li {
-	padding: 0px 20px;
-	text-decoration: none;
+    padding: 0px 20px;
+    text-decoration: none;
 }
 footer nav ul li:first-of-type {
-	padding-left: 0;
+    padding-left: 0;
 }
 footer nav ul li:last-of-type {
-	padding-right: 0;
+    padding-right: 0;
 }
 footer.light nav {
-	background: var(--blue);
-	border-radius: 10px;
-	padding: 15px 20px;
+    background: var(--blue);
+    border-radius: 10px;
+    padding: 15px 20px;
 }
 footer.light nav ul {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: nowrap;
-	align-items: center;
-	padding: 0;
-	list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0;
+    list-style-type: none;
 }
 footer.light nav ul li {
-	padding: 0px 20px;
-	text-decoration: none;
+    padding: 0px 20px;
+    text-decoration: none;
 }
 footer.light nav ul li a {
-	text-decoration: none;
-	color: #fff;
-	font-family: var(--fontFamily);
-	font-weight: var(--fontLight);
-	font-size: var(--fontMenu);
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-family: var(--fontFamily);
+    font-weight: var(--fontLight);
+    font-size: var(--fontMenu);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 footer.light nav ul li:first-of-type {
-	padding-left: 0;
+    padding-left: 0;
 }
 footer.light nav ul li:last-of-type {
-	padding-right: 0;
+    padding-right: 0;
 }

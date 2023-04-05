@@ -3,167 +3,169 @@ Letter.ejs
  ====================*/
 
 body header img {
-	margin: 2em 0 0 0.5em;
-	border-radius: 360px;
-	padding: 1em 1.625em 1em 1.375em;
+    margin: 2em 0 0 0.5em;
+    border-radius: 360px;
+    padding: 1em 1.625em 1em 1.375em;
 
-	height: 4em;
+    height: 4em;
 
-	background-color: var(--red);
+    background-color: var(--red);
 }
 
 body header h1 {
-	position: absolute;
-	top: 1.975em;
-	left: calc(1.5em + 2.25em); /* plus the width body header img is taking up */
+    position: absolute;
+    top: 1.975em;
+    left: calc(
+        1.5em + 2.25em
+    ); /* plus the width body header img is taking up */
 
-	height: 1.5em;
-	width: calc(70% + 0.25em);
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+    height: 1.5em;
+    width: calc(70% + 0.25em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-	font-weight: var(--fontRegular);
-	font-size: 1.5em;
+    font-weight: var(--fontRegular);
+    font-size: 1.5em;
 }
 
 .confirm-button {
-	position: absolute;
-	top: 90%;
-	left: calc(50% - ((100% - 1em) / 2));
+    position: absolute;
+    top: 90%;
+    left: calc(50% - ((100% - 1em) / 2));
 
-	border: 0;
-	padding: 0.75em;
-	border-radius: 5px;
+    border: 0;
+    padding: 0.75em;
+    border-radius: 5px;
 
-	width: calc(100% - 1em);
+    width: calc(100% - 1em);
 
-	font-size: 1em;
-	font-family: var(--fontFamily);
-	color: var(--white);
-	background-color: var(--blue);
+    font-size: 1em;
+    font-family: var(--fontFamily);
+    color: var(--white);
+    background-color: var(--blue);
 }
 
 /*====================
 Quill
  ====================*/
 .ql-snow {
-	position: absolute;
-	top: 7em;
-	left: calc(50% - ((100% - 1em) / 2));
+    position: absolute;
+    top: 7em;
+    left: calc(50% - ((100% - 1em) / 2));
 
-	padding: 0;
+    padding: 0;
 
-	width: calc(100% - 1.5em);
+    width: calc(100% - 1.5em);
 
-	background-color: var(--beige);
+    background-color: var(--beige);
 }
 
 .ql-snow p {
-	font-family: var(--fontFamily);
-	color: var(--black);
+    font-family: var(--fontFamily);
+    color: var(--black);
 }
 
 .ql-toolbar {
-	border: 0;
-	padding: 0;
+    border: 0;
+    padding: 0;
 
-	width: calc(100% - 1em);
+    width: calc(100% - 1em);
 
-	text-align: center;
-	background: none;
+    text-align: center;
+    background: none;
 
-	background-color: var(--beige);
+    background-color: var(--beige);
 }
 
 body .ql-toolbar.ql-snow {
-	border: 0;
+    border: 0;
 }
 
 .ql-toolbar .ql-formats .ql-bold,
 .ql-toolbar .ql-formats .ql-italic,
 .ql-toolbar .ql-formats .ql-underline,
 .ql-toolbar .ql-formats .ql-strike {
-	margin: 0.5em 1em 0.5em 1em;
-	padding: 1.5em;
-	border-radius: 360px;
+    margin: 0.5em 1em 0.5em 1em;
+    padding: 1.5em;
+    border-radius: 360px;
 
-	background-color: var(--blue);
+    background-color: var(--blue);
 }
 
 .ql-toolbar .ql-formats .ql-bold svg,
 .ql-toolbar .ql-formats .ql-italic svg,
 .ql-toolbar .ql-formats .ql-underline svg,
 .ql-toolbar .ql-formats .ql-strike svg {
-	position: relative;
-	top: -0.85em;
-	left: -0.85em;
+    position: relative;
+    top: -0.85em;
+    left: -0.85em;
 
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 
-	height: 1.75em;
+    height: 1.75em;
 
-	filter: brightness(100);
+    filter: brightness(100);
 }
 
 .ql-container {
-	top: 6.575em;
-	left: 0.625em;
+    top: 6.575em;
+    left: 0.625em;
 
-	border: 0;
-	padding: 0;
+    border: 0;
+    padding: 0;
 
-	width: calc(100% - 1.25em);
+    width: calc(100% - 1.25em);
 
-	font-size: 1em;
+    font-size: 1em;
 }
 
 /* ids */
 
 #editor {
-	border: 0;
+    border: 0;
 
-	height: 37em;
+    height: 37em;
 }
 
 #editor::after {
-	content: "";
-	position: absolute;
-	height: 1px;
-	background: var(--black);
-	top: 0;
-	width: calc(100% - 3em);
-	left: 50%;
-	transform: translateX(-50%);
+    content: "";
+    position: absolute;
+    height: 1px;
+    background: var(--black);
+    top: 0;
+    width: calc(100% - 3em);
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /*====================
 Pop-ups letter
  ====================*/
 .popup {
-	position: absolute;
-	top: calc(50% - (8.5em / 2));
-	left: calc(50% - 10em);
+    position: absolute;
+    top: calc(50% - (8.5em / 2));
+    left: calc(50% - 10em);
 
-	margin: 0;
-	border-radius: 5px;
-	padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    padding: 0;
 
-	width: 20em;
+    width: 20em;
 
-	text-align: center;
-	color: var(--white);
-	background-color: var(--blue);
+    text-align: center;
+    color: var(--white);
+    background-color: var(--blue);
 }
 
 .popup img {
-	position: absolute;
-	top: 1em;
-	right: 1em;
-	float: right;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    float: right;
 
-	width: 1.25em;
+    width: 1.25em;
 }
 
 .confirm-button:hover,
@@ -172,111 +174,111 @@ Pop-ups letter
 .popup div button:hover,
 .bottle-editor svg:hover,
 #back-button:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .popup h2 {
-	position: relative;
-	left: calc(50% - (80% / 2));
+    position: relative;
+    left: calc(50% - (80% / 2));
 
-	margin: 0;
-	padding: 1em 1em 0.5em 1em;
+    margin: 0;
+    padding: 1em 1em 0.5em 1em;
 
-	width: 80%;
+    width: 80%;
 
-	font-weight: bold;
-	font-size: 1.25em;
+    font-weight: bold;
+    font-size: 1.25em;
 }
 
 .popup div {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 
-	margin: 0;
+    margin: 0;
 }
 
 .popup a,
 .popup label,
 .styled-like-a {
-	border: 0;
-	padding: 1em 0 1em 0;
+    border: 0;
+    padding: 1em 0 1em 0;
 
-	width: 100%;
+    width: 100%;
 
-	font-size: 1em;
-	text-decoration: none;
+    font-size: 1em;
+    text-decoration: none;
 }
 
 .popup a input {
-	margin: 0;
-	border: 0;
-	padding: 0;
+    margin: 0;
+    border: 0;
+    padding: 0;
 
-	color: var(--white);
-	font-size: 1em;
-	background: none;
+    color: var(--white);
+    font-size: 1em;
+    background: none;
 }
 
 .popup section:first-of-type a input {
-	font-weight: var(--fontBold);
+    font-weight: var(--fontBold);
 }
 
 .popup a:first-of-type {
-	border-radius: 0 0 0 5px;
-	background-color: var(--red);
+    border-radius: 0 0 0 5px;
+    background-color: var(--red);
 }
 
 .popup a:nth-of-type(2),
 .styled-like-a {
-	border: 0;
-	border-radius: 0 0 5px 0;
+    border: 0;
+    border-radius: 0 0 5px 0;
 
-	font-weight: var(--fontBold);
-	color: var(--white);
-	background-color: var(--darkBlue);
+    font-weight: var(--fontBold);
+    color: var(--white);
+    background-color: var(--darkBlue);
 }
 
 .popup section:nth-of-type(3) form {
-	position: relative;
-	left: calc(50% - (80% / 2));
+    position: relative;
+    left: calc(50% - (80% / 2));
 
-	margin-top: 1em;
-	padding: 0;
+    margin-top: 1em;
+    padding: 0;
 
-	width: 80%;
+    width: 80%;
 }
 
 .popup section:nth-of-type(3) input[type="text"] {
-	margin: 2em 0 2em 0;
-	border: 0;
-	border-radius: 5px;
+    margin: 2em 0 2em 0;
+    border: 0;
+    border-radius: 5px;
 
-	width: 100%;
-	height: 2em;
+    width: 100%;
+    height: 2em;
 
-	color: var(--black);
+    color: var(--black);
 }
 
 .popup section:nth-of-type(3) input[type="text"]:focus {
-	outline: 3px solid var(--red);
+    outline: 3px solid var(--red);
 }
 
 .popup section:nth-of-type(3) input[type="submit"] {
-	position: relative;
-	left: -2em;
+    position: relative;
+    left: -2em;
 
-	border: 0;
-	border-radius: 0 0 5px 5px;
-	padding: 1em 0em 1em 0em;
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    padding: 1em 0em 1em 0em;
 
-	width: 125%;
+    width: 125%;
 
-	font-size: 1em;
-	text-align: center;
-	font-weight: var(--fontBold);
-	color: var(--white);
-	background-color: var(--darkBlue);
+    font-size: 1em;
+    text-align: center;
+    font-weight: var(--fontBold);
+    color: var(--white);
+    background-color: var(--darkBlue);
 }
 
 /*====================
@@ -284,84 +286,84 @@ Draft partial
  ====================*/
 
 .draft-item {
-	position: relative;
-	left: calc(50% - ((100% - 0.25em) / 2));
+    position: relative;
+    left: calc(50% - ((100% - 0.25em) / 2));
 
-	width: calc(100% - 1em);
+    width: calc(100% - 1em);
 
-	margin: 1em 0 1em 0.25em;
-	border-radius: 10px;
-	padding: 1em;
+    margin: 1em 0 1em 0.25em;
+    border-radius: 10px;
+    padding: 1em;
 
-	background-color: var(--white);
+    background-color: var(--white);
 }
 
 .draft-item:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .draft-item:not(:first-of-type) {
-	margin-top: 1.5em;
+    margin-top: 1.5em;
 }
 
 .draft-item img:first-of-type {
-	position: absolute;
-	top: 1em;
-	right: 1em;
-	float: right;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    float: right;
 
-	width: 1.25em;
+    width: 1.25em;
 
-	filter: brightness(0);
-	opacity: 0;
+    filter: brightness(0);
+    opacity: 0;
 }
 
 .draft-item img:first-of-type:hover {
-	opacity: 1;
-	transition: 10ms;
+    opacity: 1;
+    transition: 10ms;
 }
 
 .draft-item img:nth-of-type(2) {
-	position: absolute;
+    position: absolute;
 
-	border-radius: 360px;
+    border-radius: 360px;
 
-	width: 3.5em;
+    width: 3.5em;
 }
 
 .draft-item:last-of-type {
-	margin-bottom: 10em;
+    margin-bottom: 10em;
 }
 
 .draft-item p {
-	margin: 0 1em 0 calc(3.5em + 0.75em);
-	padding: 0.125em 0 0.125em 0;
+    margin: 0 1em 0 calc(3.5em + 0.75em);
+    padding: 0.125em 0 0.125em 0;
 
-	color: var(--black);
+    color: var(--black);
 }
 
 .draft-item p:first-of-type {
-	font-weight: var(--fontBold);
+    font-weight: var(--fontBold);
 }
 
 .draft-item p:last-of-type {
-	margin: 1.5em 0 0 0.25em;
+    margin: 1.5em 0 0 0.25em;
 
-	font-size: 0.75em;
+    font-size: 0.75em;
 }
 
 .draft-content {
-	overflow: hidden;
+    overflow: hidden;
 
-	line-height: 1.25em;
-	max-height: calc(1.25em * 2.475);
+    line-height: 1.25em;
+    max-height: calc(1.25em * 2.475);
 }
 
 .draft-content p {
-	overflow: hidden;
-	max-width: 32.5ch;
+    overflow: hidden;
+    max-width: 32.5ch;
 
-	text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 /*====================
@@ -369,78 +371,78 @@ Bottle.ejs
  ====================*/
 
 .bottle-editor {
-	width: calc(100% - 1em);
+    width: calc(100% - 1em);
 }
 
 .bottle-editor h1 {
-	position: absolute;
-	top: 2.45em;
-	left: calc(1.5em + 3.25em);
+    position: absolute;
+    top: 2.45em;
+    left: calc(1.5em + 3.25em);
 
-	font-weight: var(--fontRegular);
-	font-size: 1.3em;
+    font-weight: var(--fontRegular);
+    font-size: 1.3em;
 }
 
 .bottle-editor svg {
-	margin: 2em 0 0 0.5em;
-	border-radius: 360px;
-	padding: 0.5em;
+    margin: 2em 0 0 0.5em;
+    border-radius: 360px;
+    padding: 0.5em;
 
-	height: 4.125em;
+    height: 4.125em;
 
-	background-color: var(--blue);
+    background-color: var(--blue);
 }
 
 .bottle-img {
-	position: absolute;
-	top: calc(50% - 12.5em);
-	left: calc(50% - (10em / 2));
+    position: absolute;
+    top: calc(50% - 12.5em);
+    left: calc(50% - (10em / 2));
 
-	width: 10em;
+    width: 10em;
 }
 
 /*====================
 Pop-ups bottle
  ====================*/
 .bottle section:nth-of-type(2) div {
-	flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .bottle section:nth-of-type(2) label,
 .bottle section:nth-of-type(2) p {
-	border: 0;
-	border-radius: 0 0 5px 5px;
-	padding: 1em 0em 1em 0em;
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    padding: 1em 0em 1em 0em;
 
-	cursor: pointer;
-	width: 143%;
+    cursor: pointer;
+    width: 143%;
 
-	font-size: 1em;
-	text-align: center;
+    font-size: 1em;
+    text-align: center;
 
-	background-color: var(--darkBlue);
+    background-color: var(--darkBlue);
 }
 
 .bottle section:nth-of-type(2) p {
-	margin: 0;
+    margin: 0;
 }
 
 .bottle section:nth-of-type(2) .output {
-	position: relative;
-	top: 0;
-	right: 0;
-	float: none;
+    position: relative;
+    top: 0;
+    right: 0;
+    float: none;
 
-	margin: 1em;
-	border: 5px solid var(--brown-dark);
-	padding: 15px;
-	border-radius: 5px;
+    margin: 1em;
+    border: 5px solid var(--brown-dark);
+    padding: 15px;
+    border-radius: 5px;
 
-	width: 10em;
+    width: 10em;
 
-	background-color: var(--brown);
+    background-color: var(--brown);
 }
 
 .bottle section:nth-of-type(2) .output:hover {
-	cursor: auto;
+    cursor: auto;
 }

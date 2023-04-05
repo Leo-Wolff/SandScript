@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb') // Defining ObjectId
-const dbController = require('./editor-functions.js')
+const { ObjectId } = require("mongodb") // Defining ObjectId
+const dbController = require("./editor-functions.js")
 
 // TEXT EDITOR RELATED PAGES
 exports.letter = async (req, res) => {
@@ -9,13 +9,13 @@ exports.letter = async (req, res) => {
         let draftID = new ObjectId(req.query.draftID)
         let draftContent = await letters.findOne({ _id: draftID })
         let recipientProfile = await dbController.userFromUsers(
-            'users',
+            "users",
             draftContent.recipient
         )
 
-        console.log('Showing document:', req.query.documentId)
+        console.log("Showing document:", req.query.documentId)
 
-        res.render('pages/letter.ejs', {
+        res.render("pages/letter.ejs", {
             letters: draftContent,
             recipient: recipientProfile,
         })
@@ -29,13 +29,13 @@ exports.letter = async (req, res) => {
         console.log(matchUser)
 
         let recipientProfile = await dbController.userFromUsers(
-            'users',
+            "users",
             matchUser
         )
 
-        let noData = await dbController.dataFromDatabase('letters')
+        let noData = await dbController.dataFromDatabase("letters")
 
-        res.render('pages/letter.ejs', {
+        res.render("pages/letter.ejs", {
             letters: noData,
             recipient: recipientProfile,
         })
@@ -44,14 +44,14 @@ exports.letter = async (req, res) => {
 
 // BOTTLE RELATED PAGES
 exports.bottle = (req, res) => {
-    res.render('pages/bottle.ejs')
+    res.render("pages/bottle.ejs")
 }
 
 exports.postBottle = async (req, res) => {
     if (ObjectId.isValid(req.body.id)) {
         // If a draft item was clicked update the data
 
-        console.log('Updated document ID:', req.body.id)
+        console.log("Updated document ID:", req.body.id)
         await dbController.updateDraft(
             letters,
             req.body.id,
@@ -60,7 +60,7 @@ exports.postBottle = async (req, res) => {
             true
         )
 
-        res.redirect('/editor/bottle')
+        res.redirect("/editor/bottle")
     } else {
         // If no draft item was clicked create a new draft
         const currentUser = req.session.user.username
@@ -68,11 +68,11 @@ exports.postBottle = async (req, res) => {
         const matchUser = req.session.matchUser
         console.log(matchUser)
 
-        let user = await dbController.userFromUsers('users', currentUser)
+        let user = await dbController.userFromUsers("users", currentUser)
 
         console.log(user.username)
 
-        console.log('No document ID specified.')
+        console.log("No document ID specified.")
         await dbController.createDraft(
             letters,
             user.username,
@@ -81,7 +81,7 @@ exports.postBottle = async (req, res) => {
             req.body.signed
         )
 
-        res.redirect('/editor/bottle')
+        res.redirect("/editor/bottle")
     }
 }
 
@@ -90,18 +90,18 @@ exports.drafts = async (req, res) => {
     const currentUser = req.session.user.username
 
     try {
-        let user = await dbController.userFromUsers('users', currentUser)
+        let user = await dbController.userFromUsers("users", currentUser)
         let draft = await dbController.draftsFromLetters(
-            'letters',
+            "letters",
             user.username
         )
 
-        res.render('pages/drafts.ejs', {
+        res.render("pages/drafts.ejs", {
             letters: draft,
         })
     } catch (err) {
         console.error(err)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }
 
@@ -117,7 +117,7 @@ exports.postDraft = async (req, res) => {
     if (ObjectId.isValid(req.body.id)) {
         // If a draft item was clicked update the data
 
-        console.log('Updated document ID:', req.body.id)
+        console.log("Updated document ID:", req.body.id)
         await dbController.updateDraft(
             letters,
             req.body.id,
@@ -126,7 +126,7 @@ exports.postDraft = async (req, res) => {
             false
         )
 
-        res.redirect('/editor/drafts')
+        res.redirect("/editor/drafts")
     } else {
         // If no draft item was clicked create a new draft
         const currentUser = req.session.user.username
@@ -134,11 +134,11 @@ exports.postDraft = async (req, res) => {
         const matchUser = req.session.matchUser
         console.log(matchUser)
 
-        let user = await dbController.userFromUsers('users', currentUser)
+        let user = await dbController.userFromUsers("users", currentUser)
 
         console.log(user.username)
 
-        console.log('No document ID specified.')
+        console.log("No document ID specified.")
         await dbController.createDraft(
             letters,
             user.username,
@@ -147,6 +147,6 @@ exports.postDraft = async (req, res) => {
             req.body.signed
         )
 
-        res.redirect('/editor/drafts')
+        res.redirect("/editor/drafts")
     }
 }

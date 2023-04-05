@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<%- include('../partials/head'); %>
-	</head>
-	<body class="standard-bg container">
-		<main class="inloggen">
-			<section>
-				<h2>Login</h2>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body class="standard-bg container">
+        <main class="inloggen">
+            <section>
+                <h2>Login</h2>
 
-				<form action="/account/login" method="post">
-					<input
-						type="text"
-						id="username"
-						name="username"
-						placeholder="Gebruikersnaam"
-					/>
-					<input
-						type="password"
-						id="password"
-						name="password"
-						placeholder="Wachtwoord"
-					/>
-					<input type="submit" value="login" />
-				</form>
+                <form action="/account/login" method="post">
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Gebruikersnaam"
+                    />
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Wachtwoord"
+                    />
+                    <input type="submit" value="login" />
+                </form>
 
-				<p>Nog geen account?</p>
-				<a href="/registreren">Meld je nu aan!</a>
-			</section>
-		</main>
-		<footer></footer>
+                <p>Nog geen account?</p>
+                <a href="/registreren">Meld je nu aan!</a>
+            </section>
+        </main>
+        <footer></footer>
 
-		<script src="/javascript/script.js"></script>
-	</body>
+        <script src="/javascript/script.js"></script>
+    </body>
 </html>

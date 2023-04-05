@@ -1,29 +1,29 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
+    box-sizing: border-box;
+    margin: 0;
 }
 :root {
-	--bgClr: linear-gradient(
-		180deg,
-		rgba(0, 197, 175, 1) 0%,
-		rgba(0, 177, 190, 1) 42%,
-		rgba(0, 122, 171, 1) 100%
-	);
-	--darkBlue: #032847;
-	--blue: #00b1be;
-	--lightBlue: #00c5af;
-	--white: #fff;
-	--red: #db4b3c;
-	--beige: #f2e8cf;
-	--brown: #e8c274;
-	--brown-dark: #c7a864;
-	--black: #001f3f;
-	--fontFamily: "Ubuntu", sans-serif;
-	--fontLight: 300;
-	--fontRegular: 400;
-	--fontMedium: 500;
-	--fontBold: 700;
-	--fontMenu: 14px;
+    --bgClr: linear-gradient(
+        180deg,
+        rgba(0, 197, 175, 1) 0%,
+        rgba(0, 177, 190, 1) 42%,
+        rgba(0, 122, 171, 1) 100%
+    );
+    --darkBlue: #032847;
+    --blue: #00b1be;
+    --lightBlue: #00c5af;
+    --white: #fff;
+    --red: #db4b3c;
+    --beige: #f2e8cf;
+    --brown: #e8c274;
+    --brown-dark: #c7a864;
+    --black: #001f3f;
+    --fontFamily: "Ubuntu", sans-serif;
+    --fontLight: 300;
+    --fontRegular: 400;
+    --fontMedium: 500;
+    --fontBold: 700;
+    --fontMenu: 14px;
 }
 
 p,
@@ -36,71 +36,71 @@ h5,
 h6,
 label,
 input {
-	color: var(--white);
-	font-family: var(--fontFamily);
-	text-decoration: none;
+    color: var(--white);
+    font-family: var(--fontFamily);
+    text-decoration: none;
 }
 
 /*====================
  General styling
  ====================*/
 body.container {
-	width: 95%;
-	position: relative;
-	margin: auto;
-	display: block;
+    width: 95%;
+    position: relative;
+    margin: auto;
+    display: block;
 }
 
 body.home-bg {
-	background: var(--bgClr);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	height: 100%;
+    background: var(--bgClr);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
 }
 
 body.standard-bg {
-	background: var(--darkBlue);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	height: 100%;
+    background: var(--darkBlue);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
 }
 
 .standard-bg header {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .standard-bg main nav {
-	background: #fff;
-	margin: auto;
-	border-radius: 10px;
-	margin-top: 30px;
+    background: #fff;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: 30px;
 }
 
 button svg {
-	height: 40px;
+    height: 40px;
 }
 
 button.dark,
 button.light {
-	width: 60px;
-	height: 60px;
-	border: none;
-	border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
 }
 button.first {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 button.light {
-	background-color: var(--lightBlue);
+    background-color: var(--lightBlue);
 }
 .standard-bg button.dark,
 .standard-bg button.light {
-	background-color: var(--blue);
+    background-color: var(--blue);
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 /*====================
@@ -108,66 +108,66 @@ SVG Buttons Styling
 ====================*/
 
 svg .cls-1 {
-	stroke-miterlimit: 10;
+    stroke-miterlimit: 10;
 }
 
 svg .cls-1,
 svg .cls-2 {
-	fill: var(--darkBlue);
-	stroke: #fff;
-	stroke-width: 5px;
+    fill: var(--darkBlue);
+    stroke: #fff;
+    stroke-width: 5px;
 }
 
 svg .cls-2 {
-	stroke-linecap: round;
-	stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 svg.treasure {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	height: 130px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 130px;
 }
 
 svg.treasure .cls-1,
 svg.treasure .cls-2 {
-	fill: var(--darkBlue);
-	stroke-width: 2px;
+    fill: var(--darkBlue);
+    stroke-width: 2px;
 }
 
 svg.filtering {
-	height: 2.5em;
-	width: 100%;
+    height: 2.5em;
+    width: 100%;
 }
 
 svg g#Icons path {
-	fill: var(--white);
+    fill: var(--white);
 }
 
 svg.sorting {
-	height: 2em;
-	width: 100%;
+    height: 2em;
+    width: 100%;
 }
 
 svg.menu-item {
-	height: 50px;
-	width: 100%;
+    height: 50px;
+    width: 100%;
 }
 footer nav ul li:nth-of-type(3) a svg.menu-item {
-	transform: rotate(10deg);
+    transform: rotate(10deg);
 }
 
 footer.light svg .cls-1,
 svg .cls-2 {
-	fill: var(--blue);
-	stroke: #fff;
-	stroke-width: 5px;
+    fill: var(--blue);
+    stroke: #fff;
+    stroke-width: 5px;
 }
 
 footer.light svg.active .cls-1,
 footer.light svg.active .cls-2 {
-	fill: #fff;
-	stroke: transparent;
+    fill: #fff;
+    stroke: transparent;
 }

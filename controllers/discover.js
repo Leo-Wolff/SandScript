@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb') // Defining ObjectId
+const { ObjectId } = require("mongodb") // Defining ObjectId
 
 // DISCOVER RELATED PAGES
 // Load firstMatch on pageload
@@ -17,10 +17,10 @@ exports.discover = async (req, res) => {
             },
         }) // find FirstMatch if username is not in liked or disliked of currentUser, Don't show currentUser as firstMatch.
 
-        res.render('pages/gefiltered', { firstMatch }) // Render the page with the first match
+        res.render("pages/gefiltered", { firstMatch }) // Render the page with the first match
     } catch (err) {
         console.log(err.stack)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }
 
@@ -37,23 +37,23 @@ exports.postDiscover = async (req, res) => {
             // If the key is not empty
             if (req.body[key]) {
                 // Check if the key is minAge or maxAge
-                if (key === 'minAge' || key === 'maxAge') {
+                if (key === "minAge" || key === "maxAge") {
                     filters.age = {
                         $gte: parseInt(req.body.minAge),
                         $lte: parseInt(req.body.maxAge),
                     }
-                } else if (key === 'gender') {
+                } else if (key === "gender") {
                     filters.gender = req.body.gender
                 } else if (
-                    key === 'language' &&
-                    req.body.language !== 'choose'
+                    key === "language" &&
+                    req.body.language !== "choose"
                 ) {
                     filters.language = req.body.language
-                } else if (key === 'country' && req.body.country !== 'choose') {
+                } else if (key === "country" && req.body.country !== "choose") {
                     filters.country = req.body.country
                 } else if (
-                    key === 'interests' &&
-                    req.body.interests !== 'choose'
+                    key === "interests" &&
+                    req.body.interests !== "choose"
                 ) {
                     filters.interests = req.body.interests
                 }
@@ -62,7 +62,7 @@ exports.postDiscover = async (req, res) => {
 
         console.log(filters)
 
-        res.cookie('selectedFilters', JSON.stringify(filters)) // Save selected filters in cookie
+        res.cookie("selectedFilters", JSON.stringify(filters)) // Save selected filters in cookie
 
         const currentUser = req.session.user
         const firstMatch = await users.findOne({
@@ -73,10 +73,10 @@ exports.postDiscover = async (req, res) => {
             },
         })
 
-        res.render('pages/gefiltered', { firstMatch })
+        res.render("pages/gefiltered", { firstMatch })
     } catch (err) {
         console.log(err.stack)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }
 
@@ -87,10 +87,10 @@ exports.match = async (req, res) => {
             username: { $in: currentUser.matches.slice(-1) },
         })
 
-        res.render('pages/match.ejs', { userMatch }) // Match pagina met als route /match
+        res.render("pages/match.ejs", { userMatch }) // Match pagina met als route /match
     } catch (err) {
         console.error(err)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }
 
@@ -119,7 +119,7 @@ exports.liked = async (req, res) => {
             currentUser.likedBy.includes(firstMatch.username)
         ) {
             // If firstMatch username is in the currentUser Liked and likedBy redirect to matched
-            console.log('match')
+            console.log("match")
             await users.updateOne(
                 { username: currentUser.username }, // Update firstMatched db
                 { $push: { matches: firstMatch.username } } // Add currentUser username to matches
@@ -132,15 +132,15 @@ exports.liked = async (req, res) => {
 
             currentUser.matches.push(firstMatch.username)
 
-            res.redirect('/match')
+            res.redirect("/match")
         } else {
             // Else no match redirect to discover page
-            console.log('geen match')
-            res.redirect('/discover')
+            console.log("geen match")
+            res.redirect("/discover")
         }
     } catch (err) {
         console.log(err.stack)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }
 
@@ -159,10 +159,10 @@ exports.disliked = async (req, res) => {
             { $push: { disliked: firstMatch.username } } // Add firstMatch username to liked
         )
 
-        res.redirect('/discover')
+        res.redirect("/discover")
     } catch (err) {
         console.log(err.stack)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }
 
@@ -177,10 +177,10 @@ exports.matchlist = async (req, res) => {
 
         // console.log(userMatches)
 
-        res.render('pages/matches', { userMatches }) // Render the page with the matches
+        res.render("pages/matches", { userMatches }) // Render the page with the matches
     } catch (err) {
         console.log(err.stack)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }
 
@@ -193,11 +193,11 @@ exports.postMatchlist = async (req, res) => {
 
         let sortOption = {}
 
-        if (sortBy === 'age') {
+        if (sortBy === "age") {
             sortOption = { age: 1 }
-        } else if (sortBy === 'name') {
+        } else if (sortBy === "name") {
             sortOption = { name: 1 }
-        } else if (sortBy === '-name') {
+        } else if (sortBy === "-name") {
             sortOption = { name: -1 }
         }
 
@@ -207,12 +207,12 @@ exports.postMatchlist = async (req, res) => {
             .toArray() // Retrieve all the matches, sorted by the user's selection
 
         if (userMatches.length > 0) {
-            res.render('pages/matches', { userMatches })
+            res.render("pages/matches", { userMatches })
         } else {
-            res.send('no results')
+            res.send("no results")
         }
     } catch (err) {
         console.log(err.stack)
-        res.status(500).send('Internal Server Error')
+        res.status(500).send("Internal Server Error")
     }
 }

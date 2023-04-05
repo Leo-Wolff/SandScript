@@ -1,18 +1,18 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
 
-const editorController = require('../controllers/editor.js')
+const editorController = require("../controllers/editor.js")
 
-router.get('/letter', editorController.letter)
+router.get("/letter", editorController.letter)
 
-router.get('/bottle', editorController.bottle)
+router.get("/bottle", editorController.bottle)
 
-router.post('/bottle', editorController.postBottle)
+router.post("/bottle", editorController.postBottle)
 
-router.get('/drafts', editorController.drafts)
+router.get("/drafts", editorController.drafts)
 
-router.delete('/delete-draft', editorController.deleteDraft)
+router.delete("/delete-draft", editorController.deleteDraft)
 
-router.post('/drafts', editorController.postDraft)
+router.post("/drafts", editorController.postDraft)
 
 module.exports = router

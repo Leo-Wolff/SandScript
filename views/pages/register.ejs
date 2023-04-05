@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<%- include('../partials/head'); %>
-	</head>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
 
-	<body class="standard-bg">
-		<main>
-			<h2>Register</h2>
+    <body class="standard-bg">
+        <main>
+            <h2>Register</h2>
 
-			<form class="register-form" method="POST" action="/profile">
-				<label for="username">Username</label>
-				<input type="text" name="username" id="username" required />
-				<label for="email">Email</label>
-				<input type="email" name="email" id="email" required />
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" required />
-				<button type="submit" class="btn">Register</button>
-			</form>
+            <form class="register-form" method="POST" action="/profile">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required />
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required />
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required />
+                <button type="submit" class="btn">Register</button>
+            </form>
 
-			<p class="log-in-prompt">
-				Already have an account? <a href="/inloggen">Log in!</a>
-			</p>
-		</main>
-	</body>
+            <p class="log-in-prompt">
+                Already have an account? <a href="/inloggen">Log in!</a>
+            </p>
+        </main>
+    </body>
 </html>

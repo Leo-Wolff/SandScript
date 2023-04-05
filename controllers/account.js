@@ -1,13 +1,13 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt")
 
 // LOG IN RELATED PAGES
 exports.logout = (req, res) => {
     req.session.destroy()
-    res.redirect('/account/login')
+    res.redirect("/account/login")
 }
 
 exports.login = (req, res) => {
-    res.render('pages/login.ejs')
+    res.render("pages/login.ejs")
 }
 
 exports.postLogin = async (req, res) => {
@@ -32,10 +32,10 @@ exports.postLogin = async (req, res) => {
             disliked: currentUser.disliked,
             matches: currentUser.matches,
         }
-        res.redirect('/')
+        res.redirect("/")
     } else {
-        console.log('Account not found')
-        res.redirect('/account/login')
+        console.log("Account not found")
+        res.redirect("/account/login")
     }
 }
 
@@ -70,7 +70,7 @@ exports.update = async (req, res) => {
     req.session.user.language = req.body.language
     req.session.user.gender = req.body.gender
 
-    res.redirect('/account/profile')
+    res.redirect("/account/profile")
 }
 
 // PROFILE RELATED PAGES
@@ -86,7 +86,7 @@ exports.profile = async (req, res) => {
         country,
         language,
     } = req.session.user
-    res.render('pages/profile.ejs', {
+    res.render("pages/profile.ejs", {
         username: username,
         email: email,
         password: password,
@@ -112,7 +112,7 @@ exports.editProfile = async (req, res) => {
         language,
     } = req.session.user
 
-    res.render('pages/account.ejs', {
+    res.render("pages/account.ejs", {
         username: username,
         email: email,
         password: password,
@@ -127,7 +127,7 @@ exports.editProfile = async (req, res) => {
 
 // REGISTER RELATED PAGES
 exports.register = (req, res) => {
-    res.render('pages/register.ejs')
+    res.render("pages/register.ejs")
 }
 
 exports.postRegister = async (req, res) => {
@@ -142,5 +142,5 @@ exports.postRegister = async (req, res) => {
     }
 
     users.insertOne(user)
-    res.redirect('/account/profile')
+    res.redirect("/account/profile")
 }

@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb') // Defining ObjectId
+const { ObjectId } = require("mongodb") // Defining ObjectId
 
 async function createDraft(
     collection,

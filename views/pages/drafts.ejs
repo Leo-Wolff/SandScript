@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<%- include('../partials/head'); %>
-	</head>
-	<body class="standard-bg container">
-		<header>
-			<button class="dark first">
-				<%- include('../partials/bag'); %>
-			</button>
-		</header>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body class="standard-bg container">
+        <header>
+            <button class="dark first">
+                <%- include('../partials/bag'); %>
+            </button>
+        </header>
 
-		<main>
-			<nav>
-				<ul>
-					<li><a href="/matches">Matches</a></li>
-					<li>Drafts</li>
-				</ul>
-			</nav>
+        <main>
+            <nav>
+                <ul>
+                    <li><a href="/matches">Matches</a></li>
+                    <li>Drafts</li>
+                </ul>
+            </nav>
 
-			<section class="draft-list">
-				<% letters.forEach((draft)=> { %>
-				<div class="draft-item">
-					<img
-						data-id="<%= draft._id %>"
-						src="/img/close-button.svg"
-						alt="Cancel"
-					/>
+            <section class="draft-list">
+                <% letters.forEach((draft)=> { %>
+                <div class="draft-item">
+                    <img
+                        data-id="<%= draft._id %>"
+                        src="/img/close-button.svg"
+                        alt="Cancel"
+                    />
 
-					<img
-						src="/img/profile-picture.svg"
-						alt="Profile picture of recipient"
-					/>
+                    <img
+                        src="/img/profile-picture.svg"
+                        alt="Profile picture of recipient"
+                    />
 
-					<p>RE: <%= draft.recipient %></p>
-					<div class="draft-content"><p><%- draft.text %></p></div>
-					<p>
-						<% if (draft.signed && draft.signed.length) { %> - <%= draft.signed
-						%> <% } else { %> <% } %>
-					</p>
-					<p>
-						Last updated: <%= new Date(draft.dateUpdated).toLocaleDateString()
-						%>
-					</p>
-				</div>
-				<% }) %>
-			</section>
-		</main>
+                    <p>RE: <%= draft.recipient %></p>
+                    <div class="draft-content"><p><%- draft.text %></p></div>
+                    <p>
+                        <% if (draft.signed && draft.signed.length) { %> - <%=
+                        draft.signed %> <% } else { %> <% } %>
+                    </p>
+                    <p>
+                        Last updated: <%= new
+                        Date(draft.dateUpdated).toLocaleDateString() %>
+                    </p>
+                </div>
+                <% }) %>
+            </section>
+        </main>
 
-		<footer class="light"><%- include('../partials/footer'); %></footer>
+        <footer class="light"><%- include('../partials/footer'); %></footer>
 
-		<script src="/javascript/script.js"></script>
-	</body>
+        <script src="/javascript/script.js"></script>
+    </body>
 </html>
