@@ -841,7 +841,7 @@ footer nav ul li:last-of-type {
 	padding-right: 0;
 }
 footer.light nav {
-	background: var(--blue);
+	background: var(--blue) !important;
 	border-radius: 0.8em;
 	padding: 1em 1.2em;
 }
