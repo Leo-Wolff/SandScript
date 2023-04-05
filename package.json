@@ -5,7 +5,9 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon server.js"
+		"start": "nodemon server.js",
+		"prestart": "gulp sass",
+		"dev": "nodemon --ignore static/css/all.css"
 	},
 	"repository": {
 		"type": "git",
@@ -20,6 +22,8 @@
 	"homepage": "https://github.com/Leo-Wolff/SandScript#readme",
 	"devDependencies": {
 		"eslint": "^8.37.0",
+		"gulp": "^4.0.2",
+		"gulp-concat": "^2.6.1",
 		"nodemon": "^2.0.22"
 	},
 	"dependencies": {
