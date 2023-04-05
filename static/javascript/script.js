@@ -184,36 +184,20 @@ if (document.getElementById("back-button") != null) {
         signPopup.classList.add("hidden")
         signForm.classList.add("hidden")
 
-// FILTER RELATED        
-// search for filter form
-const filterForm = document.getElementById("filter")
-
-// if filter form has been found, do the function
-if (filterForm != null) {
-	const filterIcon = document.querySelector(".filterIcon")
         console.log("Open stop writing letter pop-up")
     })
 }
 
-	filterIcon.addEventListener("click", () => {
-  	filterForm.classList.remove("hidden")// show form when clicked on filterIcon
-	})
-    
 if (document.querySelector(".confirm-button") != null && signForm != null) {
     document.querySelector(".confirm-button").addEventListener("click", () => {
         signPopup.classList.remove("hidden")
         stopPopup.classList.add("hidden")
         signForm.classList.add("hidden")
 
-	// close button to close form
-	const closeFilterFormButton = document.querySelector(".cancel-filter")
         console.log("Open sign letter pop-up")
     })
 }
 
-	closeFilterFormButton.addEventListener("click", () => {
-  	filterForm.classList.add("hidden")// hide form when clicked on clos button
-})
 if (document.querySelector(".styled-like-a") != null) {
     document.querySelector(".styled-like-a").addEventListener("click", () => {
         signForm.classList.remove("hidden")
@@ -240,8 +224,22 @@ if (document.querySelector(".close-button") != null) {
     })
 }
 
-function openForm() {
-    document.getElementById("filter").style.display = "block"
+// FILTER FORM RELATED
+
+// search for filter form
+const filterForm = document.getElementById("filter")
+
+// if filter form has been found, do the function
+if (filterForm != null) {
+    const filterIcon = document.querySelector(".filterIcon")
+    filterIcon.addEventListener("click", () => {
+        filterForm.classList.remove("hidden") // show form when clicked on filterIcon
+    }) // close button to close form
+
+    const closeFilterFormButton = document.querySelector(".cancel-filter")
+    closeFilterFormButton.addEventListener("click", () => {
+        filterForm.classList.add("hidden") // hide form when clicked on clos button
+    })
 }
 
 // search for sort form
@@ -249,16 +247,13 @@ const sorterForm = document.getElementById("sorter")
 
 // if sorter form has been found, do the function
 if (sorterForm != null) {
-	const sortIcon = document.querySelector(".sortIcon")
+    const sortIcon = document.querySelector(".sortIcon")
+    sortIcon.addEventListener("click", () => {
+        sorterForm.classList.remove("hidden") // show form when clicked on sortIcon
+    }) // close button to close form
 
-	sortIcon.addEventListener("click", () => {
-  	sorterForm.classList.remove("hidden")// show form when clicked on sortIcon
-	})
-
-	// close button to close form
-	const closeSortFormButton = document.querySelector(".cancel-sorter")
-
-	closeSortFormButton.addEventListener("click", () => {
-  	sorterForm.classList.add("hidden")// hide form when clicked on clos button
-})
+    const closeSortFormButton = document.querySelector(".cancel-sorter")
+    closeSortFormButton.addEventListener("click", () => {
+        sorterForm.classList.add("hidden") // hide form when clicked on clos button
+    })
 }
