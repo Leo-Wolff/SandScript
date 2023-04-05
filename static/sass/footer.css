@@ -1,0 +1,66 @@
+/*====================
+ Footer stijling
+ ====================*/
+footer {
+    position: fixed;
+    bottom: -1.2em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+footer nav {
+    background: var(--darkBlue);
+    border-radius: 0.8em;
+    padding: 1em 1.2em;
+}
+footer nav ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0;
+    list-style-type: none;
+}
+footer nav ul li {
+    padding: 0 1.2em;
+    text-decoration: none;
+}
+footer nav ul li:first-of-type {
+    padding-left: 0;
+}
+footer nav ul li:last-of-type {
+    padding-right: 0;
+}
+footer.light nav {
+    background: var(--blue) !important;
+    border-radius: 0.8em;
+    padding: 1em 1.2em;
+}
+footer.light nav ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0;
+    list-style-type: none;
+}
+footer.light nav ul li {
+    padding: 0 1.2em;
+    text-decoration: none;
+}
+footer.light nav ul li a {
+    text-decoration: none;
+    color: var(--white);
+    font-family: var(--fontFamily);
+    font-weight: var(--fontLight);
+    font-size: var(--fontMenu);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+footer.light nav ul li:first-of-type {
+    padding-left: 0;
+}
+footer.light nav ul li:last-of-type {
+    padding-right: 0;
+}

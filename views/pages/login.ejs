@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body class="standard-bg container">
+        <main class="inloggen">
+            <section>
+                <h2>Login</h2>
+
+                <form action="/account/login" method="post">
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
+                    />
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                    />
+                    <input type="submit" value="login" />
+                </form>
+
+                <p>Not a account yet?</p>
+                <a href="/account/register">Register!</a>
+            </section>
+        </main>
+        <footer></footer>
+
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>

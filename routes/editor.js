@@ -3,12 +3,16 @@ const router = express.Router()
 
 const editorController = require("../controllers/editor.js")
 
-router.get("/drafts", editorController.drafts)
+router.get("/letter", editorController.letter) // Get letter page aka text editor
 
-router.get("/letter", editorController.letter)
+router.get("/bottle", editorController.bottle) // Get bottle page
 
-router.get("/bottle", editorController.bottle)
+router.post("/bottle", editorController.postBottle) // Post letter information and get bottle page
 
-router.post("/bottle", editorController.bottle1)
+router.get("/drafts", editorController.drafts) // Get drafts page
+
+router.delete("/delete-draft", editorController.deleteDraft) // Delete draft document and reload drafts page
+
+router.post("/drafts", editorController.postDraft) // Post letter information and get drafts page
 
 module.exports = router

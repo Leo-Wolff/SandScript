@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body class="matched standard-bg container">
+        <header>
+            <h1>Congratulations, you have a match!</h1>
+        </header>
+
+        <main class="matched">
+            <svg
+                version="1.1"
+                id="Menu"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 250 250"
+                style="enable-background: new 0 0 250 250"
+                xml:space="preserve"
+            >
+                <style type="text/css">
+                    .st0 {
+                        fill: #db4b3c;
+                    }
+                </style>
+                <path
+                    id="Interests"
+                    class="st0"
+                    d="M125,214.07C-57.08,93.75,68.94-0.16,122.91,49.51c0.71,0.65,1.41,1.33,2.09,2.03c0.67-0.7,1.37-1.38,2.09-2.02C181.05-0.19,307.09,93.73,125,214.07"
+                />
+            </svg>
+            <h2><%= userMatch.name %></h2>
+
+            <button><a href="/discover">Discover matches!</a></button>
+            <button><a href="/discover">Write a letter!</a></button>
+        </main>
+
+        <footer class="light"><%- include('../partials/footer'); %></footer>
+
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>

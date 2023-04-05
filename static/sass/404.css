@@ -1,0 +1,17 @@
+#text404 {
+    position: absolute;
+    top: 20em;
+    left: calc(50% - (90% / 2));
+
+    width: 90%;
+
+    text-align: center;
+}
+
+#text404 h1 {
+    font-size: 2.5em;
+}
+
+#text404 p {
+    font-size: 1.2em;
+}

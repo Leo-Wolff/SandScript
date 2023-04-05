@@ -1,8 +1,103 @@
 <html lang="en">
-	<head>
-		<%- include('../partials/head'); %>
-	</head>
-	<body>
-		<script src="/javascript/script.js"></script>
-	</body>
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body class="standard-bg container">
+        <header class="bottle-editor">
+            <!-- Click on img to go to pop-up "Do you want to stop for now?" -->
+            <img id="back-button" src="/img/back-button.svg" />
+
+            <!-- Reciptient of letter -->
+            <h1>To: Bas Kramer</h1>
+
+            <?xml version="1.0" encoding="utf-8"?>
+            <!-- Generator: Adobe Illustrator 27.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <svg
+                class="camera"
+                version="1.1"
+                id="Icons"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 250 247.89"
+                style="enable-background: new 0 0 250 247.89"
+                xml:space="preserve"
+            >
+                <style type="text/css">
+                    .st0 {
+                        fill: transparent;
+                        stroke: #fff;
+                        stroke-width: 10;
+                        stroke-linecap: round;
+                        stroke-linejoin: round;
+                        stroke-miterlimit: 10;
+                    }
+                </style>
+                <g
+                    id="Photo_00000101100847316300574960000000738722244354420384_"
+                >
+                    <path
+                        class="st0"
+                        d="M154.69,129.88c0,16.4-13.29,29.69-29.69,29.69s-29.69-13.29-29.69-29.69s13.29-29.69,29.69-29.69
+		S154.69,113.48,154.69,129.88z"
+                    />
+                    <path
+                        id="Photo"
+                        class="st0"
+                        d="M53.75,76.44C40.63,76.44,30,87.08,30,100.19v71.25c0,13.12,10.63,23.75,23.75,23.75h142.5
+		c13.12,0,23.75-10.63,23.75-23.75v-71.25c0-13.12-10.63-23.75-23.75-23.75h-13.92c-6.3,0-12.34-2.5-16.79-6.96l-9.83-9.83
+		c-4.45-4.45-10.49-6.96-16.79-6.96h-27.83c-6.3,0-12.34,2.5-16.79,6.96l-9.83,9.83c-4.45,4.45-10.49,6.96-16.79,6.96H53.75z
+		 M59.69,100.19c-3.28,0-5.94-2.66-5.94-5.94c0-3.28,2.66-5.94,5.94-5.94c3.28,0,5.94,2.66,5.94,5.94
+		C65.62,97.54,62.97,100.19,59.69,100.19z M166.56,129.88c0,22.95-18.61,41.56-41.56,41.56s-41.56-18.61-41.56-41.56
+		S102.05,88.32,125,88.32S166.56,106.93,166.56,129.88z"
+                    />
+                </g>
+            </svg>
+        </header>
+
+        <img
+            class="bottle-img"
+            src="/img/open-bottle.svg"
+            alt="Your bottle that you can fill with a photo or trinket"
+        />
+
+        <!-- Confirm letter button that will lead to pop-up "" -->
+        <a href="../">
+            <button class="confirm-button">Send bottle</button>
+        </a>
+
+        <!-- POP-UPS -->
+        <section class="popup bottle">
+            <section class="hidden">
+                <img src="/img/close-button.svg" alt="Cancel" />
+                <h2>Do you want to stop for now?</h2>
+                <div>
+                    <a href="../">Exit</a>
+                    <a href="../editor/drafts">Save as draft</a>
+                </div>
+            </section>
+
+            <section class="hidden">
+                <img src="/img/close-button.svg" alt="Cancel" />
+                <h2>Add a photo to put into your bottle</h2>
+                <div>
+                    <input
+                        id="insert-photo"
+                        class="hidden"
+                        type="file"
+                        accept="image/*"
+                    />
+                    <img
+                        class="output hidden"
+                        alt="A preview of the image you have uploaded"
+                    />
+                    <label for="insert-photo">Upload photo</label>
+                    <p class="hidden">Select photo</p>
+                </div>
+            </section>
+        </section>
+
+        <script src="/javascript/script.js"></script>
+    </body>
 </html>
