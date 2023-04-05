@@ -1,0 +1,308 @@
+/*====================
+filter on Discover page stijling
+ ====================*/
+#filter {
+	position: fixed;
+	top: 7em;
+	background: var(--white);
+	padding: 1.5em;
+	z-index: 9;
+	width: 95%;
+	border-radius: 0.8em;
+}
+#filter form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontLight);
+}
+#filter article.event-found h2 {
+	margin: 0;
+}
+#filter form label,
+#filter form section {
+	font-size: 1.2em;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontMedium);
+	margin-bottom: 0.3em;
+	color: var(--black);
+	display: block;
+	width: 100%;
+}
+#filter form input,
+#filter form select {
+	border: solid var(--black) 0.1em;
+	border-radius: 0.4em;
+	padding: 0.8em;
+	margin-bottom: 0.3em;
+	width: 33%;
+	color: var(--black);
+}
+#filter form input#male,
+#filter form input#female {
+	width: inherit !important;
+}
+#filter button.btn:first-of-type {
+	width: 100%;
+	background: var(--blue);
+	border: none;
+	border-radius: 0.4em;
+	color: var(--white);
+	padding: 1.5em;
+	margin-top: 2em;
+	font-weight: var(--fontMedium);
+}
+#filter button.cancel {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	background: none;
+	border: none;
+	font-size: 1.5em;
+}
+
+/*====================
+ Matches on discover page styling
+ ====================*/
+article.event-found {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--fontFamily);
+}
+article.event-found img {
+	width: 100%;
+	padding: 0 6em;
+	margin-bottom: 1em;
+}
+article.event-found p:nth-of-type(3),
+article.event-found p:nth-of-type(5),
+article.event-found p:nth-of-type(7) {
+	width: 100%;
+	text-align: center;
+	margin: 0.8em 0;
+	font-weight: var(--fontMedium);
+}
+article.event-found p:nth-of-type(4),
+article.event-found p:nth-of-type(6) {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0.8em;
+}
+article.event-found h2,
+article.event-found p {
+	color: var(--black);
+}
+article.event-found p b {
+	display: block;
+}
+article.event-found p.username {
+	margin-bottom: 0;
+	text-align: start;
+}
+section.matchable {
+	background: var(--white);
+	padding: 1.5em;
+	border-radius: 0.8em;
+	position: relative;
+	margin-top: 3em;
+}
+section.match-btn {
+	display: flex;
+	justify-content: center;
+	margin: 1.5em;
+	fill: var(--white);
+}
+section.match-btn button.dark.dislike {
+	background-color: var(--red);
+	margin-right: 5em;
+	height: 6em;
+	width: 6em;
+}
+section.match-btn button.dark.like {
+	height: 6em;
+	width: 6em;
+}
+
+/*====================
+ Matched on matches page styling
+====================*/
+section.m-page .bio {
+	grid-area: bio;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	align-content: center;
+}
+section.m-page .Photo {
+	grid-area: Photo;
+}
+section.m-page article.event-found {
+	font-family: var(--fontFamily);
+	display: grid;
+    grid-template-columns: 0.6fr 1.4fr;
+    grid-template-rows: 1fr;
+    gap: 0 0;
+    grid-template-areas: 'Photo bio';
+}
+section.m-page article.event-found img {
+	width: 80%;
+	padding: 0;
+	margin-bottom: 0;
+}
+section.m-page .event-found p:nth-of-type(3) {
+	width: auto;
+	font-weight: var(--fontSmall);
+	margin: 0;
+}
+section.m-page article.event-found h2 {
+	margin: 0;
+	text-align: left;
+}
+section.matchable.m-page {
+	margin-top: 1.5em;
+}
+
+/*====================
+ Sorter on matches page styling
+====================*/
+#sorter {
+	position: fixed;
+	top: 7em;
+	background: var(--white);
+	padding: 1.5em;
+	z-index: 9;
+	width: 95%;
+	border-radius: 0.8em;
+	box-shadow: 0 0 0.8em rgb(0 0 0 / 35%);
+}
+#sorter form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontLight);
+}
+#sorter form article label {
+	display: inline;
+}
+#sorter form input,
+#sorter form select {
+	border: solid var(--black) 0.1em;
+	border-radius: 0.4em;
+	padding: 0.8em;
+	margin-bottom: 0.3em;
+	width: 33%;
+}
+#sorter form section,
+#sorter form label {
+	width: 100%;
+	display: block;
+	color: var(--black);
+	font-size: 1.2em;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontMedium);
+	margin-bottom: 0.3em;
+}
+#sorter form input#male,
+#sorter form input#female {
+	width: inherit !important;
+}
+#sorter button.btn:first-of-type {
+	width: 100%;
+	background: var(--blue);
+	border: none;
+	border-radius: 0.4em;
+	color: var(--white);
+	padding: 1.5em;
+	margin-top: 2em;
+	font-weight: var(--fontMedium);
+}
+#sorter button.cancel {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	background: none;
+	border: none;
+	font-size: 1.5em;
+}
+
+/*====================
+ navigation for match/draft bar on matches page stijling
+====================*/
+.standard-bg main nav ul {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+}
+.standard-bg main nav li {
+	text-decoration: none;
+	list-style-type: none;
+	padding: 0.8em 3em;
+	width: 50%;
+	text-align: center;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontLight);
+}
+.standard-bg main nav li a {
+	color: var(--black);
+}
+.standard-bg main nav li:last-of-type {
+	background: var(--blue);
+	border-top-right-radius: 0.8em;
+	border-bottom-right-radius: 0.8em;
+	color: var(--white);
+}
+.standard-bg main.matches-page nav li:first-of-type {
+	background: var(--blue);
+	border-top-left-radius: 0.8em;
+	border-bottom-left-radius: 0.8em;
+	color: var(--white);
+}
+.standard-bg main.matches-page nav li:last-of-type {
+	background: none;
+	color: var(--black);
+}
+
+/*====================
+ Matched single page stijling
+====================*/
+body.matched header h1 {
+	position: relative;
+	top: 2em;
+	left: 0;
+	text-align: center;
+}
+main.matched {
+	text-align: center;
+}
+main.matched h2 {
+	margin-bottom: 2em;
+}
+main.matched svg {
+	width: 80%;
+	margin-top: 2em;
+}
+main.matched button {
+	width: 100%;
+	padding: 2em;
+	border-radius: 0.8em;
+	border: none;
+	font-size: 1.3em;
+}
+main.matched button:first-of-type {
+	background: var(--white);
+	margin-bottom: 1.3em;
+}
+main.matched button:last-of-type {
+	background: var(--blue);
+}
+main.matched button a {
+	color: var(--black);
+	text-decoration: none;
+}

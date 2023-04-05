@@ -218,57 +218,40 @@ if (draftText != null) {
 	quill.container.firstChild.innerHTML = draftText.innerHTML
 }
 
-// // CLOCK
-// let remainingTime = 2 * 60 * 60 // Two hours in seconds
-// let timerInterval
+// search for filter form
+const filterForm = document.getElementById("filter")
 
-// const hoursElem = document.getElementById("hours"),
-// 	minutesElem = document.getElementById("minutes"),
-// 	secondsElem = document.getElementById("seconds"),
-// 	timer = document.getElementById("timer"),
-// 	content = document.getElementById("content")
+// if filter form has been found, do the function
+if (filterForm != null) {
+	const filterIcon = document.querySelector(".filterIcon")
 
-// const formatTime = (time, string) => {
-// 	return time == 1 ? `${time}` : `${time}`
-// }
+	filterIcon.addEventListener("click", () => {
+  	filterForm.classList.remove("hidden")// show form when clicked on filterIcon
+	})
 
-// const startCountdown = () => {
-// 	if (remainingTime < 1) {
-// 		endCountdown()
-// 	}
+	// close button to close form
+	const closeFilterFormButton = document.querySelector(".cancel-filter")
 
-// 	let hours = Math.floor(remainingTime / (60 * 60))
-// 	let minutes = Math.floor((remainingTime % (60 * 60)) / 60)
-// 	let seconds = Math.floor(remainingTime % 60)
-
-// 	hoursElem.innerHTML = formatTime(hours)
-// 	minutesElem.innerHTML = formatTime(minutes)
-// 	secondsElem.innerHTML = formatTime(seconds)
-
-// 	remainingTime--
-// }
-
-// const endCountdown = () => {
-// 	clearInterval(timerInterval)
-// }
-
-// window.addEventListener("load", () => {
-// 	startCountdown()
-// 	timerInterval = setInterval(startCountdown, 1000)
-// })
-
-function openForm() {
-	document.getElementById("filter").style.display = "block"
+	closeFilterFormButton.addEventListener("click", () => {
+  	filterForm.classList.add("hidden")// hide form when clicked on clos button
+})
 }
 
-function closeForm() {
-	document.getElementById("filter").style.display = "none"
-}
+// search for sort form
+const sorterForm = document.getElementById("sorter")
 
-function openSortForm() {
-	document.getElementById("sorter").style.display = "block"
-}
+// if sorter form has been found, do the function
+if (sorterForm != null) {
+	const sortIcon = document.querySelector(".sortIcon")
 
-function closeSortForm() {
-	document.getElementById("sorter").style.display = "none"
+	sortIcon.addEventListener("click", () => {
+  	sorterForm.classList.remove("hidden")// show form when clicked on sortIcon
+	})
+
+	// close button to close form
+	const closeSortFormButton = document.querySelector(".cancel-sorter")
+
+	closeSortFormButton.addEventListener("click", () => {
+  	sorterForm.classList.add("hidden")// hide form when clicked on clos button
+})
 }

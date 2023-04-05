@@ -1,0 +1,1045 @@
+/*====================
+Register page
+===================*/
+.standard-bg h2 {
+	text-align: center;
+}
+.register-form {
+	display: grid;
+	justify-content: center;
+	margin-top: 1em;
+}
+label {
+	color: var(--white);
+}
+.register-form input {
+	margin-bottom: 1em;
+	color: var(--black);
+}
+.register-form .btn {
+	background-color: var(--lightBlue);
+	margin-bottom: 1.5em;
+}
+.log-in-prompt {
+	text-align: center;
+}
+
+/*====================
+inloggen stijling
+====================*/
+main.inloggen {
+	position: relative;
+	height: 100vh;
+}
+main.inloggen section:first-of-type {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	padding: 3em;
+	border-radius: 0.8em;
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(1em);
+	width: 90%;
+}
+main.inloggen section:first-of-type a {
+    text-decoration: underline;
+}
+main.inloggen section:first-of-type h2 {
+	font-size: 3em;
+	margin-bottom: 0.8em;
+}
+main.inloggen section:first-of-type form input {
+	width: 100%;
+	background: var(--white);
+	border: none;
+	padding: 0.8em;
+	margin-bottom: 0.8em;
+	color: var(--black);
+}
+main.inloggen section:first-of-type form input[type='submit'] {
+	background: var(--blue);
+	border-radius: 0.8em;
+	color: var(--white);
+}
+
+/*====================
+account stijling
+====================*/
+main.account {
+	position: relative;
+	height: 100vh;
+}
+main.account section:first-of-type {
+	left: 50%;
+	position: absolute;
+	top: 40%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	border-radius: 0.8em;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+main.account section.account p {
+	font-size: 2em;
+	margin-bottom: 1em;
+}
+main.account section:first-of-type form input {
+	width: 100%;
+	background: var(--white);
+	border: none;
+	padding: 0.8em;
+	margin-bottom: 0.8em;
+	color: var(--black);
+}
+main.account section:first-of-type form input[type='submit'] {
+	background: var(--blue);
+	border-radius: 0.8em;
+	color: var(--white);
+}
+
+/*====================
+profile stijling
+====================*/
+main.profile {
+	position: relative;
+	height: 100vh;
+}
+main.profile section:first-of-type {
+	left: 50%;
+	position: relative;
+	top: 10%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	border-radius: 0.8em;
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column-reverse;
+}
+main.profile section:first-of-type form input {
+	width: 100%;
+	background: var(--white);
+	border: none;
+	padding: 0.8em;
+	margin-bottom: 0.8em;
+	color: var(--black);
+}
+main.profile section:first-of-type form input[type='submit'] {
+	background: var(--blue);
+	border-radius: 0.8em;
+	color: var(--white);
+}
+main.profile section:last-of-type {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	padding: 3em;
+	border-radius: 0.8em;
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(1em);
+	width: 100%;
+}
+main.profile section:last-of-type a {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}
+main.profile section:last-of-type a svg {
+	width: 2em;
+}
+
+/*====================
+filter on Discover page stijling
+ ====================*/
+#filter {
+	position: fixed;
+	top: 7em;
+	background: var(--white);
+	padding: 1.5em;
+	z-index: 9;
+	width: 95%;
+	border-radius: 0.8em;
+}
+#filter form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontLight);
+}
+#filter article.event-found h2 {
+	margin: 0;
+}
+#filter form label,
+#filter form section {
+	font-size: 1.2em;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontMedium);
+	margin-bottom: 0.3em;
+	color: var(--black);
+	display: block;
+	width: 100%;
+}
+#filter form input,
+#filter form select {
+	border: solid var(--black) 0.1em;
+	border-radius: 0.4em;
+	padding: 0.8em;
+	margin-bottom: 0.3em;
+	width: 33%;
+	color: var(--black);
+}
+#filter form input#male,
+#filter form input#female {
+	width: inherit !important;
+}
+#filter button.btn:first-of-type {
+	width: 100%;
+	background: var(--blue);
+	border: none;
+	border-radius: 0.4em;
+	color: var(--white);
+	padding: 1.5em;
+	margin-top: 2em;
+	font-weight: var(--fontMedium);
+}
+#filter button.cancel {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	background: none;
+	border: none;
+	font-size: 1.5em;
+}
+
+/*====================
+ Matches on discover page styling
+ ====================*/
+article.event-found {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--fontFamily);
+}
+article.event-found img {
+	width: 100%;
+	padding: 0 6em;
+	margin-bottom: 1em;
+}
+article.event-found p:nth-of-type(3),
+article.event-found p:nth-of-type(5),
+article.event-found p:nth-of-type(7) {
+	width: 100%;
+	text-align: center;
+	margin: 0.8em 0;
+	font-weight: var(--fontMedium);
+}
+article.event-found p:nth-of-type(4),
+article.event-found p:nth-of-type(6) {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0.8em;
+}
+article.event-found h2,
+article.event-found p {
+	color: var(--black);
+}
+article.event-found p b {
+	display: block;
+}
+article.event-found p.username {
+	margin-bottom: 0;
+	text-align: start;
+}
+section.matchable {
+	background: var(--white);
+	padding: 1.5em;
+	border-radius: 0.8em;
+	position: relative;
+	margin-top: 3em;
+}
+section.match-btn {
+	display: flex;
+	justify-content: center;
+	margin: 1.5em;
+	fill: var(--white);
+}
+section.match-btn button.dark.dislike {
+	background-color: var(--red);
+	margin-right: 5em;
+	height: 6em;
+	width: 6em;
+}
+section.match-btn button.dark.like {
+	height: 6em;
+	width: 6em;
+}
+
+/*====================
+ Matched on matches page styling
+====================*/
+section.m-page .bio {
+	grid-area: bio;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	align-content: center;
+}
+section.m-page .Photo {
+	grid-area: Photo;
+}
+section.m-page article.event-found {
+	font-family: var(--fontFamily);
+	display: grid;
+    grid-template-columns: 0.6fr 1.4fr;
+    grid-template-rows: 1fr;
+    gap: 0 0;
+    grid-template-areas: 'Photo bio';
+}
+section.m-page article.event-found img {
+	width: 80%;
+	padding: 0;
+	margin-bottom: 0;
+}
+section.m-page .event-found p:nth-of-type(3) {
+	width: auto;
+	font-weight: var(--fontSmall);
+	margin: 0;
+}
+section.m-page article.event-found h2 {
+	margin: 0;
+	text-align: left;
+}
+section.matchable.m-page {
+	margin-top: 1.5em;
+}
+
+/*====================
+ Sorter on matches page styling
+====================*/
+#sorter {
+	position: fixed;
+	top: 7em;
+	background: var(--white);
+	padding: 1.5em;
+	z-index: 9;
+	width: 95%;
+	border-radius: 0.8em;
+	box-shadow: 0 0 0.8em rgb(0 0 0 / 35%);
+}
+#sorter form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontLight);
+}
+#sorter form article label {
+	display: inline;
+}
+#sorter form input,
+#sorter form select {
+	border: solid var(--black) 0.1em;
+	border-radius: 0.4em;
+	padding: 0.8em;
+	margin-bottom: 0.3em;
+	width: 33%;
+}
+#sorter form section,
+#sorter form label {
+	width: 100%;
+	display: block;
+	color: var(--black);
+	font-size: 1.2em;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontMedium);
+	margin-bottom: 0.3em;
+}
+#sorter form input#male,
+#sorter form input#female {
+	width: inherit !important;
+}
+#sorter button.btn:first-of-type {
+	width: 100%;
+	background: var(--blue);
+	border: none;
+	border-radius: 0.4em;
+	color: var(--white);
+	padding: 1.5em;
+	margin-top: 2em;
+	font-weight: var(--fontMedium);
+}
+#sorter button.cancel {
+	position: absolute;
+	top: 0.8em;
+	right: 0.8em;
+	background: none;
+	border: none;
+	font-size: 1.5em;
+}
+
+/*====================
+ navigation for match/draft bar on matches page stijling
+====================*/
+.standard-bg main nav ul {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+}
+.standard-bg main nav li {
+	text-decoration: none;
+	list-style-type: none;
+	padding: 0.8em 3em;
+	width: 50%;
+	text-align: center;
+	font-family: var(--fontFamily);
+	font-weight: var(--fontLight);
+}
+.standard-bg main nav li a {
+	color: var(--black);
+}
+.standard-bg main nav li:last-of-type {
+	background: var(--blue);
+	border-top-right-radius: 0.8em;
+	border-bottom-right-radius: 0.8em;
+	color: var(--white);
+}
+.standard-bg main.matches-page nav li:first-of-type {
+	background: var(--blue);
+	border-top-left-radius: 0.8em;
+	border-bottom-left-radius: 0.8em;
+	color: var(--white);
+}
+.standard-bg main.matches-page nav li:last-of-type {
+	background: none;
+	color: var(--black);
+}
+
+/*====================
+ Matched single page stijling
+====================*/
+body.matched header h1 {
+	position: relative;
+	top: 2em;
+	left: 0;
+	text-align: center;
+}
+main.matched {
+	text-align: center;
+}
+main.matched h2 {
+	margin-bottom: 2em;
+}
+main.matched svg {
+	width: 80%;
+	margin-top: 2em;
+}
+main.matched button {
+	width: 100%;
+	padding: 2em;
+	border-radius: 0.8em;
+	border: none;
+	font-size: 1.3em;
+}
+main.matched button:first-of-type {
+	background: var(--white);
+	margin-bottom: 1.3em;
+}
+main.matched button:last-of-type {
+	background: var(--blue);
+}
+main.matched button a {
+	color: var(--black);
+	text-decoration: none;
+}
+
+/*====================
+Letter.ejs
+====================*/
+body header img {
+	margin: 2em 0 0 0.5em;
+	border-radius: 50%;
+	padding: 1em 1.625em 1em 1.375em;
+	height: 4em;
+	background-color: var(--red);
+}
+body header h1 {
+	position: absolute;
+	top: 1.975em;
+	left: calc(1.5em + 2.25em); /* plus the width body header img is taking up */
+	height: 1.5em;
+	width: calc(70% + 0.25em);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight: var(--fontRegular);
+	font-size: 1.5em;
+}
+.confirm-button {
+	position: absolute;
+	top: 90%;
+	left: calc(50% - ((100% - 1em) / 2));
+	border: 0;
+	padding: 0.75em;
+	border-radius: 0.4em;
+	width: calc(100% - 1em);
+	font-size: 1em;
+	font-family: var(--fontFamily);
+	color: var(--white);
+	background-color: var(--blue);
+}
+
+/*====================
+Quill
+ ====================*/
+.ql-snow {
+	position: absolute;
+	top: 7em;
+	left: calc(50% - ((100% - 1em) / 2));
+	padding: 0;
+	width: calc(100% - 1.5em);
+	background-color: var(--beige);
+}
+.ql-snow p {
+	font-family: var(--fontFamily);
+	color: var(--black);
+}
+.ql-toolbar {
+	border: 0;
+	padding: 0;
+	width: calc(100% - 1em);
+	text-align: center;
+	background: none;
+	background-color: var(--beige);
+}
+body .ql-toolbar.ql-snow {
+	border: 0;
+}
+.ql-toolbar .ql-formats .ql-bold,
+.ql-toolbar .ql-formats .ql-italic,
+.ql-toolbar .ql-formats .ql-underline,
+.ql-toolbar .ql-formats .ql-strike {
+	margin: 0.5em 1em 0.5em 1em;
+	padding: 1.5em;
+	border-radius: 50%;
+	background-color: var(--blue);
+}
+.ql-toolbar .ql-formats .ql-bold svg,
+.ql-toolbar .ql-formats .ql-italic svg,
+.ql-toolbar .ql-formats .ql-underline svg,
+.ql-toolbar .ql-formats .ql-strike svg {
+	position: relative;
+	top: -0.85em;
+	left: -0.85em;
+	margin: 0;
+	padding: 0;
+	height: 1.75em;
+	filter: brightness(100);
+}
+.ql-container {
+	top: 6.575em;
+	left: 0.625em;
+	border: 0;
+	padding: 0;
+	width: calc(100% - 1.25em);
+	font-size: 1em;
+}
+
+/* ids */
+#editor {
+	border: 0;
+	height: 37em;
+}
+#editor::after {
+	content: '';
+	position: absolute;
+	height: 0.1em;
+	background: var(--black);
+	top: 0;
+	width: calc(100% - 3em);
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/*====================
+Pop-ups letter
+ ====================*/
+.popup {
+	position: absolute;
+	top: calc(50% - (8.5em / 2));
+	left: calc(50% - 10em);
+	margin: 0;
+	border-radius: 0.4em;
+	padding: 0;
+	width: 20em;
+	text-align: center;
+	color: var(--white);
+	background-color: var(--blue);
+}
+.popup img {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	float: right;
+	width: 1.25em;
+}
+.confirm-button:hover,
+.popup img:hover,
+.popup a input:hover,
+.popup div button:hover,
+.bottle-editor svg:hover,
+#back-button:hover {
+	cursor: pointer;
+}
+.popup h2 {
+	position: relative;
+	left: calc(50% - (80% / 2));
+	margin: 0;
+	padding: 1em 1em 0.5em 1em;
+	width: 80%;
+	font-weight: bold;
+	font-size: 1.25em;
+}
+.popup div {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0;
+}
+.popup a,
+.popup label,
+.styled-like-a {
+	border: 0;
+	padding: 1em 0 1em 0;
+	width: 100%;
+	font-size: 1em;
+	text-decoration: none;
+}
+.popup a input {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	color: var(--white);
+	font-size: 1em;
+	background: none;
+}
+.popup section:first-of-type a input {
+	font-weight: var(--fontBold);
+}
+.popup a:first-of-type {
+	border-radius: 0 0 0 0.4em;
+	background-color: var(--red);
+}
+.popup a:nth-of-type(2),
+.styled-like-a {
+	border: 0;
+	border-radius: 0 0 0.4em 0;
+	font-weight: var(--fontBold);
+	color: var(--white);
+	background-color: var(--darkBlue);
+}
+.popup section:nth-of-type(3) form {
+	position: relative;
+	left: calc(50% - (80% / 2));
+	margin-top: 1em;
+	padding: 0;
+	width: 80%;
+}
+.popup section:nth-of-type(3) input[type='text'] {
+	margin: 2em 0 2em 0;
+	border: 0;
+	border-radius: 0.4em;
+	width: 100%;
+	height: 2em;
+	color: var(--black);
+}
+.popup section:nth-of-type(3) input[type='text']:focus {
+	outline: 0.2em solid var(--red);
+}
+.popup section:nth-of-type(3) input[type='submit'] {
+	position: relative;
+	left: -2em;
+	border: 0;
+	border-radius: 0 0 0.4em 0.4em;
+	padding: 1em 0em 1em 0em;
+	width: 125%;
+	font-size: 1em;
+	text-align: center;
+	font-weight: var(--fontBold);
+	color: var(--white);
+	background-color: var(--darkBlue);
+}
+
+/*====================
+Draft partial
+====================*/
+.draft-item {
+	position: relative;
+	left: calc(50% - ((100% - 0.25em) / 2));
+	width: calc(100% - 1em);
+	margin: 1em 0 1em 0.25em;
+	border-radius: 0.8em;
+	padding: 1em;
+	background-color: var(--white);
+}
+.draft-item:hover {
+	cursor: pointer;
+}
+.draft-item:not(:first-of-type) {
+	margin-top: 1.5em;
+}
+.draft-item img:first-of-type {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	float: right;
+	width: 1.25em;
+	filter: brightness(0);
+	opacity: 0;
+}
+.draft-item img:first-of-type:hover {
+	opacity: 1;
+	transition: 10ms;
+}
+.draft-item img:nth-of-type(2) {
+	position: absolute;
+	border-radius: 50%;
+	width: 3.5em;
+}
+.draft-item:last-of-type {
+	margin-bottom: 10em;
+}
+.draft-item p {
+	margin: 0 1em 0 calc(3.5em + 0.75em);
+	padding: 0.125em 0 0.125em 0;
+	color: var(--black);
+}
+.draft-item p:first-of-type {
+	font-weight: var(--fontBold);
+}
+.draft-item p:last-of-type {
+	margin: 1.5em 0 0 0.25em;
+	font-size: 0.75em;
+}
+.draft-content {
+	overflow: hidden;
+	line-height: 1.25em;
+	max-height: calc(1.25em * 2.475);
+}
+.draft-content p {
+	overflow: hidden;
+	max-width: 32.5ch;
+	text-overflow: ellipsis;
+}
+
+/*====================
+Bottle.ejs
+====================*/
+.bottle-editor {
+	width: calc(100% - 1em);
+}
+.bottle-editor h1 {
+	position: absolute;
+	top: 2.45em;
+	left: calc(1.5em + 3.25em);
+	font-weight: var(--fontRegular);
+	font-size: 1.3em;
+}
+.bottle-editor svg {
+	margin: 2em 0 0 0.5em;
+	border-radius: 50%;
+	padding: 0.5em;
+	height: 4.125em;
+	background-color: var(--blue);
+}
+.bottle-img {
+	position: absolute;
+	top: calc(50% - 12.5em);
+	left: calc(50% - (10em / 2));
+	width: 10em;
+}
+
+/*====================
+Pop-ups bottle
+ ====================*/
+.bottle section:nth-of-type(2) div {
+	flex-wrap: wrap;
+}
+.bottle section:nth-of-type(2) label,
+.bottle section:nth-of-type(2) p {
+	border: 0;
+	border-radius: 0 0 0.4em 0.4em;
+	padding: 1em 0em 1em 0em;
+	cursor: pointer;
+	width: 143%;
+	font-size: 1em;
+	text-align: center;
+	background-color: var(--darkBlue);
+}
+.bottle section:nth-of-type(2) p {
+	margin: 0;
+}
+.bottle section:nth-of-type(2) .output {
+	position: relative;
+	top: 0;
+	right: 0;
+	float: none;
+	margin: 1em;
+	border: 0.4em solid var(--brown-dark);
+	padding: 0.8em;
+	border-radius: 0.4em;
+	width: 10em;
+	background-color: var(--brown);
+}
+.bottle section:nth-of-type(2) .output:hover {
+	cursor: auto;
+}
+
+/*====================
+ Footer stijling
+ ====================*/
+footer {
+	position: fixed;
+	bottom: -1.2em;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+footer nav {
+	background: var(--darkBlue);
+	border-radius: 0.8em;
+	padding: 1em 1.2em;
+}
+footer nav ul {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	align-items: center;
+	padding: 0;
+	list-style-type: none;
+}
+footer nav ul li {
+	padding: 0 1.2em;
+	text-decoration: none;
+}
+footer nav ul li:first-of-type {
+	padding-left: 0;
+}
+footer nav ul li:last-of-type {
+	padding-right: 0;
+}
+footer.light nav {
+	background: var(--blue) !important;
+	border-radius: 0.8em;
+	padding: 1em 1.2em;
+}
+footer.light nav ul {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	align-items: center;
+	padding: 0;
+	list-style-type: none;
+}
+footer.light nav ul li {
+	padding: 0 1.2em;
+	text-decoration: none;
+}
+footer.light nav ul li a {
+	text-decoration: none;
+	color: var(--white);
+	font-family: var(--fontFamily);
+	font-weight: var(--fontLight);
+	font-size: var(--fontMenu);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+footer.light nav ul li:first-of-type {
+	padding-left: 0;
+}
+footer.light nav ul li:last-of-type {
+	padding-right: 0;
+}
+
+/*====================
+ clock stijling
+ ====================*/
+.timer {
+	position: fixed;
+	text-align: center;
+	margin-top: 4em;
+	width: 100%;
+	color: var(--white);
+}
+.timer p {
+	font-family: var(--fontFamily);
+	font-weight: var(--fontMedium);
+	font-size: 4em;
+	color: var(--white);
+}
+body.home-bg section svg:nth-of-type(1) {
+	margin-top: 5em;
+}
+body.home-bg section svg:nth-of-type(2) {
+	width: 25%;
+	margin-left: 3em;
+	margin-top: -5em;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+:root {
+	--bgClr: linear-gradient(
+		180deg,
+		rgba(0, 197, 175, 1) 0%,
+		rgba(0, 177, 190, 1) 42%,
+		rgba(0, 122, 171, 1) 100%
+	);
+	--darkBlue: #032847;
+	--blue: #00b1be;
+	--lightBlue: #00c5af;
+	--white: #fff;
+	--red: #db4b3c;
+	--beige: #f2e8cf;
+	--brown: #e8c274;
+	--brown-dark: #c7a864;
+	--black: #001f3f;
+	--fontFamily: 'Ubuntu', sans-serif;
+	--fontLight: 300;
+	--fontRegular: 400;
+	--fontMedium: 500;
+	--fontBold: 700;
+}
+
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+input {
+	color: var(--white);
+	font-family: var(--fontFamily);
+	text-decoration: none;
+}
+
+/*====================
+ General styling
+ ====================*/
+body.container {
+	width: 95%;
+	position: relative;
+	margin: auto;
+	display: block;
+}
+body.home-bg {
+	background: var(--bgClr);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100%;
+}
+body.standard-bg {
+	background: var(--darkBlue);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100%;
+}
+.standard-bg header {
+	display: flex;
+	justify-content: space-between;
+}
+.standard-bg main nav {
+	background: var(--white);
+	margin: auto;
+	border-radius: 0.8em;
+	margin-top: 1.5em;
+}
+.hidden {
+	display: none;
+}
+
+/*====================
+SVG Buttons Styling 
+====================*/
+button svg {
+	height: 3.5em;
+}
+
+button.dark,
+button.light {
+	width: 4.5em;
+	height: 4.5em;
+	border: none;
+	border-radius: 50%;
+}
+button.first {
+	margin-top: 2em;
+}
+button.light {
+	background-color: var(--lightBlue);
+}
+.standard-bg button.dark,
+.standard-bg button.light {
+	background-color: var(--blue);
+}
+svg .cls-1 {
+	stroke-miterlimit: 10;
+}
+svg .cls-1,
+svg .cls-2 {
+	fill: var(--darkBlue);
+	stroke: var(--white);
+	stroke-width: 0.4em;
+}
+svg .cls-2 {
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+svg.filtering {
+	height: 2.5em;
+	width: 100%;
+}
+svg g#Icons path {
+	fill: var(--white);
+}
+svg.sorting {
+	height: 2em;
+	width: 100%;
+}
+svg.menu-item {
+	height: 3em;
+	width: 100%;
+}
+footer nav ul li:nth-of-type(3) a svg.menu-item {
+	transform: rotate(10deg);
+}
+footer.light svg .cls-1,
+svg .cls-2 {
+	fill: var(--blue);
+	stroke: var(--white);
+	stroke-width: 0.4em;
+}
+footer.light svg.active .cls-1,
+footer.light svg.active .cls-2 {
+	fill: var(--white);
+	stroke: transparent;
+}

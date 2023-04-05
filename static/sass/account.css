@@ -1,0 +1,158 @@
+/*====================
+Register page
+===================*/
+.standard-bg h2 {
+	text-align: center;
+}
+.register-form {
+	display: grid;
+	justify-content: center;
+	margin-top: 1em;
+}
+label {
+	color: var(--white);
+}
+.register-form input {
+	margin-bottom: 1em;
+	color: var(--black);
+}
+.register-form .btn {
+	background-color: var(--lightBlue);
+	margin-bottom: 1.5em;
+}
+.log-in-prompt {
+	text-align: center;
+}
+
+/*====================
+inloggen stijling
+====================*/
+main.inloggen {
+	position: relative;
+	height: 100vh;
+}
+main.inloggen section:first-of-type {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	padding: 3em;
+	border-radius: 0.8em;
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(1em);
+	width: 90%;
+}
+main.inloggen section:first-of-type a {
+    text-decoration: underline;
+}
+main.inloggen section:first-of-type h2 {
+	font-size: 3em;
+	margin-bottom: 0.8em;
+}
+main.inloggen section:first-of-type form input {
+	width: 100%;
+	background: var(--white);
+	border: none;
+	padding: 0.8em;
+	margin-bottom: 0.8em;
+	color: var(--black);
+}
+main.inloggen section:first-of-type form input[type='submit'] {
+	background: var(--blue);
+	border-radius: 0.8em;
+	color: var(--white);
+}
+
+/*====================
+account stijling
+====================*/
+main.account {
+	position: relative;
+	height: 100vh;
+}
+main.account section:first-of-type {
+	left: 50%;
+	position: absolute;
+	top: 40%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	border-radius: 0.8em;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+main.account section.account p {
+	font-size: 2em;
+	margin-bottom: 1em;
+}
+main.account section:first-of-type form input {
+	width: 100%;
+	background: var(--white);
+	border: none;
+	padding: 0.8em;
+	margin-bottom: 0.8em;
+	color: var(--black);
+}
+main.account section:first-of-type form input[type='submit'] {
+	background: var(--blue);
+	border-radius: 0.8em;
+	color: var(--white);
+}
+
+/*====================
+profile stijling
+====================*/
+main.profile {
+	position: relative;
+	height: 100vh;
+}
+main.profile section:first-of-type {
+	left: 50%;
+	position: relative;
+	top: 10%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	border-radius: 0.8em;
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column-reverse;
+}
+main.profile section:first-of-type form input {
+	width: 100%;
+	background: var(--white);
+	border: none;
+	padding: 0.8em;
+	margin-bottom: 0.8em;
+	color: var(--black);
+}
+main.profile section:first-of-type form input[type='submit'] {
+	background: var(--blue);
+	border-radius: 0.8em;
+	color: var(--white);
+}
+main.profile section:last-of-type {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: var(--black);
+	padding: 3em;
+	border-radius: 0.8em;
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(1em);
+	width: 100%;
+}
+main.profile section:last-of-type a {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}
+main.profile section:last-of-type a svg {
+	width: 2em;
+}

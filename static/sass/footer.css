@@ -1,17 +1,16 @@
 /*====================
  Footer stijling
  ====================*/
-
- footer {
+footer {
 	position: fixed;
-	bottom: -20px;
+	bottom: -1.2em;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 footer nav {
 	background: var(--darkBlue);
-	border-radius: 10px;
-	padding: 15px 20px;
+	border-radius: 0.8em;
+	padding: 1em 1.2em;
 }
 footer nav ul {
 	display: flex;
@@ -22,7 +21,7 @@ footer nav ul {
 	list-style-type: none;
 }
 footer nav ul li {
-	padding: 0px 20px;
+	padding: 0 1.2em;
 	text-decoration: none;
 }
 footer nav ul li:first-of-type {
@@ -32,9 +31,9 @@ footer nav ul li:last-of-type {
 	padding-right: 0;
 }
 footer.light nav {
-	background: var(--blue);
-	border-radius: 10px;
-	padding: 15px 20px;
+	background: var(--blue) !important;
+	border-radius: 0.8em;
+	padding: 1em 1.2em;
 }
 footer.light nav ul {
 	display: flex;
@@ -45,12 +44,12 @@ footer.light nav ul {
 	list-style-type: none;
 }
 footer.light nav ul li {
-	padding: 0px 20px;
+	padding: 0 1.2em;
 	text-decoration: none;
 }
 footer.light nav ul li a {
 	text-decoration: none;
-	color: #fff;
+	color: var(--white);
 	font-family: var(--fontFamily);
 	font-weight: var(--fontLight);
 	font-size: var(--fontMenu);
