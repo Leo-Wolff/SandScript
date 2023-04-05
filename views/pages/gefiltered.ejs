@@ -8,13 +8,13 @@
 			<button class="dark first">
 				<%- include('../partials/bag'); %>
 			</button>
-			<button class="dark first" onclick="openForm()">
-				<%- include('../partials/filterIcon'); %>
+			<button class="dark first">
+				<span class="filterIcon"><%- include('../partials/filterIcon'); %></span>
 			</button>
 		</header>
 
 		<main>
-			<section id="filter">
+			<section id="filter" class="hidden">
 				<form method="post" action="/discover">
 					<section class="form-group">
 						<article>
@@ -70,7 +70,7 @@
 					</section>
 
 					<button type="submit" class="btn">Apply</button>
-					<button type="button" class="btn cancel" onclick="closeForm()">
+					<button type="button" class="cancel-filter btn cancel">
 						X
 					</button>
 				</form>

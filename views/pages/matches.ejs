@@ -9,8 +9,8 @@
   <button class="dark first">
     <%- include('../partials/bag'); %>
   </button>
-  <button class="dark first" onclick="openSortForm()">
-    <%- include('../partials/sortIcon'); %>
+  <button class="sorter dark first">
+    <span class="sortIcon"><%- include('../partials/sortIcon'); %> </span>
   </button>
 </header>
 
@@ -22,7 +22,7 @@
     </ul>
   </nav>
 
-	<section id="sorter">
+	<section id="sorter" class="hidden">
 		<form method="post" action="/matches">
 			<section class="form-group">
 				<label for="interests">Sorteren op:</label>
@@ -35,7 +35,7 @@
 			</section>
 
       <button type="submit" class="btn">Apply</button>
-      <button type="button" class="btn cancel" onclick="closeSortForm()">X</button>
+      <button type="button" class="cancel-sorter btn cancel">X</button>
     </form>
   </section>
 
@@ -44,19 +44,16 @@
     <% userMatches.forEach((match)=> { %> 
       <section class="matchable m-page">
         <article class="event-found">
-
-          <div class="container">
             <div class="Photo">
-            <img src="<%= match.photo %>" alt="Photo of user"/>
+              <img src="<%= match.photo %>" alt="Photo of user"/>
             </div>
             <div class="bio">
-            <h2><%= match.name %></h2>
-            <p>, <%= match.age %></p>
-            <p>, <%= match.gender %></p>
-            <p>, <%= match.country %></p>
-            <p class="username"><%= match.username %></p>
+              <h2><%= match.name %></h2>
+              <p>, <%= match.age %></p>
+              <p>, <%= match.gender %></p>
+              <p>, <%= match.country %></p>
+              <p class="username"><%= match.username %></p>
             </div>
-          </div>
         </article>
     </section>
     <% }) %>

@@ -218,18 +218,40 @@ if (draftText != null) {
 	quill.container.firstChild.innerHTML = draftText.innerHTML
 }
 
-function openForm() {
-	document.getElementById("filter").style.display = "block"
+// search for filter form
+const filterForm = document.getElementById("filter")
+
+// if filter form has been found, do the function
+if (filterForm != null) {
+	const filterIcon = document.querySelector(".filterIcon")
+
+	filterIcon.addEventListener("click", () => {
+  	filterForm.classList.remove("hidden")// show form when clicked on filterIcon
+	})
+
+	// close button to close form
+	const closeFilterFormButton = document.querySelector(".cancel-filter")
+
+	closeFilterFormButton.addEventListener("click", () => {
+  	filterForm.classList.add("hidden")// hide form when clicked on clos button
+})
 }
 
-function closeForm() {
-	document.getElementById("filter").style.display = "none"
-}
+// search for sort form
+const sorterForm = document.getElementById("sorter")
 
-function openSortForm() {
-	document.getElementById("sorter").style.display = "block"
-}
+// if sorter form has been found, do the function
+if (sorterForm != null) {
+	const sortIcon = document.querySelector(".sortIcon")
 
-function closeSortForm() {
-	document.getElementById("sorter").style.display = "none"
+	sortIcon.addEventListener("click", () => {
+  	sorterForm.classList.remove("hidden")// show form when clicked on sortIcon
+	})
+
+	// close button to close form
+	const closeSortFormButton = document.querySelector(".cancel-sorter")
+
+	closeSortFormButton.addEventListener("click", () => {
+  	sorterForm.classList.add("hidden")// hide form when clicked on clos button
+})
 }

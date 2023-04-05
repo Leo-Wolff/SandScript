@@ -44,6 +44,9 @@ main.inloggen section:first-of-type {
 	backdrop-filter: blur(1em);
 	width: 90%;
 }
+main.inloggen section:first-of-type a {
+    text-decoration: underline;
+}
 main.inloggen section:first-of-type h2 {
 	font-size: 3em;
 	margin-bottom: 0.8em;
