@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 
-// Log in related pages
+// LOG IN RELATED PAGES
 exports.logout = (req, res) => {
     req.session.destroy()
     res.redirect('/account/login')
@@ -73,7 +73,7 @@ exports.update = async (req, res) => {
     res.redirect('/account/profile')
 }
 
-// Profile related pages
+// PROFILE RELATED PAGES
 exports.profile = async (req, res) => {
     const {
         username,
@@ -125,7 +125,7 @@ exports.editProfile = async (req, res) => {
     })
 }
 
-// Register related pages
+// REGISTER RELATED PAGES
 exports.register = (req, res) => {
     res.render('pages/register.ejs')
 }
@@ -140,6 +140,7 @@ exports.postRegister = async (req, res) => {
         email,
         password: hashedPassword,
     }
+
     users.insertOne(user)
     res.redirect('/account/profile')
 }

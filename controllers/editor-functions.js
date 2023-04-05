@@ -46,41 +46,28 @@ async function updateDraft(
 
 function dataFromDatabase(dbCollection) {
     let collection = db.collection(dbCollection) // collection name
-    collection = getDataFromDatabase(collection)
+    collection = collection.find().toArray()
 
     return collection
 }
 
-async function getDataFromDatabase(collection) {
-    return collection.find().toArray()
-}
-
-async function userFromDatabase(dbCollection, currentUser) {
+async function userFromUsers(dbCollection, currentUser) {
     let collection = db.collection(dbCollection)
-    let user = await getUserFromDatabase(collection, currentUser)
+    let user = await collection.findOne({ username: currentUser })
 
     return user
 }
 
-async function getUserFromDatabase(collection, currentUser) {
-    return collection.findOne({ username: currentUser })
-}
-
-async function draftsFromDatabase(dbCollection, currentUser) {
+async function draftsFromLetters(dbCollection, currentUser) {
     let collection = db.collection(dbCollection)
-    let user = await getDraftsFromDatabase(collection, currentUser)
-
+    let user = await collection.find({ author: currentUser }).toArray()
     return user
-}
-
-async function getDraftsFromDatabase(collection, currentUser) {
-    return collection.find({ author: currentUser }).toArray()
 }
 
 module.exports = {
     createDraft,
     updateDraft,
     dataFromDatabase,
-    userFromDatabase,
-    draftsFromDatabase,
+    userFromUsers,
+    draftsFromLetters,
 }

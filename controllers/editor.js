@@ -1,7 +1,5 @@
 const { ObjectId } = require('mongodb') // Defining ObjectId
 const dbController = require('./editor-functions.js')
-const userCollection = 'users'
-const letterCollection = 'letters'
 
 exports.letter = async (req, res) => {
     if (req.query.documentId != null) {
@@ -9,7 +7,7 @@ exports.letter = async (req, res) => {
 
         let draftID = new ObjectId(req.query.documentId)
         let draftContent = await letters.findOne({ _id: draftID })
-        let recipientProfile = await dbController.userFromDatabase(
+        let recipientProfile = await dbController.userFromUsers(
             'users',
             draftContent.recipient
         )
@@ -29,7 +27,7 @@ exports.letter = async (req, res) => {
 
         console.log(matchUser)
 
-        let recipientProfile = await dbController.userFromDatabase(
+        let recipientProfile = await dbController.userFromUsers(
             'users',
             matchUser
         )
@@ -68,10 +66,7 @@ exports.postBottle = async (req, res) => {
         const matchUser = req.session.matchUser
         console.log(matchUser)
 
-        let user = await dbController.userFromDatabase(
-            userCollection,
-            currentUser
-        )
+        let user = await dbController.userFromUsers('users', currentUser)
 
         console.log(user.username)
 
@@ -92,12 +87,9 @@ exports.drafts = async (req, res) => {
     const currentUser = req.session.user.username
 
     try {
-        let user = await dbController.userFromDatabase(
-            userCollection,
-            currentUser
-        )
-        let draft = await dbController.draftsFromDatabase(
-            letterCollection,
+        let user = await dbController.userFromUsers('users', currentUser)
+        let draft = await dbController.draftsFromLetters(
+            'letters',
             user.username
         )
 
@@ -139,10 +131,7 @@ exports.postDraft = async (req, res) => {
         const matchUser = req.session.matchUser
         console.log(matchUser)
 
-        let user = await dbController.userFromDatabase(
-            userCollection,
-            currentUser
-        )
+        let user = await dbController.userFromUsers('users', currentUser)
 
         console.log(user.username)
 

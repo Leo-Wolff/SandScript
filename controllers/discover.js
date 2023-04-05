@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb') // Defining ObjectId
 
+// DISCOVER RELATED PAGES
 // Load firstMatch on pageload
 exports.discover = async (req, res) => {
     try {
@@ -19,13 +20,14 @@ exports.discover = async (req, res) => {
         res.render('pages/gefiltered', { firstMatch }) // Render the page with the first match
     } catch (err) {
         console.log(err.stack)
+        res.status(500).send('Internal Server Error')
     }
 }
 
 // If filtered show firstMatch
 exports.postDiscover = async (req, res) => {
     try {
-        // chazz helped me with this
+        // chazz helped with this
         // Create an empty object
         let filters = {}
         // Get all the keys from the req.body
@@ -74,6 +76,7 @@ exports.postDiscover = async (req, res) => {
         res.render('pages/gefiltered', { firstMatch })
     } catch (err) {
         console.log(err.stack)
+        res.status(500).send('Internal Server Error')
     }
 }
 
@@ -85,8 +88,9 @@ exports.match = async (req, res) => {
         })
 
         res.render('pages/match.ejs', { userMatch }) // Match pagina met als route /match
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
+        res.status(500).send('Internal Server Error')
     }
 }
 
@@ -97,7 +101,7 @@ exports.liked = async (req, res) => {
         })
 
         const currentUser = req.session.user
-        currentUser.liked.push(firstMatch.username) // Update currentUser lokaal
+        currentUser.liked.push(firstMatch.username) // Update currentUser locally
         req.session.user = currentUser
 
         await users.updateOne(
@@ -136,6 +140,7 @@ exports.liked = async (req, res) => {
         }
     } catch (err) {
         console.log(err.stack)
+        res.status(500).send('Internal Server Error')
     }
 }
 
@@ -157,10 +162,11 @@ exports.disliked = async (req, res) => {
         res.redirect('/discover')
     } catch (err) {
         console.log(err.stack)
+        res.status(500).send('Internal Server Error')
     }
 }
 
-// Matches page
+// MATCHES RELATED PAGES
 exports.matchlist = async (req, res) => {
     try {
         const currentUser = req.session.user
@@ -174,10 +180,11 @@ exports.matchlist = async (req, res) => {
         res.render('pages/matches', { userMatches }) // Render the page with the matches
     } catch (err) {
         console.log(err.stack)
+        res.status(500).send('Internal Server Error')
     }
 }
 
-// sorting in matches page
+// Sorting in matches page
 exports.postMatchlist = async (req, res) => {
     try {
         const currentUser = req.session.user
@@ -206,5 +213,6 @@ exports.postMatchlist = async (req, res) => {
         }
     } catch (err) {
         console.log(err.stack)
+        res.status(500).send('Internal Server Error')
     }
 }
