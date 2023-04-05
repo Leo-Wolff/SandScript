@@ -124,7 +124,7 @@ const matchItem = document.querySelectorAll(".matchable"),
 const clickMatch = (e) => {
 	const MatchId = e.currentTarget.querySelector(".username").innerHTML
 	console.log(MatchId)
-	window.location.href = `/letter?MatchId=${encodeURIComponent(MatchId)}`
+	window.location.href = `/editor/letter?MatchId=${encodeURIComponent(MatchId)}`
 }
 
 if (matchItem != null) {
@@ -182,7 +182,9 @@ const clickDraftItem = (e) => {
 		.querySelector("img")
 		.getAttribute("data-id")
 	console.log(documentId)
-	window.location.href = `/letter?documentId=${encodeURIComponent(documentId)}`
+	window.location.href = `/editor/letter?documentId=${encodeURIComponent(
+		documentId
+	)}`
 }
 
 // Delete draft item
@@ -217,45 +219,6 @@ if (draftText != null) {
 	console.log(draftText.innerHTML)
 	quill.container.firstChild.innerHTML = draftText.innerHTML
 }
-
-// // CLOCK
-// let remainingTime = 2 * 60 * 60 // Two hours in seconds
-// let timerInterval
-
-// const hoursElem = document.getElementById("hours"),
-// 	minutesElem = document.getElementById("minutes"),
-// 	secondsElem = document.getElementById("seconds"),
-// 	timer = document.getElementById("timer"),
-// 	content = document.getElementById("content")
-
-// const formatTime = (time, string) => {
-// 	return time == 1 ? `${time}` : `${time}`
-// }
-
-// const startCountdown = () => {
-// 	if (remainingTime < 1) {
-// 		endCountdown()
-// 	}
-
-// 	let hours = Math.floor(remainingTime / (60 * 60))
-// 	let minutes = Math.floor((remainingTime % (60 * 60)) / 60)
-// 	let seconds = Math.floor(remainingTime % 60)
-
-// 	hoursElem.innerHTML = formatTime(hours)
-// 	minutesElem.innerHTML = formatTime(minutes)
-// 	secondsElem.innerHTML = formatTime(seconds)
-
-// 	remainingTime--
-// }
-
-// const endCountdown = () => {
-// 	clearInterval(timerInterval)
-// }
-
-// window.addEventListener("load", () => {
-// 	startCountdown()
-// 	timerInterval = setInterval(startCountdown, 1000)
-// })
 
 function openForm() {
 	document.getElementById("filter").style.display = "block"

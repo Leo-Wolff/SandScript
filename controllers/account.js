@@ -1,38 +1,37 @@
 exports.logout = (req, res) => {
 	req.session.destroy()
-	res.redirect("/login")
+	res.redirect("/account/login")
 }
 
 exports.login = (req, res) => {
-	res.render("pages/login")
+	res.render("pages/login.ejs")
 }
 
-exports.login1 = async (req, res) => {
+exports.postLogin = async (req, res) => {
 	const currentUser = await users.findOne({
 		username: req.body.username,
 	})
-	if(currentUser) { 
-	req.session.user = {
-		username: currentUser.username,
-		password: currentUser.password,
-		email: currentUser.email,
-		name: currentUser.name,
-		age: currentUser.age,
-		gender: currentUser.gender,
-		interests: currentUser.interests,
-		country: currentUser.country,
-		language: currentUser.language,
-		liked: currentUser.liked,
-		likedBy: currentUser.likedBy,
-		disliked: currentUser.disliked,
-		matches: currentUser.matches
+	if (currentUser) {
+		req.session.user = {
+			username: currentUser.username,
+			password: currentUser.password,
+			email: currentUser.email,
+			name: currentUser.name,
+			age: currentUser.age,
+			gender: currentUser.gender,
+			interests: currentUser.interests,
+			country: currentUser.country,
+			language: currentUser.language,
+			liked: currentUser.liked,
+			likedBy: currentUser.likedBy,
+			disliked: currentUser.disliked,
+			matches: currentUser.matches,
+		}
+		res.redirect("/")
+	} else {
+		console.log("Account not found")
+		res.redirect("/account/login")
 	}
-	res.redirect("/")
-}
-else {
-	console.log("Account not found")
-	res.redirect("/login")
-}
 }
 
 exports.update = async (req, res) => {
@@ -63,13 +62,23 @@ exports.update = async (req, res) => {
 	req.session.user.country = req.body.country
 	req.session.user.language = req.body.language
 	req.session.user.gender = req.body.gender
-	res.redirect("/profile")
+	res.redirect("/account/profile")
 }
 
 // Profile page
-exports.account = async (req, res) => {
-	const { username, email, password, name, age, gender, interests, country, language } = req.session.user
-	res.render("pages/account", {
+exports.editProfile = async (req, res) => {
+	const {
+		username,
+		email,
+		password,
+		name,
+		age,
+		gender,
+		interests,
+		country,
+		language,
+	} = req.session.user
+	res.render("pages/account.ejs", {
 		username: username,
 		email: email,
 		password: password,
@@ -78,13 +87,23 @@ exports.account = async (req, res) => {
 		gender: gender,
 		interests: interests,
 		country: country,
-		language: language
+		language: language,
 	})
 }
 
 exports.profile = async (req, res) => {
-	const { username, email, password, name, age, gender, interests, country, language } = req.session.user
-	res.render("pages/profile", {
+	const {
+		username,
+		email,
+		password,
+		name,
+		age,
+		gender,
+		interests,
+		country,
+		language,
+	} = req.session.user
+	res.render("pages/profile.ejs", {
 		username: username,
 		email: email,
 		password: password,
@@ -93,13 +112,13 @@ exports.profile = async (req, res) => {
 		gender: gender,
 		interests: interests,
 		country: country,
-		language: language
+		language: language,
 	})
 }
 
 // Register page
 exports.register = (req, res) => {
-	res.render("pages/register")
+	res.render("pages/register.ejs")
 }
 
 const bcrypt = require("bcrypt")
@@ -115,5 +134,5 @@ exports.postRegister = async (req, res) => {
 		password: hashedPassword,
 	}
 	users.insertOne(user)
-	res.redirect("/profile")
+	res.redirect("/account/profile")
 }

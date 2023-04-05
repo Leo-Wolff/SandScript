@@ -7,14 +7,12 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const bodyParser = require("body-parser")
 
-// Connecting mongoDB
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb")
-
-// parse application/x-www-form-urlencoded
+// Set up bodyParser for drafts feature
 app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
 app.use(bodyParser.json())
+
+// Connecting mongoDB
+const { MongoClient, ServerApiVersion } = require("mongodb")
 
 const uri = process.env.MONGODB_URI
 const client = new MongoClient(uri, {
@@ -60,14 +58,14 @@ app.use(
 		cookie: {},
 	})
 )
+
 app.use((req, res, next) => {
-	if (!req.session.user && req.url != "/login") {
-		res.redirect("/login"); 
-	} 
-	else { 
-		next(); 
-	} 
-});
+	if (!req.session.user && req.url != "/account/login") {
+		res.redirect("/account/login")
+	} else {
+		next()
+	}
+})
 
 const homeRoutes = require("./routes/home.js")
 app.use("/", homeRoutes)
@@ -76,29 +74,10 @@ const discoverRoutes = require("./routes/discover.js")
 app.use("/", discoverRoutes)
 
 const editorRoutes = require("./routes/editor.js")
-app.use("/", editorRoutes)
+app.use("/editor", editorRoutes)
 
 const accountRoutes = require("./routes/account.js")
-app.use("/", accountRoutes)
-
-// Register
-// app.get("/register", (req, res) => {
-// 	res.render("pages/register.ejs")
-// })
-
-// app.post("/account", async (req, res) => {
-// 	const username = req.body.username
-// 	const email = req.body.email
-// 	const password = req.body.password
-// 	const hashedPassword = await bcrypt.hash(password, 10)
-// 	const user = {
-// 		username,
-// 		email,
-// 		password: hashedPassword,
-// 	}
-// 	users.insertOne(user)
-// 	res.render("pages/account.ejs")
-// })
+app.use("/account", accountRoutes)
 
 app.listen(port, () => {
 	console.log(`Wow! Look at that port ${port}`)

@@ -142,7 +142,7 @@ exports.postBottle = async (req, res) => {
 			true
 		)
 
-		res.redirect("/bottle")
+		res.redirect("/editor/bottle")
 	} else {
 		// If no draft item was clicked create a new draft
 		const currentUser = req.session.user.username
@@ -163,7 +163,7 @@ exports.postBottle = async (req, res) => {
 			req.body.signed
 		)
 
-		res.redirect("/bottle")
+		res.redirect("/editor/bottle")
 	}
 }
 
@@ -200,7 +200,7 @@ exports.postDraft = async (req, res) => {
 			false
 		)
 
-		res.redirect("/drafts")
+		res.redirect("/editor/drafts")
 	} else {
 		// If no draft item was clicked create a new draft
 		const currentUser = req.session.user.username
@@ -221,6 +221,6 @@ exports.postDraft = async (req, res) => {
 			req.body.signed
 		)
 
-		res.redirect("/drafts")
+		res.redirect("/editor/drafts")
 	}
 }

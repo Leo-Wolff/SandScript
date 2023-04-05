@@ -23,7 +23,7 @@ exports.discover = async (req, res) => {
 }
 
 // If filtered show firstMatch
-exports.discover1 = async (req, res) => {
+exports.postDiscover = async (req, res) => {
 	try {
 		// chazz helped me with this
 		// Create an empty object
@@ -172,7 +172,7 @@ exports.matchlist = async (req, res) => {
 }
 
 // sorting in matches page
-exports.matchlist1 = async (req, res) => {
+exports.postMatchlist = async (req, res) => {
 	try {
 		const currentUser = req.session.user
 

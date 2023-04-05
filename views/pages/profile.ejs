@@ -6,21 +6,21 @@
 	<body class="standard-bg container">
 		<main class="profile">
 			<section>
-				<form action="/logout" method="post">
+				<form action="/account/logout" method="post">
 					<input type="submit" value="Log Out" />
 				</form>
 				<h1>Hi <%= username %> nice to see you again!</h1>
-                </section>
-                <section>
-				<p>Name: <%= name %> </p>
-				<p>Age: <%= age %> </p>
-				<p>Email: <%= email %> </p>
-				<p>Gender: <%= gender %> </p>
-				<p>Interests: <%= interests %> </p>
-				<p>Language: <%= language %> </p>
-				<p>Password: <%= password %> </p>
-				<p>Country: <%= country %> </p>
-				<a href="/account">
+			</section>
+			<section>
+				<p>Name: <%= name %></p>
+				<p>Age: <%= age %></p>
+				<p>Email: <%= email %></p>
+				<p>Gender: <%= gender %></p>
+				<p>Interests: <%= interests %></p>
+				<p>Language: <%= language %></p>
+				<p>Password: <%= password %></p>
+				<p>Country: <%= country %></p>
+				<a href="/account/edit">
 					<svg
 						version="1.1"
 						xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@
 			</section>
 		</main>
 
-		<footer class="light"> <%- include('../partials/footer'); %> </footer>
+		<footer class="light"><%- include('../partials/footer'); %></footer>
 
 		<script src="/javascript/script.js"></script>
 	</body>

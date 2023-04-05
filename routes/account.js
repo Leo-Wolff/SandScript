@@ -7,11 +7,11 @@ router.post("/logout", accountController.logout)
 
 router.get("/login", accountController.login)
 
-router.post("/login", accountController.login1)
+router.post("/login", accountController.postLogin)
 
 router.post("/update", accountController.update)
 
-router.get("/account", accountController.account)
+router.get("/edit", accountController.editProfile)
 
 router.get("/profile", accountController.profile)
 
